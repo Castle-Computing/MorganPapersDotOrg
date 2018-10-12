@@ -1,0 +1,7 @@
+#set("title") { #(searchTerm) at Julia Morgan Papers}
+
+#set("body") {
+<h1>You searched for "#(searchTerm)".</h1>
+}
+
+#embed("base")

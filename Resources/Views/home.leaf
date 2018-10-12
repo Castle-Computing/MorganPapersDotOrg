@@ -1,0 +1,22 @@
+#set("title") { Julia Morgan Papers }
+
+#set("body") {
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <div class="m-5">
+                    <img src="/images/search_vector_logo.svg" class="img align-center" alt="Responsive image" width="150px">
+                    <h2>The Julia Morgan Papers</h2>
+                </div>
+                <form class="input-group mb-3" style="padding-bottom:200px" action="/search" method="get">
+                    <input type="search" name="query" class="form-control" placeholder="Search..." aria-label="Search term" aria-describedby="search-term">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit" id="search-button">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+#embed("base")
