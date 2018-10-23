@@ -1,7 +1,13 @@
 #set("title") { #(searchTerm) at Julia Morgan Papers}
 
 #set("body") {
-<h1>You searched for "#(searchTerm)".</h1>
+	<h2>You searched for <b>#(searchTerm)</b></h2>
+	<h3>Results: #(start) - #(start + 10) of #(numberOfResults)</h3>
+	#for(result in searchResults) {
+			<h4><a href="letter/#(result.PID)">#(result.title).</a></h4>
+			<p>#(result.description)</p>
+	}
+
 }
 
 #embed("base")
