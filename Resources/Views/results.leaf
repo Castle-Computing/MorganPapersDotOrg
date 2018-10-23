@@ -2,9 +2,9 @@
 
 #set("body") {
 	<h2>You searched for <b>#(searchTerm)</b></h2>
-	<h3>Results: #(start) - #(start + 10) of #(numberOfResults)</h3>
+	<h3>Results: #(start + 1) - #(start + 10) of #(numberOfResults)</h3>
 	#for(result in searchResults) {
-			<h4><a href="letter/#(result.PID)">#(result.title).</a></h4>
+			<b><a href="letter/#(result.PID)">#(result.title).</a></b>
 			<p>#(result.description)</p>
 	}
 
