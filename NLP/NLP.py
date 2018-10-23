@@ -1,6 +1,4 @@
 import nltk
-import re
-import time
 
 SEPARATORS = ['.', ',', ':', ';', '?', '!']
 NOUNS_TAGS = ['NN', 'NNP', 'NNS', 'NNPS']
