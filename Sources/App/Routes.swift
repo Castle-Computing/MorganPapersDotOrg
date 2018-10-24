@@ -9,11 +9,15 @@ public func routes(_ router: Router) throws {
     
     // Says hello
     router.get("search") { req -> Future<View> in
-        guard let searchTerm = req.query[String.self, at: "query"]?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+        guard let searchTerm = req.query[String.self, at: "query"] else {
             throw Abort(.badRequest)
         }
         
-        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/ancestors_ms:%22rekl:morgan-ms010%22%20AND%20dc.title:" +  searchTerm + "?rows=10&omitHeader=true&wt=json"
+        guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw Abort(.badRequest)
+        }
+        
+        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" +  encodedSearchTerm + ")?rows=10&omitHeader=true&wt=json"
         
         let client = try req.client()
         
