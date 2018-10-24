@@ -11,7 +11,7 @@
 	<title>#get(title)</title>
 </head>
 <body>
-    <div class="container h-100">
+    <div class="container mt-3">
     #get(body)
     </div>
 </body>

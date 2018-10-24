@@ -1,7 +1,44 @@
 #set("title") { #(searchTerm) at Julia Morgan Papers}
 
 #set("body") {
-<h1>You searched for "#(searchTerm)".</h1>
+	<div class="row d-flex align-items-center h-100">
+		<div class="col-1">
+			<a href="/">
+				<img src="/images/search_vector_logo.svg" class="img-fluid">
+			</a>
+		</div>
+		<div class="col-8">
+			<form class="input-group mb-3" style="padding-top:20px" action="/search" method="get">
+				<input type="search" name="query" class="form-control" placeholder="Search..." value="#(searchTerm)" aria-label="Search term" aria-describedby="search-term">
+				<div class="input-group-append">
+					<button class="btn btn-outline-primary" type="submit" id="search-button">Search</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<p>#(numberOfResults) Results</p>
+	
+	#for(result in searchResults) {
+		<div class="row" style="margin-bottom:10px">
+			<div class="col-md-2">
+				<div class="row">
+					<img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN" class="img-thumbnail pull-right">
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<b><a href="letter/#(result.PID)">#(result.title).</a></b>
+				</div>
+				<div class="row">
+					<p>#(result.description)</p>
+				</div>
+			</div>
+		</div>
+
+
+	}
+
 }
 
 #embed("base")
