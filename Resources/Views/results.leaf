@@ -23,7 +23,9 @@
 		<div class="row" style="margin-bottom:10px">
 			<div class="col-md-2">
 				<div class="row">
-					<img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN" class="img-thumbnail pull-right">
+                    <a href ="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN">
+                        <img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN" class="img-thumbnail pull-right">
+                    </a>
 				</div>
 			</div>
 			<div class="col-md-10">
