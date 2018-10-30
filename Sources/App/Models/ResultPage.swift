@@ -33,22 +33,34 @@ final class docArray: Codable {
     var titleArray: [String]?
     var title: String?
     
-    var authorArray: [String]?
+    var authorPlaceholder: String?
     var author: String?
     
     var descriptionArray: [String]?
     var description: String?
+    
+    var datePlaceholder: String?
+    var date: String?
+    
+    var cityPlaceholder: String?
+    var statePlaceholder: String?
+    var location: String?
     
     var pid: String
     
     enum CodingKeys: String, CodingKey {
         case titleArray = "dc.title"
         case title = "title"
-        case authorArray = "dc.contributor"
+        case authorPlaceholder = "mods_name_personal_author_namePart_s"
         case author = "author"
         case descriptionArray = "dc.description"
         case description = "description"
         case pid = "PID"
+        case datePlaceholder = "mods_originInfo_dateCreated_s"
+        case date = "date"
+        case cityPlaceholder = "mods_subject_hierarchicalGeographic_city_s"
+        case statePlaceholder = "mods_subject_hierarchicalGeographic_state_s"
+        case location = "location"
     }
     
     init(from decoder: Decoder) throws {
@@ -57,14 +69,35 @@ final class docArray: Codable {
         titleArray = try container.decode([String].self, forKey: .titleArray)
         title = titleArray![0]
         
-        let reklPid = try container.decode(String.self, forKey: .pid)
-        pid = String(reklPid.split(separator: ":")[1])
+        pid = try container.decode(String.self, forKey: .pid)
         
         do {
-            authorArray = try container.decode([String].self, forKey: .authorArray)
-            author = authorArray![0]
+            authorPlaceholder = try container.decode(String.self, forKey: .authorPlaceholder)
+            author = authorPlaceholder
         } catch {
-            debugPrint("No contributor listed.")
+            debugPrint("No author listed.")
+        }
+        
+        do {
+            datePlaceholder = try container.decode(String.self, forKey: .datePlaceholder)
+            date = datePlaceholder
+        } catch {
+            debugPrint("No date listed.")
+        }
+        
+        do {
+            cityPlaceholder = try container.decode(String.self, forKey: .cityPlaceholder)
+            statePlaceholder = try container.decode(String.self, forKey: .statePlaceholder)
+        } catch {
+            debugPrint("No location listed.")
+        }
+        
+        if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {
+            location = cityPlaceholder! + ", " + statePlaceholder!
+        } else if cityPlaceholder?.count ?? 0 > 0 {
+            location = cityPlaceholder
+        } else if statePlaceholder?.count ?? 0 > 0 {
+            location = statePlaceholder
         }
         
         do {

@@ -20,20 +20,42 @@
 	<p>#(numberOfResults) Results</p>
 	
 	#for(result in searchResults) {
-		<div class="row" style="margin-bottom:10px">
-			<div class="col-md-2">
-				<div class="row">
-                    <a href ="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN">
-                        <img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/rekl:#(result.PID)/datastream/TN" class="img-thumbnail pull-right">
-                    </a>
-				</div>
-			</div>
-			<div class="col-md-10">
+		<div class="row">
+			<div class="col-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
 				<div class="row">
 					<b><a href="letter/#(result.PID)">#(result.title).</a></b>
 				</div>
+				#if(result.description) {
+					<div class="row">
+						<div class="col">
+							<sr>#(result.description)</sr>
+						</div>
+					</div>
+					<br>
+				}
+				
 				<div class="row">
-					<p>#(result.description)</p>
+					<div class="col">
+						<sr>
+							#if(result.author) {
+								<i class="fas fa-user-circle"></i>
+								#(result.author)
+								&emsp;
+							}
+							
+							#if(result.date) {
+								<i class="fas fa-calendar-alt"></i>
+								#(result.date)
+								&emsp;
+							}
+
+							#if(result.location) {
+								<i class="fas fa-map-marker-alt"></i>
+								#(result.location)
+							}
+							
+						</sr>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -6,6 +6,12 @@ body {
 	font-family: sans-serif;
 }
 
+sr {
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: black;
+}
+
 div.welcome {
 	height: 100%;
 	text-align: center;
@@ -16,4 +22,8 @@ div.welcome img {
   	top: 50%;
   	transform: translateY(-50%);
 	width: 300px;
+}
+
+div.result:hover {
+    background-color: #e6e6e6;
 }

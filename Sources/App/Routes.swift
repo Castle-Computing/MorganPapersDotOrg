@@ -27,7 +27,7 @@ public func routes(_ router: Router) throws {
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=10&omitHeader=true&wt=json"
+        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json"
         
         //Create a client to send a request.get()
         let client = try req.client()
