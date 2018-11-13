@@ -42,7 +42,7 @@ public func routes(_ router: Router) throws {
         //Sends an HTTP GET request to URL
         //The headers are required in the HTTP request, parameter User-Agent has value
         //MorganApp/0.1
-        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
             //flatMap unwraps the response and returns a SearchResult in the future
             .flatMap { response -> Future<SearchResult> in
                 //Decode response into a SearchResult
