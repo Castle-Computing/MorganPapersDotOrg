@@ -10,12 +10,14 @@ final class ResultPage: Codable {
     let searchResults: [docArray]
     let numberOfResults: Int
     let start: Int
+    let page: Int
     
-    init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int) {
+    init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
         self.searchTerm = searchTerm
         self.searchResults = searchResults
         self.numberOfResults = numResults
         self.start = start
+        self.page = page
     }
 }
 

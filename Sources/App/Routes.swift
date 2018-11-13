@@ -17,6 +17,13 @@ public func routes(_ router: Router) throws {
             throw Abort(.badRequest)
         }
         
+        var page = req.query[Int.self, at: "page"] ?? 1
+        if page < 1 {
+            page = 1
+        }
+        
+        let start = (page - 1) * 15
+        
         //Replaces all characters of searchTerm not in allowed characters with percent
         //Encoded characters. .urlQueryAllowed is the character set.
         guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -27,7 +34,7 @@ public func routes(_ router: Router) throws {
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json"
+        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json&start=" + String(start)
         
         //Create a client to send a request.get()
         let client = try req.client()
@@ -35,7 +42,7 @@ public func routes(_ router: Router) throws {
         //Sends an HTTP GET request to URL
         //The headers are required in the HTTP request, parameter User-Agent has value
         //MorganApp/0.1
-        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
             //flatMap unwraps the response and returns a SearchResult in the future
             .flatMap { response -> Future<SearchResult> in
                 //Decode response into a SearchResult
@@ -45,7 +52,7 @@ public func routes(_ router: Router) throws {
             .flatMap { result in
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
-                return try req.view().render("results", ResultPage(searchTerm: searchTerm, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start))
+                return try req.view().render("results", ResultPage(searchTerm: searchTerm, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
             }
     }
 }

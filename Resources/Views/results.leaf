@@ -1,27 +1,17 @@
 #set("title") { #(searchTerm) at Julia Morgan Papers}
 
 #set("body") {
-	<div class="row d-flex align-items-center h-100">
-		<div class="col-1">
-			<a href="/">
-				<img src="/images/search_vector_logo.svg" class="img-fluid">
-			</a>
-		</div>
-		<div class="col-8">
-			<form class="input-group mb-3" style="padding-top:20px" action="/search" method="get">
-				<input type="search" name="query" class="form-control" placeholder="Search..." value="#(searchTerm)" aria-label="Search term" aria-describedby="search-term">
-				<div class="input-group-append">
-					<button class="btn btn-outline-primary" type="submit" id="search-button">Search</button>
-				</div>
-			</form>
-		</div>
+	<div class="row>">
+		#if(numberOfResults - start > 15) {
+			<p style="font-size: 13px; color: gray;">#(start + 1) through #(start + 15) of #(numberOfResults) Results</p>
+		} else {
+			<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
+		}
 	</div>
-
-	<p>#(numberOfResults) Results</p>
 	
 	#for(result in searchResults) {
 		<div class="row">
-			<div class="col-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
+			<div class="col-lg-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
 				<div class="row">
 					<b><a href="letter/#(result.PID)">#(result.title).</a></b>
 				</div>
@@ -59,9 +49,40 @@
 				</div>
 			</div>
 		</div>
-
-
 	}
+
+	<div class="row">
+		<div class="col-lg-6" align="center">
+			#if(page > 1){
+				<a href="/search?query=#(searchTerm)&page=#(page - 1)" class="my-3 btn btn-outline-dark btn-sm" tabindex="0" role="button">
+					<i class="fas fa-chevron-left"></i>
+				</a>
+			}
+
+			#if(page < 6) {
+				<a href="/search?query=#(searchTerm)" class="my-3 btn btn-sm #if(page == 1) { disabled btn-outline-dark } else { btn-outline-info }" role="button">1</a>
+				#if(15 < numberOfResults) { <a href="/search?query=#(searchTerm)&page=2" class="my-3 btn btn-sm #if(page == 2) { disabled btn-outline-dark } else { btn-outline-info }" role="button">2</a> }
+				#if(2 * 15 < numberOfResults) { <a href="/search?query=#(searchTerm)&page=3" class="my-3 btn btn-sm #if(page == 3) { disabled btn-outline-dark } else { btn-outline-info }" role="button">3</a> }
+				#if(3 * 15 < numberOfResults) { <a href="/search?query=#(searchTerm)&page=4" class="my-3 btn btn-sm #if(page == 4) { disabled btn-outline-dark } else { btn-outline-info }" role="button">4</a> }
+				#if(4 * 15 < numberOfResults) { <a href="/search?query=#(searchTerm)&page=5" class="my-3 btn btn-sm #if(page == 5) { disabled btn-outline-dark } else { btn-outline-info }" role="button">5</a> }
+				#if(5 * 15 < numberOfResults) { <a href="/search?query=#(searchTerm)&page=6" class="my-3 btn btn-sm #if(page == 6) { disabled btn-outline-dark } else { btn-outline-info }" role="button">6</a> }
+			} else {
+				<a href="/search?query=#(searchTerm)" class="my-3 btn btn-sm btn-outline-info" role="button">1</a>
+				<a href="/search?query=#(searchTerm)&page=#(page / 2)" class="my-3 btn btn-sm btn-outline-info" role="button">...</a>
+				<a href="/search?query=#(searchTerm)&page=#(page)" class="my-3 btn btn-sm btn-outline-dark disabled" role="button">#(page)</a>
+				<a href="/search?query=#(searchTerm)&page=#(page + 1)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 1)</a>
+				<a href="/search?query=#(searchTerm)&page=#(page + 2)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 2)</a>
+				<a href="/search?query=#(searchTerm)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 3)</a>
+				<a href="/search?query=#(searchTerm)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 4)</a>
+			}
+
+			#if(page * 15 < numberOfResults) {
+				<a href="/search?query=#(searchTerm)&page=#(page + 1)" class="my-3 btn btn-outline-dark btn-sm" role="button">
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			}
+		</div>
+	</div>
 
 }
 
