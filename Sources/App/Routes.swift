@@ -7,6 +7,29 @@ public func routes(_ router: Router) throws {
         return try req.view().render("home")
     }
     
+    router.get("letter", String.parameter) { req -> Future<View> in
+        let context = try req.parameters.next(String.self)
+        //Create a client to send a request.get()
+        let client = try req.client()
+        //Sends an HTTP GET request to URL
+        let searchURL = getChildrenURL(pid: context)
+        
+        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
+            .flatMap { response -> Future<AncestorSearchResult> in
+                return try response.content.decode(AncestorSearchResult.self)
+        }
+            .flatMap { result in
+                var i = 0
+                var pageArray: [PageInfo] = []
+                for pageIn in result.response.docs {
+                    pageArray.append(PageInfo(index1: i, PID1: pageIn.PID))
+                    i = i + 1
+                }
+                return try req.view().render("letter", LetterPage(searchResults: result.response.numFound, searchData: pageArray, parent: context))
+        }
+    }
+
+    
     //Adds new route, with search parameter.
     //Returns a view in the future
     router.get("search") { req -> Future<View> in
@@ -34,7 +57,7 @@ public func routes(_ router: Router) throws {
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json&start=" + String(start)
+        let searchURL = searchBookURL(item: encodedSearchTerm)
         
         //Create a client to send a request.get()
         let client = try req.client()
@@ -53,6 +76,6 @@ public func routes(_ router: Router) throws {
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
                 return try req.view().render("results", ResultPage(searchTerm: searchTerm, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
-            }
+        }
     }
 }

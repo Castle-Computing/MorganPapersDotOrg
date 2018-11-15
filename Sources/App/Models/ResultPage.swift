@@ -4,7 +4,6 @@
 //
 //  Created by tigeriv on 10/25/18.
 //
-
 final class ResultPage: Codable {
     let searchTerm: String
     let searchResults: [docArray]
