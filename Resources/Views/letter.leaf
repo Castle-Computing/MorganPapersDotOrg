@@ -1,0 +1,77 @@
+#set("title") {#(numberResults)}
+
+#set("body") {
+<div class = "row mt-3">
+    <div class = "col-sm-6">
+        <h3 class = "text-center"><u>#(parentLabel)</u></h3>
+    </div>
+    <div class = "col-sm">
+        <h3 class = "text-center"><u>You Might Like...</u></h3>
+    </div>
+</div>
+
+<div class = "row mt-3">
+    <div class = "col-sm-6">
+        <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ul class="carousel-indicators">
+                #for(page in data) {
+                    #if(page.index == 0) {<li data-target="#pages" data-slide-to="0" class="active"></li>}
+                    #if(page.index > 0){<li data-target="#pages" data-slide-to="#(page.index)"></li>}
+                }
+            </ul>
+            <div class="carousel-inner">
+                #for(page in data) {
+                    #if(page.index == 0){
+                        <div class="carousel-item active">
+                            <img src="https://t-ec.bstatic.com/images/hotel/max1280x900/112/112819619.jpg" alt="Page 1" width="600">
+                            <div class="carousel-caption">
+                                <h3>#(page.PID)</h3>
+                                <p>This is page #(page.index + 1)</p>
+                            </div>
+                        </div>
+                    }
+                    #if(page.index > 0){
+                        <div class="carousel-item">
+                            <img src="https://www.skender.com/wp-content/uploads/2018/01/sawyer-bengtson-256260.jpg" alt="Chicago" width="600">
+                            <div class="carousel-caption">
+                                <h3>#(page.PID)</h3>
+                                <p>This is page #(page.index + 1)</p>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <a class="carousel-control-prev" href="#pages" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#pages" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light mr-3">Text</button>
+                <button type="button" class="btn btn-light">Citation</button>
+                <button type="button" class="btn btn-light ml-3">Image</button>
+            </div>
+        </div>
+    </div>
+    <div class = "col-sm">
+        <div class = "row ml-5">
+            <p class = "font-weight-bold">1. Cupertino</p>
+        </div>
+        <div class = "row ml-5">
+            <p class = "font-weight-bold">2. Mountain View</p>
+        </div>
+        <div class = "row ml-5">
+            <p class = "font-weight-bold">3. San Jose</p>
+        </div>
+        <div class = "row ml-5">
+            <p class = "font-weight-bold">4. Palo Alto</p>
+        </div>
+    </div>
+</div>
+}
+
+#embed("base")
