@@ -1,0 +1,98 @@
+#set("title") {#(numberResults)}
+
+#set("body") {
+<div class = "row mt-3">
+    <div class = "col-sm-8">
+        <h3 class = "text-center"><u>#(parentLabel)</u></h3>
+    </div>
+    <div class = "col-sm-4">
+        <h3 class = "text-center"><u>You Might Like...</u></h3>
+    </div>
+</div>
+
+<div class = "row mt-3">
+    <div class = "col-sm-8">
+        <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ul class="carousel-indicators">
+                #for(page in data) {
+                    #if(page.index == 0) {<li data-target="#pages" data-slide-to="0" class="active"></li>}
+                    #if(page.index > 0){<li data-target="#pages" data-slide-to="#(page.index)"></li>}
+                }
+            </ul>
+            <div class="carousel-inner">
+                #for(page in data) {
+                    #if(page.index == 0){
+                        <div class="carousel-item active">
+                            <img src="https://t-ec.bstatic.com/images/hotel/max1280x900/112/112819619.jpg" alt="Page 1" width="800">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                    }
+                    #if(page.index > 0){
+                        <div class="carousel-item">
+                            <img src="https://www.skender.com/wp-content/uploads/2018/01/sawyer-bengtson-256260.jpg" alt="Chicago" width="800">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                    }
+                }
+
+                <a class="carousel-control-prev" href="#pages" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#pages" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
+        <div class = "col mt-3 text-center">
+            <p class = "font-weight-bold">Transcription</p>
+        </div>
+        <div class = "row mt-3">
+            <p>Chicago (/ʃɪˈkɑːɡoʊ/ (About this soundlisten), locally also /-ˈkɔː-/), officially the City of Chicago, is the third most populous city in the United States. As of the 2017 census-estimate, Chicago has a population of 2,716,450, which makes it the most populous city in both the state of Illinois and the Midwestern United States. It is the county seat of Cook County, the second most populous county in the United States. Chicago is the principal city of the Chicago metropolitan area, which is often referred to as "Chicagoland." The Chicago metropolitan area has nearly 10 million people, is the third-largest in the United States, the fourth largest in North America, and the third largest metropolitan area in the world by land area.
+
+            Located on the shores of Lake Michigan, Chicago was incorporated as a city in 1837 near a portage between the Great Lakes and the Mississippi River watershed and grew rapidly in the mid-nineteenth century.[6] After the Great Chicago Fire of 1871, which destroyed several square miles and left more than 100,000 homeless, the city made a concerted effort to rebuild.[7] The construction boom accelerated population growth throughout the following decades, and by 1900 Chicago was one of the five largest cities in the world.[8] During this period, Chicago made noted contributions to urban planning and zoning standards, including new construction styles (including the Chicago School of architecture), the development of the City Beautiful Movement, and the steel-framed skyscraper.[9][10]</p>
+        </div>
+    </div>
+    <div class = "col-sm-4">
+        <div class = "row align-items-center">
+            <div class = "col-sm-6">
+                <p class = "font-weight-bold">1. Cupertino</p>
+                <p>Cupertino is a city in California's Silicon Valley.</p>
+            </div>
+            <div class = "col-sm-2">
+                <img src="https://az592774.vo.msecnd.net/pgl-release/Images/ArticleImages/16/16005.jpg" width = "200"/>
+            </div>
+        </div>
+        <div class = "row align-items-center">
+            <div class = "col-sm-6">
+                <p class = "font-weight-bold">2. Mountain View</p>
+                <p>Mountain View is a city located in Santa Clara County, California[9], United States, named for its views of the Santa Cruz Mountains.</p>
+            </div>
+            <div class = "col-sm-2">
+                <img src="https://static1.squarespace.com/static/56d0d42df85082ea376b5eb3/58fd201cc534a56ca62e2ff9/58fd201cc534a56ca62e2ffc/1493071321693/Miramar+Capital+Projects_Village+Lakes+5+.jpg" width = "200"/>
+            </div>
+        </div>
+        <div class = "row align-items-center">
+            <div class = "col-sm-6">
+                <p class = "font-weight-bold">3. San Jose</p>
+                <p>San Jose officially the City of San José, is an economic, cultural and political center of Silicon Valley, and the largest city in Northern California.</p>
+            </div>
+            <div class = "col-sm-2">
+                <img src="https://www.langan.com/wp-content/uploads/2016/11/San-Jose.jpg" width = "200"/>
+            </div>
+        </div>
+        <div class = "row align-items-center">
+            <div class = "col-sm-6">
+                <p class = "font-weight-bold">4. Palo Alto</p>
+                <p>Palo Alto is a charter city located in the northwest corner of Santa Clara County, California, United States, in the San Francisco Bay Area.</p>
+            </div>
+            <div class = "col-sm-2">
+                <img src="https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_ca101_fiveamazingthings_palalto_alto1_videostill_1280x640.jpg" width = "200"/>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+#embed("base")
