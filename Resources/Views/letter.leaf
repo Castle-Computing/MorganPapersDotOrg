@@ -23,14 +23,13 @@
                 #for(page in data) {
                     #if(page.index == 0){
                         <div class="carousel-item active">
-                            <img src="https://t-ec.bstatic.com/images/hotel/max1280x900/112/112819619.jpg" alt="Page 1" width="800">
-                            <div class="carousel-caption">
-                            </div>
+                            <img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/#(page.PID)/datastream/JPG" alt="#(page.PID)" class="img-fluid" width="800">
+                            <div class="carousel-caption"></div>
                         </div>
                     }
                     #if(page.index > 0){
                         <div class="carousel-item">
-                            <img src="https://www.skender.com/wp-content/uploads/2018/01/sawyer-bengtson-256260.jpg" alt="Chicago" width="800">
+                            <img src="https://digital.lib.calpoly.edu/islandora/rest/v1/object/#(page.PID)/datastream/JPG" alt="#(page.PID)" class="img-fluid" width="800">
                             <div class="carousel-caption">
                             </div>
                         </div>
