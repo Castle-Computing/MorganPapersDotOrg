@@ -3,7 +3,7 @@
 #set("body") {
 <div class = "row">
     <div class = "col-sm-8 mt-5">
-        <h3 class = "text-center text-warning font-weight-bold">#(parentLabel)</h3>
+        <h2 class = "text-center text-warning font-weight-bold">#(parentLabel)</h3>
         <div id="pages" class="carousel slide mt-5" data-ride="carousel" data-interval="false">
             <ul class="carousel-indicators">
                 #for(page in data) {
@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class = "col-sm-4 mt-5">
-        <h3 class = "text-center text-warning font-weight-bold">You Might Like...</h3>
+        <h2 class = "text-center text-warning font-weight-bold">You Might Like...</h3>
         <div class = "row align-items-center mt-5">
             <div class = "col-sm-6">
                 <p class = "font-weight-bold">1. Cupertino</p>
