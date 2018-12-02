@@ -38,6 +38,7 @@ final class docArray: Codable {
     var author: String?
     
     var descriptionArray: [String]?
+    var ocrText: String?
     var description: String?
     
     var datePlaceholder: String?
@@ -47,6 +48,8 @@ final class docArray: Codable {
     var statePlaceholder: String?
     var location: String?
     
+    var children: [String]?
+    
     var pid: String
     
     enum CodingKeys: String, CodingKey {
@@ -55,6 +58,7 @@ final class docArray: Codable {
         case authorPlaceholder = "mods_name_personal_author_namePart_s"
         case author = "author"
         case descriptionArray = "dc.description"
+        case ocrText = "OCR_BOOK_t"
         case description = "description"
         case pid = "PID"
         case datePlaceholder = "mods_originInfo_dateCreated_s"
@@ -62,6 +66,7 @@ final class docArray: Codable {
         case cityPlaceholder = "mods_subject_hierarchicalGeographic_city_s"
         case statePlaceholder = "mods_subject_hierarchicalGeographic_state_s"
         case location = "location"
+        case children = "BOOK_CHILDREN_t"
     }
     
     init(from decoder: Decoder) throws {
@@ -87,10 +92,21 @@ final class docArray: Codable {
         }
         
         do {
+            let childrenString = try container.decode(String.self, forKey: .children)
+            children = childrenString.components(separatedBy: ",")
+        } catch {
+            debugPrint("No children listed.")
+        }
+        
+        do {
             cityPlaceholder = try container.decode(String.self, forKey: .cityPlaceholder)
             statePlaceholder = try container.decode(String.self, forKey: .statePlaceholder)
         } catch {
             debugPrint("No location listed.")
+        }
+        
+        do {
+            ocrText = try container.decode(String.self, forKey: .ocrText)
         }
         
         if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {
@@ -103,9 +119,20 @@ final class docArray: Codable {
         
         do {
             descriptionArray = try container.decode([String].self, forKey: .descriptionArray)
-            description = descriptionArray![0]
+            if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
+                description = descriptionArray![0]
+            } else if let temp = ocrText {
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+            } else {
+                debugPrint("No valid description or OCR listed.")
+            }
         } catch {
-            debugPrint("No description listed.")
+            if let temp = ocrText {
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+            } else {
+                debugPrint("No description or OCR listed.")
+            }
+         
         }
     }
 }

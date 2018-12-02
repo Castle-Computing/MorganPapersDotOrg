@@ -26,8 +26,12 @@ func getBooksURL() -> String {
     return "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22"
 }
 
+func getLetterURL(pid: String) -> String {
+    return "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/PID:%22" + pid + "%22"
+}
+
 //URL associated with books containing a certain term
-func searchBookURL(item: String) -> String {
-    let itemURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + item + "%20OR%20dc.description:" + item + ")?rows=15&omitHeader=true&wt=json"
+func searchBookURL(encodedSearchTerm: String, start: Int) -> String {
+    let itemURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + "%20OR%20OCR_BOOK_t:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json&start=" + String(start)
     return itemURL
 }

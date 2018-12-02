@@ -12,23 +12,23 @@ public func routes(_ router: Router) throws {
         //Create a client to send a request.get()
         let client = try req.client()
         //Sends an HTTP GET request to URL
-        let searchURL = getChildrenURL(pid: context)
+        let letterURL = getLetterURL(pid: context)
         
-        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
-            .flatMap { response -> Future<AncestorSearchResult> in
-                return try response.content.decode(AncestorSearchResult.self)
-        }
-            .flatMap { result in
-                var i = 0
-                var pageArray: [PageInfo] = []
-                for pageIn in result.response.docs {
-                    pageArray.append(PageInfo(index1: i, PID1: pageIn.PID))
-                    i = i + 1
+        return client.get(letterURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            .flatMap { response -> Future<SearchResult> in
+                return try response.content.decode(SearchResult.self)
+            }.flatMap { result in
+                guard let letter = result.response.docs.first else {
+                    throw Abort(.badRequest)
                 }
-                return try req.view().render("letter", LetterPage(searchResults: result.response.numFound, searchData: pageArray, parent: context))
+                
+                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText))
         }
     }
 
+    router.get("help") { req -> Future<View> in
+        return try req.view().render("about")
+    }
     
     //Adds new route, with search parameter.
     //Returns a view in the future
@@ -57,7 +57,7 @@ public func routes(_ router: Router) throws {
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = searchBookURL(item: encodedSearchTerm)
+        let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
         
         //Create a client to send a request.get()
         let client = try req.client()
