@@ -30,6 +30,10 @@ public func routes(_ router: Router) throws {
     }
 
     router.get("help") { req -> Future<View> in
+        return try req.view().render("help")
+    }
+    
+    router.get("about") { req -> Future<View> in
         return try req.view().render("about")
     }
     

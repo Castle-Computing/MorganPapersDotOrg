@@ -1,0 +1,11 @@
+#set("title") {Help Me!}
+#set("body") {
+<div class = "row mt-5">
+    <div class = "col">
+        <h1 class = "text-center text-warning font-weight-bold font-italic">Pro Tips</h1>
+        <p class = "text-center font-weight-bold">Add some stuff when we're further into the website.</p>
+    </div>
+</div>
+}
+
+#embed("base")
