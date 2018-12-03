@@ -22,12 +22,20 @@ public func routes(_ router: Router) throws {
                     throw Abort(.badRequest)
                 }
                 
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText))
+                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText, numPages: letter.children?.count))
         }
     }
 
     router.get("help") { req -> Future<View> in
+        return try req.view().render("help")
+    }
+    
+    router.get("about") { req -> Future<View> in
         return try req.view().render("about")
+    }
+    
+    router.get("explore") { req -> Future<View> in
+        return try req.view().render("explore")
     }
     
     //Adds new route, with search parameter.

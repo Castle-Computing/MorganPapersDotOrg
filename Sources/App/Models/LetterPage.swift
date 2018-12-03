@@ -11,10 +11,13 @@ final class LetterPage: Codable {
     let letterTitle: String?
     let children: [String]?
     let ocrText: String?
-    init (title: String?, children: [String]?, ocrText: String?)
+    let numPages: Int
+    
+    init (title: String?, children: [String]?, ocrText: String?, numPages: Int?)
     {
         self.letterTitle = title
         self.children = children
         self.ocrText = ocrText
+        self.numPages = numPages ?? 0
     }
 }

@@ -1,0 +1,80 @@
+#set("title") { Julia Morgan Papers }
+
+#set("body") {
+<body>
+    <div class="container h-100">
+        <div class="row align-items-center h-100 mx-auto mt-3 d-flex align-items-stretch">
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/casagrande.JPG" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Casa Grande</h5>
+                  <p class="card-text">Learn about the front facade of the iconic Hearst Castle</p>
+                  <a href="/search?query=%22Casa+Grande%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore Casa Grande Letters</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/casadelsol.jpeg" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Casa del Sol</h5>
+                  <p class="card-text">Discover the beauty of Hearst Castle through exploring each of the three houses</p>
+                  <a href="/search?query=%22House+C%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore Casa del Sol Letters</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/casadelmonte.JPG" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Casa Del Monte</h5>
+                  <p class="card-text">Discover the beauty of Hearst Castle through exploring each of the three houses</p>
+                  <a href="/search?query=%22House+B%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore Casa del Monte Letters</a>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/casedelmar.jpg" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Casa Del Mar</h5>
+                  <p class="card-text">Discover the beauty of Hearst Castle through exploring each of the three houses</p>
+                  <a href="/search?query=%22House+A%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore Casa del Mar Letters</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/Julia-Morgan.jpg" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Julia Morgan</h5>
+                  <p class="card-text">One of the first female architects in California, discover the ingenuinity of this brilliant woman</p>
+                  <div class="mt-auto">
+                  <a href="/search?query=%22Julia+Morgan%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore Julia Morgan</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/whearst.jpg" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">William Hearst</h5>
+                  <p class="card-text">Proprietor of Hearst Castle and correspondent with Julia Morgan, learn about the magnate with a dream</p>
+                  <div class="mt-auto">
+                  <a href="/search?query=%22William+Hearst%22" class="btn btn-sm btn-block btn-primary mt-auto">Explore William Hearst</a>
+                </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+}
+#embed("base")
