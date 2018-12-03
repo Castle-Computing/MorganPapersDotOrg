@@ -26,11 +26,11 @@
                 #for(child in children) {
                     #if(isFirst){
                         <div class="carousel-item active">
-                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid w-100">
+                            <img referrerPolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid w-100">
                         </div>
                     } else {
                         <div class="carousel-item">
-                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid w-100">
+                            <img referrerPolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid w-100">
                         </div>
                     }
                 }
