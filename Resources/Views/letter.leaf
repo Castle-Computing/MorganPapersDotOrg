@@ -4,14 +4,9 @@
 #set("body") {
 <meta name="referrer" content="never">
 <div class = "row">
-    <div class = "col">
-        <h3 class = "text-center"><u>#(letterTitle)</u></h3>
-    </div>
-</div>
-
-<div class = "row">
-    <div class = "col">
-        <div id="pages" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
+    <div class = "col mt-5">
+        <h4 class = "text-center text-warning font-weight-bold">#(letterTitle)</h4>
+        <div id="pages" class="carousel slide mt-5" data-ride="carousel" data-wrap="false" data-interval="false">
             <ul class="carousel-indicators">
                 #for(child in children) {
                     #if(numPages > 1) {
@@ -53,45 +48,46 @@
             <p>#(ocrText)</p>
         </div>
     </div>
-    <!--<div class = "col-sm-4">
-        <div class = "row align-items-center">
-            <div class = "col-sm-6">
+    <div class = "col-lg-4 mt-5 ml-5">
+        <h4 class = "text-center text-warning font-weight-bold">You Might Like...</h4>
+        <div class = "row align-items-center mt-5">
+            <div class = "col">
                 <p class = "font-weight-bold">1. Cupertino</p>
                 <p>Cupertino is a city in California's Silicon Valley.</p>
             </div>
-            <div class = "col-sm-2">
-                <img src="https://az592774.vo.msecnd.net/pgl-release/Images/ArticleImages/16/16005.jpg" width = "200"/>
+            <div class = "col">
+                <img src="https://az592774.vo.msecnd.net/pgl-release/Images/ArticleImages/16/16005.jpg" class="img-fluid w-100"/>
             </div>
         </div>
-        <div class = "row align-items-center">
-            <div class = "col-sm-6">
+        <div class = "row align-items-center mt-5">
+            <div class = "col">
                 <p class = "font-weight-bold">2. Mountain View</p>
                 <p>Mountain View is a city located in Santa Clara County, California[9], United States, named for its views of the Santa Cruz Mountains.</p>
             </div>
-            <div class = "col-sm-2">
-                <img src="https://static1.squarespace.com/static/56d0d42df85082ea376b5eb3/58fd201cc534a56ca62e2ff9/58fd201cc534a56ca62e2ffc/1493071321693/Miramar+Capital+Projects_Village+Lakes+5+.jpg" width = "200"/>
+            <div class = "col">
+                <img src="https://static1.squarespace.com/static/56d0d42df85082ea376b5eb3/58fd201cc534a56ca62e2ff9/58fd201cc534a56ca62e2ffc/1493071321693/Miramar+Capital+Projects_Village+Lakes+5+.jpg" class="img-fluid w-100"/>
             </div>
         </div>
-        <div class = "row align-items-center">
-            <div class = "col-sm-6">
+        <div class = "row align-items-center mt-5">
+            <div class = "col">
                 <p class = "font-weight-bold">3. San Jose</p>
                 <p>San Jose officially the City of San José, is an economic, cultural and political center of Silicon Valley, and the largest city in Northern California.</p>
             </div>
-            <div class = "col-sm-2">
-                <img src="https://www.langan.com/wp-content/uploads/2016/11/San-Jose.jpg" width = "200"/>
+            <div class = "col">
+                <img src="https://www.langan.com/wp-content/uploads/2016/11/San-Jose.jpg" class="img-fluid w-100"/>
             </div>
         </div>
-        <div class = "row align-items-center">
-            <div class = "col-sm-6">
+        <div class = "row align-items-center mt-5">
+            <div class = "col">
                 <p class = "font-weight-bold">4. Palo Alto</p>
                 <p>Palo Alto is a charter city located in the northwest corner of Santa Clara County, California, United States, in the San Francisco Bay Area.</p>
             </div>
-            <div class = "col-sm-2">
-                <img src="https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_ca101_fiveamazingthings_palalto_alto1_videostill_1280x640.jpg" width = "200"/>
+            <div class = "col">
+                <img src="https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_ca101_fiveamazingthings_palalto_alto1_videostill_1280x640.jpg" class="img-fluid w-100"/>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 
 
 }

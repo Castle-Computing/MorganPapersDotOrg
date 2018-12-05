@@ -13,29 +13,33 @@
     <div class = "row mt-5">
         <div class = "col">
             <h1 class = "text-center text-warning font-weight-bold font-italic">Who are we?</h1>
+            <p class = "text-center font-weight-bold mt-2">We are computer engineering and software engineering students at Cal Poly, making this website for our capstone project.</p>
         </div>
     </div>
     <div class = "row mt-3">
         <div class = "col-md ml-4 mr-4">
-            <img src="/images/JoeyWilson.jpeg" class="img-fluid">
+            <img src="/images/JoeyWilson.jpeg" class="img-fluid w-100">
             <h4 class = "text-center font-weight-bold">Joey Wilson</h4>
-            <p class = "text-center">Insert stuff here...</p>
+            <p class = "text-center">Joey plays saxophone.</p>
         </div>
         <div class = "col-md ml-4 mr-4">
-            <img src="/images/JoeyWilson.jpeg" class="img-fluid">
-            <h4 class = "text-center font-weight-bold">Luca</h1>
+            <img src="/images/Luca.jpg" class="img-fluid w-100">
+            <h4 class = "text-center font-weight-bold">Luca Soares</h1>
+            <p class = "text-center">Luca builds satellites.</p>
         </div>
         <div class = "col-md ml-4 mr-4">
-            <img src="/images/JoeyWilson.jpeg" class="img-fluid">
-            <h4 class = "text-center font-weight-bold">Ethan</h1>
+            <img src="/images/Ethan.png" class="img-fluid w-100">
+            <h4 class = "text-center font-weight-bold">Ethan Kusters</h1>
+            <p class = "text-center">Ethan does theater.</p>
         </div>
         <div class = "col-md ml-4 mr-4">
-            <img src="/images/JoeyWilson.jpeg" class="img-fluid">
-            <h4 class = "text-center font-weight-bold">Sam</h1>
+            <img src="/images/Sam.jpg" class="img-fluid w-100">
+            <h4 class = "text-center font-weight-bold">Sam Verkruyse</h1>
+            <p class = "text-center">Sam's laptop got stolen.</p>
         </div>
     </div>
 
-    <div class = "row mt-5 align-items-center">
+    <div class = "row mt-5 mb-5 align-items-center">
         <div class = "col-sm-8" ml-5 mr-5>
             <h1 class = "text-center text-warning font-weight-bold font-italic">Who's Julia Morgan?</h1>
             <p class = "text-center font-weight-bold">Glad you asked! Julia Morgan was the first licensed female architect in the US, and built many amazing projects including Hearst Castle. To learn more about Julia Morgan or the collection, visit Kennedy Library's <a href="http://lib.calpoly.edu/search-and-find/collections-and-archives/architectural/julia-morgan/">Julia Morgan Biography</a>.</p>

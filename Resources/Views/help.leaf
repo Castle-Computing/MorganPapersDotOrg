@@ -1,5 +1,15 @@
 #set("title") { Help }
 #set("body") {
+<div class = "row mt-5 align-items-center">
+    <div class = "col-md text-center">
+        <h1 class = "text-center text-warning font-weight-bold font-italic">What Is This?</h1>
+        <p class = "text-center font-weight-bold">To learn about us and this website, check our about page <a href="/about">here!</a></p>
+    </div>
+    <div class = "col-md text-center">
+        <img src="/images/What.png" class="img-fluid w-100">
+    </div>
+</div>
+
 <div class = "row mt-5">
     <div class = "col">
         <h1 class = "text-center text-warning font-weight-bold font-italic">Pro Tips</h1>
