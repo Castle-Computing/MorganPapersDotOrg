@@ -1,4 +1,4 @@
-#set("title") { #(searchTerm) at Julia Morgan Papers}
+#set("title") { #(searchTerm) at Julia Morgan Papers }
 
 #set("body") {
 	<div class="row>">

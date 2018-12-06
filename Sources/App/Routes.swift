@@ -22,7 +22,7 @@ public func routes(_ router: Router) throws {
                     throw Abort(.badRequest)
                 }
                 
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText, numPages: letter.children?.count))
+                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText, numPages: letter.children?.count, metadata: letter))
         }
     }
 
