@@ -17,15 +17,15 @@
 
 <body>
     <div class="row align-items-center h-100 ml-3 mr-3">
-        <div class="col-md-6 mx-auto text-center m-5">
-            <img src="/images/HomeImage.png" width="200" alt="Responsive image" class = "text-center mb-3">
+        <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center m-5">
+            <img src="/images/HomeImage.png" width="300" class = "text-center mb-3">
             <form class="input-group mb-3" action="/search" method="get">
                 <input type="search" name="query" class="form-control" placeholder="Search..." aria-label="Search term" aria-describedby="search-term">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
                 </div>
             </form>
-            <h4 class = "text-center font-weight-bold">Not sure where to start? Click <a href="/explore">here</a>.</h4>
+            <h5 class = "text-center">Not sure where to start? Click <a href="/explore">here</a>.</h5>
         </div>
     </div>
 </body>

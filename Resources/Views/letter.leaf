@@ -4,52 +4,61 @@
 <div class = "row">
     <div class = "col">
         
-        <h4 class="text-center text-dark font-weight-bold">#(letterTitle)</h4>
+        <h4 style="margin-top: 10px; margin-bottom: 15px" class="text-center text-dark font-weight-bold">#(letterTitle)</h4>
         <div class="row">
         <div class="col">
-            <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
-                <ul class="carousel-indicators">
-                    #for(child in children) {
-                        #if(numPages > 1) {
-                            #if(isFirst) {
-                                <li data-target="#pages" data-slide-to="0" class="active"></li>
-                            } else {
-                                <li data-target="#pages" data-slide-to="#(child.index)"></li>
+            #if(numPages> 1) {
+                <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <ul class="carousel-indicators">
+                        #for(child in children) {
+                            #if(numPages > 1) {
+                                #if(isFirst) {
+                                    <li data-target="#pages" data-slide-to="0" class="active"></li>
+                                } else {
+                                    <li data-target="#pages" data-slide-to="#(child.index)"></li>
+                                }
                             }
                         }
-                    }
-                </ul>
-                <div class="carousel-inner">
-                    #for(child in children) {
-                        #if(isFirst){
-                            <div class="carousel-item active">
-                                <div class="middle">
-                                    <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view">
+                    </ul>
+                    <div class="carousel-inner">
+                        #for(child in children) {
+                            #if(isFirst){
+                                <div class="carousel-item active">
+                                    <div class="middle">
+                                        <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view">
+                                    </div>
                                 </div>
-                            </div>
-                        } else {
-                            <div class="carousel-item">
-                                <div class="middle">
-                                    <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view">
+                            } else {
+                                <div class="carousel-item">
+                                    <div class="middle">
+                                        <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view">
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         }
-                    }
 
-                    #if(numPages > 1) {
-                        <a class="carousel-control-prev" href="#pages" data-slide="prev">
-                            <span style="font-size: 2em; color: Black;">
-                                <i class="fas fa-chevron-circle-left"></i>
-                            </span>
-                        </a>
-                        <a class="carousel-control-next" href="#pages" data-slide="next">
-                            <span style="font-size: 2em; color: Black;">
-                                <i class="fas fa-chevron-circle-right"></i>
-                            </span>
-                        </a>
-                    }
+                        #if(numPages > 1) {
+                            <a class="carousel-control-prev" href="#pages" data-slide="prev">
+                                <span style="font-size: 2em; color: Black;">
+                                    <i class="fas fa-chevron-circle-left"></i>
+                                </span>
+                            </a>
+                            <a class="carousel-control-next" href="#pages" data-slide="next">
+                                <span style="font-size: 2em; color: Black;">
+                                    <i class="fas fa-chevron-circle-right"></i>
+                                </span>
+                            </a>
+                        }
+                    </div>
                 </div>
-            </div>
+            } else {
+                #for(child in children) {
+                            #if(isFirst) {
+                                <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid mx-auto d-block">
+                            }
+                }
+            }
+
             </div>
         </div>
 
