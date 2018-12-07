@@ -27,3 +27,36 @@ div.welcome img {
 div.result:hover {
     background-color: #e6e6e6;
 }
+
+.carousel {
+	height: 600px;
+	border-radius: 15px;
+}
+
+.carousel-indicators .active {
+	background-color: black;
+}
+
+.carousel-indicators li {
+	background-color: lightgray;
+}
+
+.middle {
+	position: relative;
+	height: 600px;
+}
+
+.middle img {
+	max-width: 100%;
+	max-height: 600px; /*what ever height */
+	margin: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+
+
+
