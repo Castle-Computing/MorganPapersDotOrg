@@ -86,8 +86,10 @@
         </div>	
         
         <div class="row mt-3 text-left">
-            <p class="font-weight-bold">Letter Transcription:</p>
-            <p>#(ocrText)</p>
+            <div class="col">
+                <p class="font-weight-bold">Letter Transcription:</p>
+                <p>#(ocrText)</p>
+            </div>
         </div>
     </div>
     <!--<div class = "col-lg-4 mt-5 ml-5">
