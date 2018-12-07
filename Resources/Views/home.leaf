@@ -14,18 +14,36 @@
 
 	<title>#get(title)</title>
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/explore">Explore</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/help">Help</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <body>
-    <div class="row align-items-center h-100 ml-3 mr-3">
+    <div class="row align-items-center h-100 ml-3 mr-3 bg-light">
         <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center m-5">
-            <img src="/images/HomeImage.png" width="300" class = "text-center mb-3">
-            <form class="input-group mb-3" action="/search" method="get">
+            <img src="/images/HomeImage.png" width="300" class="text-center mb-3" style="margin-top: -200px">
+            <form class="input-group mb-4" action="/search" method="get">
                 <input type="search" name="query" class="form-control" placeholder="Search..." aria-label="Search term" aria-describedby="search-term">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
                 </div>
             </form>
-            <h5 class = "text-center">Not sure where to start? Click <a href="/explore">here</a>.</h5>
+            <h5 class="text-center text-secondary">Not sure where to start? Click <a href="/explore">here</a>.</h5>
         </div>
     </div>
 </body>
