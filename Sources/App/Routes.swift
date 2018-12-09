@@ -8,21 +8,27 @@ public func routes(_ router: Router) throws {
     }
     
     router.get("letter", String.parameter) { req -> Future<View> in
-        let context = try req.parameters.next(String.self)
-        //Create a client to send a request.get()
+        let letterPID = try req.parameters.next(String.self)
         let client = try req.client()
-        //Sends an HTTP GET request to URL
-        let letterURL = getLetterURL(pid: context)
+        let letterURL = getLetterURL(pid: letterPID)
         
-        return client.get(letterURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
-            .flatMap { response -> Future<SearchResult> in
-                return try response.content.decode(SearchResult.self)
-            }.flatMap { result in
+        let searchResultRequest = client.get(letterURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            .flatMap { firstResponse -> Future<SearchResult> in
+                return try firstResponse.content.decode(SearchResult.self)
+        }
+        
+        let ocrDataRequest = client.get("https://digital.lib.calpoly.edu/islandora/object/" + letterPID + "/datastream/OCR_BOOK", headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            .flatMap { secondResponse -> Future<Data> in
+                return secondResponse.http.body.consumeData(on: req)
+        }
+        
+        return flatMap(searchResultRequest, ocrDataRequest) { (result: SearchResult, ocrData: Data) in
                 guard let letter = result.response.docs.first else {
                     throw Abort(.badRequest)
                 }
-                
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText, numPages: letter.children?.count, metadata: letter))
+            
+                let ocrText = String(data: ocrData, encoding: .utf8) ?? "invalid encoding"
+                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
         }
     }
 
