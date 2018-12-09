@@ -15,14 +15,20 @@ public func routes(_ router: Router) throws {
         let letterURL = getLetterURL(pid: context)
         
         return client.get(letterURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
-            .flatMap { response -> Future<SearchResult> in
-                return try response.content.decode(SearchResult.self)
+            .flatMap { firstResponse -> Future<SearchResult> in
+                return try firstResponse.content.decode(SearchResult.self)
             }.flatMap { result in
                 guard let letter = result.response.docs.first else {
                     throw Abort(.badRequest)
                 }
                 
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: letter.ocrText, numPages: letter.children?.count, metadata: letter))
+                return client.get("https://digital.lib.calpoly.edu/islandora/object/" + letter.pid + "/datastream/OCR_BOOK", headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+                    .flatMap { secondResponse -> Future<Data> in
+                        return secondResponse.http.body.consumeData(on: req)
+                    }.flatMap { ocrData in
+                        let ocrText = String(data: ocrData, encoding: .utf8) ?? "invalid encoding"
+                        return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
+                    }
         }
     }
 
