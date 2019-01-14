@@ -2,11 +2,16 @@
 
 #set("body") {
 	<div class="row>">
-		#if(numberOfResults - start > 15) {
-			<p style="font-size: 13px; color: gray;">#(start + 1) through #(start + 15) of #(numberOfResults) Results</p>
-		} else {
-			<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
-		}
+		<div class="col">
+			#if(numberOfResults - start > 15) {
+				<p style="font-size: 13px; color: gray;">#(start + 1) through #(start + 15) of #(numberOfResults) Results</p>
+			} else {
+				<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
+			}
+		</div>
+		<div class="col">
+			
+		</div>
 	</div>
 	
 	#for(result in searchResults) {
