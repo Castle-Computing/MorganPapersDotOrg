@@ -3,10 +3,10 @@
     <div class = "row mt-5 align-items-center">
         <div class = "col-md-8">
             <h1 class = "text-center text-warning font-weight-bold font-italic">Making Research Fun...</h1>
-            <p class = "text-center font-weight-bold">Research sucks, but it doesn't have to. Here at Castle Computing, we're making research, specifically the construction of Hearst Castle, a fun, interactive experience. In this site, you will find a collection of letters and other forms of communication between revered architect Julia Morgan and media tycoon William Randolph Hearst from the construction of Hearst Castle.</p>
+            <p class = "text-center font-weight-bold">Here at Castle Computing, we're making research, specifically the construction of Hearst Castle, a fun, interactive experience. In this site, you will find a collection of letters and other forms of communication between revered architect Julia Morgan and media tycoon William Randolph Hearst from the construction of Hearst Castle.</p>
         </div>
         <div class = "col-md-4">
-            <img src="https://cdn.vox-cdn.com/thumbor/w7oXIduJWkMK5uA516v9uKKHnAQ=/0x0:640x480/1200x800/filters:focal(269x189:371x291)/cdn.vox-cdn.com/uploads/chorus_image/image/61328529/HearstCastle-712894.0.0.1450294390.0.jpeg" class="img-fluid"/>
+            <img src="/images/AboutHearstCastle.jpg" class="img-fluid"/>
         </div>
     </div>
 
@@ -42,7 +42,7 @@
     <div class = "row mt-5 mb-5 align-items-center">
         <div class = "col-sm-8" ml-5 mr-5>
             <h1 class = "text-center text-warning font-weight-bold font-italic">Who's Julia Morgan?</h1>
-            <p class = "text-center font-weight-bold">Glad you asked! Julia Morgan was the first licensed female architect in the US, and built many amazing projects including Hearst Castle. To learn more about Julia Morgan or the collection, visit Kennedy Library's <a href="http://lib.calpoly.edu/search-and-find/collections-and-archives/architectural/julia-morgan/">Julia Morgan Biography</a>.</p>
+            <p class = "text-center font-weight-bold">Glad you asked! Julia Morgan was the first licensed female architect in California, and built many amazing projects including Hearst Castle. To learn more about Julia Morgan or the collection, visit Kennedy Library's <a href="http://lib.calpoly.edu/search-and-find/collections-and-archives/architectural/julia-morgan/">Julia Morgan Biography</a>.</p>
         </div>
         <div class = "col-sm-4">
             <img src="http://www.californiamuseum.org/sites/main/files/imagecache/lightbox/main-images/julia-morgan.png" class="img-fluid"/>
