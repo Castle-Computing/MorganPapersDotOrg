@@ -29,7 +29,7 @@
                     <i class="fas fa-search"></i>
                 </button>
                 <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu w-100 px-3" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu w-100 px-3 keep-open" aria-labelledby="dropdownMenuButton">
                     <h4 class="mt-2">Find documents with...</h4>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
@@ -47,63 +47,97 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">this exact phrase</span>
                         </div>
-                        <input name="phrase_explicit" type="text" class="form-control" aria-label="this exact phrase">
+                        <input name="phrase_explicit" type="text" class="form-control" aria-label="this exact phrase" data-toggle="popover" data-trigger="hover" title="Tip" data-content='to search for multiple phrases, put exact words in quotes: "julia morgan" "william hearst"'>
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text">none of these words</span>
                         </div>
-                        <input name="none_explicit" type="text" class="form-control" aria-label="none of these words" >
+                        <input name="none_explicit" type="text" class="form-control" aria-label="none of these words">
                     </div>
                     <h4 class="mt-4">Then narrow down your results by...</h4>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text">author</span>
                         </div>
-                        <input name="author" type="text" class="form-control" aria-label="author name" >
+                        <input name="author" type="text" class="form-control" aria-label="author name">
+                        <select name="exclude_author" class="custom-select"style="max-width: 200px">
+                            <option selected value="">include</option>
+                            <option value="true">exclude</option>
+                        </select>
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text">title</span>
                         </div>
-                        <input name="title" type="text" class="form-control" aria-label="document title" >
+                        <input name="title" type="text" class="form-control" aria-label="document title">
+                        <select name="exclude_title" class="custom-select"style="max-width: 200px">
+                            <option selected value="">include</option>
+                            <option value="true">exclude</option>
+                        </select>
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text">location</span>
                         </div>
-                        <input name="location" type="text" class="form-control" aria-label="document location" >
+                        <input name="location" type="text" class="form-control" aria-label="document location">
+                        <select name="exclude_location" class="custom-select" style="max-width: 200px">
+                            <option selected value="">include</option>
+                            <option value="true">exclude</option>
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="documentTypeInputGroup">document type</label>
                         </div>
-                        <select name="document_type" class="custom-select" id="documentTypeInputGroup">
-                            <option selected value="">Choose...</option>
-                            <option value="Letter">Letter</option>
-                            <option value="Telegram">Telegram</option>
-                            <option value="Document">Document</option>
-                            <option value="Drawing">Drawing</option>
-                            <option value="Invoice">Invoice</option>
-                        </select>
+                        <div class="input-group-append form-control">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Letter</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                                <label class="form-check-label" for="inlineCheckbox2">Telegram</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked>
+                                <label class="form-check-label" for="inlineCheckbox3">Document</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" checked>
+                                <label class="form-check-label" for="inlineCheckbox4">Drawing</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" checked>
+                                <label class="form-check-label" for="inlineCheckbox5">Invoice</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="container mx-lg my-2 p-0">
+                    <div class="container mx-md my-2 p-0">
                         <div class="row">
-                            <div class="col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">from</span>
+                            <div class="col-3 mx-0">
+                                    <div class="input-group">
+                                        <select name="exclude_dates" class="custom-select"style="margin: 0px;">
+                                            <option selected value="">include dates</option>
+                                            <option value="true">exclude dates</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="col-4 mx-0">
+                                <div class="input-group mx-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">from</span>
+                                    </div>
+                                    <input name="firstDate" type="text" class="form-control" id="datepicker">
                                 </div>
-                                <input name="firstDate" type="text" class="form-control" id="datepicker">
                             </div>
-                            </div>
-                            <div class="col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">to</span>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">to</span>
+                                    </div>
+                                    <input name="secondDate" type="text" class="form-control" id="datepicker2">
                                 </div>
-                                <input name="secondDate" type="text" class="form-control" id="datepicker2">
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -157,6 +191,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
     <script src="/styles/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
+        // enables bootstrap popover functionality:
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
         $(function () {
             $('#datepicker').datetimepicker({
                 format: 'YYYY-MM-DD',
@@ -202,5 +241,12 @@
                     .prop('name', '');
             });
         });
+
+        // prevents advanced search window from closing if user clicks on it
+        $(function() {
+            $('.dropdown-menu.keep-open').on({
+                'click': (e) => { e.stopPropagation(); },
+            });
+        })
     </script>
 </html>
