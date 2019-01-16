@@ -21,7 +21,7 @@
     <a class="navbar-brand" href="/">
         <img src="/images/search_vector_logo.svg" width="auto" height="50">
     </a>
-    <form class="mx-lg-2 my-auto d-inline w-50" action="/search" method="get">
+    <form name="searchForm" id="searchForm" class="mx-lg-2 my-auto d-inline w-50" action="/search" method="get">
         <div class="input-group">
             <input type="text" name="query" class="form-control" placeholder="Search..." value="#(searchTerm)" aria-label="Search" aria-describedby="search-button">
             <div class="input-group-append">
@@ -33,58 +33,58 @@
                     <h4 class="mt-2">Find documents with...</h4>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">all of these words</span>
+                            <span class="input-group-text">all of these words</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="all_explicit" type="text" class="form-control" aria-label="all of these words">
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">any of these words</span>
+                            <span class="input-group-text">any of these words</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="any_explicit" type="text" class="form-control" aria-label="any of these words">
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">this exact phrase</span>
+                            <span class="input-group-text">this exact phrase</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="phrase_explicit" type="text" class="form-control" aria-label="this exact phrase">
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">none of these words</span>
+                            <span class="input-group-text">none of these words</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="none_explicit" type="text" class="form-control" aria-label="none of these words" >
                     </div>
                     <h4 class="mt-4">Then narrow down your results by...</h4>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">author</span>
+                            <span class="input-group-text">author</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="author" type="text" class="form-control" aria-label="author name" >
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">title</span>
+                            <span class="input-group-text">title</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="title" type="text" class="form-control" aria-label="document title" >
                     </div>
                     <div class="input-group mx-lg my-2">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">location</span>
+                            <span class="input-group-text">location</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input name="location" type="text" class="form-control" aria-label="document location" >
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">document type</label>
+                            <label class="input-group-text" for="documentTypeInputGroup">document type</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            <option value="1">Letter</option>
-                            <option value="2">Telegram</option>
-                            <option value="3">Document</option>
-                            <option value="4">Drawing</option>
-                            <option value="5">Invoice</option>
+                        <select name="document_type" class="custom-select" id="documentTypeInputGroup">
+                            <option selected value="">Choose...</option>
+                            <option value="Letter">Letter</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="Document">Document</option>
+                            <option value="Drawing">Drawing</option>
+                            <option value="Invoice">Invoice</option>
                         </select>
                     </div>
                     <div class="container mx-lg my-2 p-0">
@@ -94,7 +94,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">from</span>
                                 </div>
-                                <input type="text" class="form-control" id="datepicker">
+                                <input name="firstDate" type="text" class="form-control" id="datepicker">
                             </div>
                             </div>
                             <div class="col-6">
@@ -102,7 +102,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">to</span>
                                 </div>
-                                <input type="text" class="form-control" id="datepicker2">
+                                <input name="secondDate" type="text" class="form-control" id="datepicker2">
                             </div>
                             </div>
                         </div>
@@ -159,22 +159,47 @@
     <script type="text/javascript">
         $(function () {
             $('#datepicker').datetimepicker({
-                format: 'MM/DD/YYYY',
-                maxDate: '12/31/1945',
-                minDate: '01/01/1915',
+                format: 'YYYY-MM-DD',
+                maxDate: '1945-12-31',
+                minDate: '1915-01-01',
                 useCurrent: false,
-                defaultDate: '01/01/1915',
+                defaultDate: '1915-01-01',
                 showClear: true
             });
         });
         $(function () {
             $('#datepicker2').datetimepicker({
-                format: 'MM/DD/YYYY',
-                maxDate: '12/31/1945',
-                minDate: '01/01/1915',
+                format: 'YYYY-MM-DD',
+                maxDate: '1945-12-31',
+                minDate: '1915-01-01',
                 useCurrent: false,
-                defaultDate: '12/31/1945',
+                defaultDate: '1945-12-31',
                 showClear: true
+            });
+        });
+
+        $(function() {
+            $('#searchForm').submit(function () {
+                var defaultDate1 = '1915-01-01';
+                var defaultDate2 = '1945-12-31';
+
+                if($(this)[0].elements['firstDate'].value === defaultDate1 && $(this)[0].elements['secondDate'].value == defaultDate2){
+                    $(this)[0].elements['firstDate'].name = $(this)[0].elements['secondDate'].name = '';
+                }
+                
+                $(this)
+                    .find('input[name]')
+                    .filter(function () {
+                        return !this.value;
+                    })
+                    .prop('name', '');
+                
+                $(this)
+                    .find('select[name]')
+                    .filter(function () {
+                        return !this.value;
+                    })
+                    .prop('name', '');
             });
         });
     </script>
