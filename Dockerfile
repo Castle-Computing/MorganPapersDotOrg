@@ -20,5 +20,5 @@ COPY --from=builder /build/lib/* /usr/lib/
 COPY --from=builder /app/Resources/Views/* /app/Resources/Views/
 COPY --from=builder /app/Public/images/* /app/Public/images/
 COPY --from=builder /app/Public/styles/* /app/Public/styles/
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ./Run serve -e prod -b 0.0.0.0
