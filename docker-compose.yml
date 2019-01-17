@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  api:
+    image: morganapp:1.0.0
+    ports:
+      - 80:8080
+    environment:
+      EXAMPLE_PASSWORD: secretpw
+  nlp:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_PASSWORD: topsecretpw
+      MYSQL_USER: prod_user
+      MYSQL_PASSWORD: secretpw
+      MYSQL_DATABASE: prod
+  redis:
+    image: redis:alpine
