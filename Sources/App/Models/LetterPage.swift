@@ -23,3 +23,12 @@ final class LetterPage: Codable {
         self.metadata = metadata
     }
 }
+
+final class LODPage: Codable {
+    let letters: [String]?
+    let numLetters: Int
+    init (lettersIn: [String]?, numLetters: Int?) {
+        self.letters = lettersIn
+        self.numLetters = numLetters ?? 0
+    }
+}

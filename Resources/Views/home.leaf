@@ -1,4 +1,4 @@
-#set("title") { Julia Morgan Papers }
+#set("title") { #(numLetters) }
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +47,51 @@
             <h5 class="text-center text-secondary">Not sure where to start? Click <a href="/explore">here</a>.</h5>
         </div>
     </div>
+
+<div class = "container">
+#if(numLetters> 1) {
+<div id="pages" class="carousel" data-ride="carousel" style="width: 200px; margin: 0 auto">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            #for(child in letters) {
+                #if(isFirst) {
+                    <li data-target="#pages" data-slide-to="0" class="active"></li>
+                } else {
+                    <li data-target="#pages" data-slide-to="#(child.index)"></li>
+                }
+            }
+        </ol>
+        <!-- Images -->
+        <div class="carousel-inner">
+            #for(child in letters) {
+                #if(isFirst){
+                    <div class="carousel-item active">
+                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                    </div>
+                } else {
+                    <div class="carousel-item">
+                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                    </div>
+                }
+            }
+        </div>
+        <!-- L/R -->
+        <a class="carousel-control-prev" href="#pages" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#pages" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+} else {
+    #for(child in letters) {
+        #if(isFirst) {
+            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid mx-auto d-block">
+        }
+    }
+}
+
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

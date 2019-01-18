@@ -3,8 +3,33 @@ import Vapor
 //All routes
 public func routes(_ router: Router) throws {
     //Home screen, accessible without any additional URL parameters
-    router.get { req in
-        return try req.view().render("home")
+    router.get { req -> EventLoopFuture<View> in
+        //Get current Date
+        let now = Date()
+        let months = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M"
+        let month = dateFormatter.string(from: now)
+        dateFormatter.dateFormat = "d"
+        let day = dateFormatter.string(from: now)
+        let index = months[Int(month)! - 1] + Int(day)! - 1
+        
+        //Read from file
+        let fileURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.txt")
+        let fileData = try String.init(contentsOf: fileURL)
+        var lines: [String] = []
+        fileData.enumerateLines { line, _ in
+            lines.append(line)
+        }
+        
+        //Split line into array
+        let letterArr = lines[index].components(separatedBy: ", ")
+        
+        print (letterArr)
+        print(letterArr.count)
+        
+        //Render home
+        return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
     }
     
     router.get("letter", String.parameter) { req -> Future<View> in
