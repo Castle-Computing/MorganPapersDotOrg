@@ -1,0 +1,29 @@
+
+    <head>
+        <link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+        <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js">     </script>
+    </head>
+<body>
+    <div id="Timeline"></div>
+    <script>
+        var options = {
+           width:'100%',
+           height:'1500',
+           timenav_position:'top',
+           language:'en',
+           start_at_end:false,
+           start_at_slide:0,
+           initial_zoom:0
+        };
+
+        //Below is with the output from the dynamicjson, hosted on a different website. It works
+        //window.timeline = new TL.Timeline('Timeline',"https://api.myjson.com/bins/z9g9s",options);
+
+        //This is with the static json, showing it works when route returns a string
+        //window.timeline = new TL.Timeline('Timeline',"/staticjson",options);
+
+        //This is with the dynamicjson, but it doesn't work. Needs to return as string instead of View
+        //window.timeline = new TL.Timeline('Timeline',"/dynamicjson?rekl=28694,8172,13660&cpsca=132,64,84&islandora=1087,1093,1282,983",options);
+    </script>
+</div>
+</body>

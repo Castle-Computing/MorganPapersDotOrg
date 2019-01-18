@@ -10,7 +10,7 @@ final class ResultPage: Codable {
     let numberOfResults: Int
     let start: Int
     let page: Int
-    
+
     init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
         self.searchTerm = searchTerm
         self.searchResults = searchResults
@@ -33,25 +33,25 @@ struct searchResponse: Codable {
 final class docArray: Codable {
     var titleArray: [String]?
     var title: String?
-    
+
     var authorPlaceholder: String?
     var author: String?
-    
+
     var descriptionArray: [String]?
     var ocrText: String?
     var description: String?
-    
+
     var datePlaceholder: String?
     var date: String?
-    
+
     var cityPlaceholder: String?
     var statePlaceholder: String?
     var location: String?
-    
+
     var children: [String]?
-    
+
     var pid: String
-    
+
     enum CodingKeys: String, CodingKey {
         case titleArray = "dc.title"
         case title = "title"
@@ -68,47 +68,47 @@ final class docArray: Codable {
         case location = "location"
         case children = "BOOK_CHILDREN_t"
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         titleArray = try container.decode([String].self, forKey: .titleArray)
         title = titleArray![0]
-        
+
         pid = try container.decode(String.self, forKey: .pid)
-        
+
         do {
             authorPlaceholder = try container.decode(String.self, forKey: .authorPlaceholder)
             author = authorPlaceholder
         } catch {
             debugPrint("No author listed.")
         }
-        
+
         do {
             datePlaceholder = try container.decode(String.self, forKey: .datePlaceholder)
             date = datePlaceholder
         } catch {
             debugPrint("No date listed.")
         }
-        
+
         do {
             let childrenString = try container.decode(String.self, forKey: .children)
             children = childrenString.components(separatedBy: ",")
         } catch {
             debugPrint("No children listed.")
         }
-        
+
         do {
             cityPlaceholder = try container.decode(String.self, forKey: .cityPlaceholder)
             statePlaceholder = try container.decode(String.self, forKey: .statePlaceholder)
         } catch {
             debugPrint("No location listed.")
         }
-        
+
         do {
             ocrText = try container.decode(String.self, forKey: .ocrText)
         }
-        
+
         if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {
             location = cityPlaceholder! + ", " + statePlaceholder!
         } else if cityPlaceholder?.count ?? 0 > 0 {
@@ -116,7 +116,7 @@ final class docArray: Codable {
         } else if statePlaceholder?.count ?? 0 > 0 {
             location = statePlaceholder
         }
-        
+
         do {
             descriptionArray = try container.decode([String].self, forKey: .descriptionArray)
             if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
@@ -132,7 +132,7 @@ final class docArray: Codable {
             } else {
                 debugPrint("No description or OCR listed.")
             }
-         
+
         }
     }
 }
