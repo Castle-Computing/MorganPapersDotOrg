@@ -3,7 +3,7 @@
     <div class = "row mt-5 align-items-center">
         <div class = "col-md-8">
             <h1 class = "text-center text-warning font-weight-bold font-italic">Making Research Fun...</h1>
-            <p class = "text-center font-weight-bold">Here at Castle Computing, we're making research, specifically the construction of Hearst Castle, a fun, interactive experience. In this site, you will find a collection of letters and other forms of communication between revered architect Julia Morgan and media tycoon William Randolph Hearst from the construction of Hearst Castle.</p>
+            <p class = "text-center font-weight-bold">Here at Castle Computing, we're making research a fun, interactive experience. In this site, you will find a collection of letters and other forms of communication between revered architect Julia Morgan and media tycoon William Randolph Hearst from the construction of Hearst Castle.</p>
         </div>
         <div class = "col-md-4">
             <img src="/images/AboutHearstCastle.jpg" class="img-fluid"/>
