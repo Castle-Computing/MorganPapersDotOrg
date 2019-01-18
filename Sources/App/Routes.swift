@@ -8,7 +8,6 @@ public func routes(_ router: Router) throws {
         return try req.view().render("home")
     }
 
-<<<<<<< Updated upstream
     router.get("letter", String.parameter) { req -> Future<View> in
         let letterPID = try req.parameters.next(String.self)
         let client = try req.client()
@@ -126,11 +125,6 @@ public func routes(_ router: Router) throws {
       return try req.view().render("explorer")
     }
 
-=======
-    router.get("explore"){ req in
-        return try req.view().render("explore")
-    }
->>>>>>> Stashed changes
     //Adds new route, with search parameter.
     //Returns a view in the future
     router.get("search") { req -> Future<View> in
@@ -158,13 +152,8 @@ public func routes(_ router: Router) throws {
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-<<<<<<< Updated upstream
         let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
         print(searchURL)
-=======
-        let searchURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/solr/RELS_EXT_hasModel_uri_t:bookCModel%20AND%20ancestors_ms:%22rekl:morgan-ms010%22%20AND%20(dc.title:" + encodedSearchTerm + "%20OR%20dc.description:" + encodedSearchTerm + ")?rows=15&omitHeader=true&wt=json&start=" + String(start)
-
->>>>>>> Stashed changes
         //Create a client to send a request.get()
         let client = try req.client()
 
