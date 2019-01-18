@@ -14,6 +14,7 @@
 
 	<title>#get(title)</title>
 </head>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +35,7 @@
         </ul>
     </div>
 </nav>
+
 <body class="bg-light">
     <div class="row align-items-center h-100 ml-3 mr-3 bg-light">
         <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center m-5">
@@ -48,39 +50,43 @@
         </div>
     </div>
 
-<div class = "container">
+<div class = "row mt-1 align-items-center">
+    <div class = "col text-center">
+        <h5 class="text-center text-secondary">On This Day...</h5>
+    </div>
+</div>
+
+<div class = "row mt-1">
 #if(numLetters> 1) {
-<div id="pages" class="carousel" data-ride="carousel" style="width: 200px; margin: 0 auto">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            #for(child in letters) {
-                #if(isFirst) {
-                    <li data-target="#pages" data-slide-to="0" class="active"></li>
-                } else {
-                    <li data-target="#pages" data-slide-to="#(child.index)"></li>
-                }
-            }
-        </ol>
+<div id="pages" class="carousel" data-ride="carousel" style="width: 200px; height: 200px; margin: 0 auto">
         <!-- Images -->
         <div class="carousel-inner">
             #for(child in letters) {
                 #if(isFirst){
-                    <div class="carousel-item active">
-                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                    <div class="carousel-item active text-center">
+                        <a href = "letter/#(child)">
+                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                        </a>
                     </div>
                 } else {
-                    <div class="carousel-item">
-                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                    <div class="carousel-item text-center">
+                        <a href = "letter/#(child)">
+                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                        </a>
                     </div>
                 }
             }
         </div>
         <!-- L/R -->
         <a class="carousel-control-prev" href="#pages" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
+            <span style="font-size: 1em; color: Black;">
+                <i class="fas fa-chevron-circle-left"></i>
+            </span>
         </a>
         <a class="carousel-control-next" href="#pages" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
+            <span style="font-size: 1em; color: Black;">
+                <i class="fas fa-chevron-circle-right"></i>
+            </span>
         </a>
     </div>
 } else {

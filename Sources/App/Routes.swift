@@ -12,7 +12,7 @@ public func routes(_ router: Router) throws {
         let month = dateFormatter.string(from: now)
         dateFormatter.dateFormat = "d"
         let day = dateFormatter.string(from: now)
-        let index = months[Int(month)! - 1] + Int(day)! - 1
+        var index = months[Int(month)! - 1] + Int(day)! - 1
         
         //Read from file
         let fileURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.txt")
@@ -22,11 +22,14 @@ public func routes(_ router: Router) throws {
             lines.append(line)
         }
         
+        
+        //Modify leap year since no letter
+        if (index == 59) {
+            index = 60
+        }
+        
         //Split line into array
         let letterArr = lines[index].components(separatedBy: ", ")
-        
-        print (letterArr)
-        print(letterArr.count)
         
         //Render home
         return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
