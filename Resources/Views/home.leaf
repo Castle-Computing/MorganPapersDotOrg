@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -37,9 +38,9 @@
 </nav>
 
 <body class="bg-light">
-    <div class="row align-items-center h-100 ml-3 mr-3 bg-light">
-        <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center m-5">
-            <img src="/images/HomeImage.png" width="300" class="text-center mb-3" style="margin-top: -200px">
+    <div class="row align-items-center ml-3 mr-3 mt-5 bg-light">
+        <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
+            <img src="/images/HomeImage.png" width="300" class="text-center mb-3">
             <form class="input-group mb-4" action="/search" method="get">
                 <input type="search" name="query" class="form-control" placeholder="Search..." aria-label="Search term" aria-describedby="search-term">
                 <div class="input-group-append">
@@ -50,56 +51,51 @@
         </div>
     </div>
 
-<div class = "row mt-1 align-items-center">
-    <div class = "col text-center">
-        <h5 class="text-center text-secondary">On This Day...</h5>
-    </div>
-</div>
-
-<div class = "row mt-1">
-#if(numLetters> 1) {
-<div id="pages" class="carousel" data-ride="carousel" style="width: 200px; height: 200px; margin: 0 auto">
-        <!-- Images -->
-        <div class="carousel-inner">
-            #for(child in letters) {
-                #if(isFirst){
-                    <div class="carousel-item active text-center">
-                        <a href = "letter/#(child)">
-                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
-                        </a>
-                    </div>
-                } else {
-                    <div class="carousel-item text-center">
-                        <a href = "letter/#(child)">
-                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
-                        </a>
-                    </div>
+    <div class = "row mt-1">
+    #if(numLetters> 1) {
+    <div id="pages" class="carousel" data-ride="carousel" style="width: 200px; height: 200px; margin: 0 auto" data-interval="3000">
+            <!-- Images -->
+            <div class="carousel-inner">
+                #for(child in letters) {
+                    #if(isFirst){
+                        <div class="carousel-item active text-center">
+                            <a href = "letter/#(child)">
+                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                            </a>
+                        </div>
+                    } else {
+                        <div class="carousel-item text-center">
+                            <a href = "letter/#(child)">
+                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                            </a>
+                        </div>
+                    }
                 }
-            }
+            </div>
+            <!-- L/R -->
+            <a class="carousel-control-prev" href="#pages" data-slide="prev">
+                <span style="font-size: 1em; color: Black;">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+            </a>
+            <a class="carousel-control-next" href="#pages" data-slide="next">
+                <span style="font-size: 1em; color: Black;">
+                    <i class="fas fa-chevron-circle-right"></i>
+                </span>
+            </a>
         </div>
-        <!-- L/R -->
-        <a class="carousel-control-prev" href="#pages" data-slide="prev">
-            <span style="font-size: 1em; color: Black;">
-                <i class="fas fa-chevron-circle-left"></i>
-            </span>
-        </a>
-        <a class="carousel-control-next" href="#pages" data-slide="next">
-            <span style="font-size: 1em; color: Black;">
-                <i class="fas fa-chevron-circle-right"></i>
-            </span>
-        </a>
-    </div>
-} else {
-    #for(child in letters) {
-        #if(isFirst) {
-            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid mx-auto d-block">
+    } else {
+        #for(child in letters) {
+            #if(isFirst) {
+                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid mx-auto d-block">
+            }
         }
     }
-}
-
-</div>
+    </div>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script></body>
+
 </html>
