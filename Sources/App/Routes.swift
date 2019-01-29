@@ -30,7 +30,28 @@ public func routes(_ router: Router) throws {
         
         //Split line into array
         let letterArr = lines[index].components(separatedBy: ", ")
+        var letters: LODPageTitle
         
+        //Try JSON
+        let fileURL2 = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
+        let data = try Data(contentsOf: fileURL2, options: .mappedIfSafe)
+        do {
+            let object: [String: AnyObject] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject as! [String : AnyObject]
+            let today = object[String(index)] as! [[String : AnyObject]]
+            var ltArr: [OIDTitle] = []
+            for item in today {
+                print ("PID: ", item["PID"]!, "title: ", item["title"]!)
+                ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
+            }
+            letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
+            for item in letters.letters! {
+                print ("PID: ", item.PID, "title: ", item.title)
+            }
+            print (letters.numLetters)
+            return try req.view().render("home", letters)
+        } catch {
+            // Handle Error
+        }
         //Render home
         return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
     }

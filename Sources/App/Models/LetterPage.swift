@@ -32,3 +32,21 @@ final class LODPage: Codable {
         self.numLetters = numLetters ?? 0
     }
 }
+
+final class LODPageTitle: Codable {
+    let letters: [OIDTitle]?
+    let numLetters: Int
+    init (lettersIn: [OIDTitle]?, numLetters: Int?) {
+        self.letters = lettersIn
+        self.numLetters = numLetters ?? 0
+    }
+}
+
+final class OIDTitle: Codable {
+    let PID: String
+    let title: String
+    init (title: String, PID: String) {
+        self.title = title
+        self.PID = PID
+    }
+}

@@ -38,37 +38,57 @@
 </nav>
 
 <body class="bg-light">
-    <div class="row align-items-center ml-3 mr-3 bg-light h-100">
-        <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
+<div class = "container mh-100 mw-100">
+    <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
 
-            <img src="/images/HomeImage.png" width="300" class="text-center mb-3">
+        <div class="row align-items-end ml-3 mr-3 bg-light mt-5">
+            <div class = "ml-auto">
+                <img src="/images/HomeImage.png" width="100"/>
+                <h4>Hearst Castle Papers</h4>
+            </div>
+        </div>
 
+        <div class="row align-items-center ml-3 mr-3 bg-light">
             <form class="input-group mb-4" action="/search" method="get">
-                <input type="search" name="query" class="form-control" placeholder="Search..." aria-label="Search term" aria-describedby="search-term">
+                <input type="search" name="query" class="form-control" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
                 </div>
             </form>
+        </div>
 
-            <h5 class="text-center text-secondary">Not sure where to start? Click <a href="/explore">here</a>.</h5>
+        <div class="row ml-3 mr-3 bg-light">
+            <div class = "col text-right">
+                <h5 class="text-secondary"><a href="/explore">Help</a></h5>
+            </div>
+        </div>
 
+        <div class="row ml-3 mr-3 bg-light mt-3">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+        </div>
+
+        <div class="row align-items-center ml-3 mr-3 bg-light mt-3">
             <!-- Carousel -->
             #if(numLetters> 1) {
-                <div id="pages" class="carousel mt-3" data-ride="carousel" style="width: 200px; height: 200px; margin: 0 auto" data-interval="3000">
+                <div id="pages" class="carousel mt-3" data-ride="carousel" style="height: 200px; mw-100; margin: 0 auto" data-interval="3000">
                 <!-- Images -->
                     <div class="carousel-inner">
                         #for(child in letters) {
                             #if(isFirst){
                                 <div class="carousel-item active text-center">
-                                    <a href = "letter/#(child)">
-                                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
-                                    </a>
+                                    <div class = "container-fluid">
+                                        <a href = "letter/#(child)">
+                                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
+                                        </a>
+                                        <p class = "font-italic">#(child.title)</p>
+                                    </div>
                                 </div>
                             } else {
                                 <div class="carousel-item text-center">
                                     <a href = "letter/#(child)">
-                                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/TN" class="img-fluid w-200">
+                                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid w-200"/>
                                     </a>
+                                    <p class = "font-italic">#(child.title)</p>
                                 </div>
                             }
                         }
@@ -94,6 +114,7 @@
             }
         </div>
     </div>
+</div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
