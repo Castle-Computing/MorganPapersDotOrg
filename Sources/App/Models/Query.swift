@@ -33,7 +33,16 @@ final class Query: Codable {
     var secondDate = "1945-12-31"
     var excludeDates = false
     
-    init(queryParameters: QueryContainer) {
+    let currentSearchURL: String
+    
+    private let baseURL = IslandoraService.baseURL + "solr/"
+    private let urlSuffix = "?rows=15&omitHeader=true&wt=json&start="
+    private let restrictToCollectionQuery = "(RELS_EXT_hasModel_uri_t:bookCModel AND ancestors_ms:\"rekl:morgan-ms010\")"
+    
+    init(queryParameters: QueryContainer, currentSearchURL: String) {
+        let regex = try! NSRegularExpression(pattern: "&?page=\\d*")
+        self.currentSearchURL = regex.stringByReplacingMatches(in: currentSearchURL, options: [], range: NSMakeRange(0, currentSearchURL.count), withTemplate: "")
+        
         if let queryParam = queryParameters[String.self, at: "query"] { query = queryParam }
         
         if let allExplicitParam = queryParameters[String.self, at: "all_explicit"] { allExplicit = allExplicitParam }
@@ -71,5 +80,54 @@ final class Query: Codable {
         if let secondDateParam = queryParameters[String.self, at: "second_date"] { secondDate = secondDateParam }
         
         if let excludeDatesParam = queryParameters[Bool.self, at: "exclude_dates"] { excludeDates = excludeDatesParam }
+    }
+    
+    func getSolrSearch(start: Int) -> String? {
+        var solrSearch = baseURL + restrictToCollectionQuery
+        
+        if var query = query {
+            query = query.trimmingCharacters(in: .whitespacesAndNewlines)
+            let wildCardQuery = query.replacingOccurrences(of: " ", with: "~ ") + "~"
+            let fuzzyQuery = query.replacingOccurrences(of: " ", with: "* ") + "*"
+            
+            solrSearch.append(" AND (dc.title:\(wildCardQuery) OR dc.description:\(wildCardQuery) OR OCR_BOOK_t:\(wildCardQuery) OR dc.title:\(fuzzyQuery) OR dc.description:\(fuzzyQuery) OR OCR_BOOK_t:\(fuzzyQuery))")
+        }
+        
+        if let allExplicit = allExplicit {
+            let terms = allExplicit.split(separator: " ")
+            
+            for term in terms {
+                solrSearch.append(" AND (OCR_BOOK_t:\"\(term)\")")
+            }
+        }
+        
+        if let anyExplicit = anyExplicit {
+            let terms = anyExplicit.split(separator: " ")
+            
+            var termsCombined = ""
+            
+            for term in terms {
+                if !termsCombined.isEmpty {
+                    termsCombined.append(" OR ")
+                }
+                
+                termsCombined.append("(OCR_BOOK_t:\"\(term)\")")
+            }
+            
+            solrSearch.append("AND (\(termsCombined))")
+        }
+        
+        if let phraseExplicit = phraseExplicit {
+            let phrases = phraseExplicit.components(separatedBy: "\" \"")
+            
+            for phrase in phrases {
+                solrSearch.append(" AND (OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
+            }
+        }
+        
+        solrSearch.append(urlSuffix)        
+        solrSearch.append(String(start))
+        
+        return solrSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
 }

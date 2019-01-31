@@ -51,7 +51,7 @@ public func routes(_ router: Router) throws {
         //Receive the search term from the query
         //Request host/search?query=
         
-        let currentQuery = Query.init(queryParameters: req.query)
+        let currentQuery = Query.init(queryParameters: req.query, currentSearchURL: req.http.urlString)
         
         var page = req.query[Int.self, at: "page"] ?? 1
         if page < 1 {
@@ -60,17 +60,12 @@ public func routes(_ router: Router) throws {
         
         let start = (page - 1) * 15
         
-        //Replaces all characters of searchTerm not in allowed characters with percent
-        //Encoded characters. .urlQueryAllowed is the character set.
-        guard let encodedSearchTerm = currentQuery.query!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            throw Abort(.badRequest)
-        }
-        
         //Create URL for Islandora entries with encoded search title and description
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
+        //let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
+        let searchURL = currentQuery.getSolrSearch(start: start)!
         
         //Create a client to send a request.get()
         let client = try req.client()
