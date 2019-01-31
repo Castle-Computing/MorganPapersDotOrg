@@ -69,10 +69,10 @@
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
         </div>
 
-        <div class="row align-items-center ml-3 mr-3 bg-light mt-3">
+        <div class="row ml-3 mr-3 bg-light mt-3">
             <!-- Carousel -->
             #if(numLetters> 1) {
-                <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center">
+                <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center; width:100%">
                 <!-- Images -->
                     <div class="carousel-inner">
                         #for(child in letters) {
