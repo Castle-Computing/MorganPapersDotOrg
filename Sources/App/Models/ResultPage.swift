@@ -5,14 +5,14 @@
 //  Created by tigeriv on 10/25/18.
 //
 final class ResultPage: Codable {
-    let searchTerm: String
+    let query: Query
     let searchResults: [docArray]
     let numberOfResults: Int
     let start: Int
     let page: Int
     
-    init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
-        self.searchTerm = searchTerm
+    init(query: Query, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
+        self.query = query
         self.searchResults = searchResults
         self.numberOfResults = numResults
         self.start = start

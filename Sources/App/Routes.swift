@@ -50,9 +50,8 @@ public func routes(_ router: Router) throws {
         //Attempt to obtain search term, otherwise abort
         //Receive the search term from the query
         //Request host/search?query=
-        guard let searchTerm = req.query[String.self, at: "query"] else {
-            throw Abort(.badRequest)
-        }
+        
+        let currentQuery = Query.init(queryParameters: req.query)
         
         var page = req.query[Int.self, at: "page"] ?? 1
         if page < 1 {
@@ -63,7 +62,7 @@ public func routes(_ router: Router) throws {
         
         //Replaces all characters of searchTerm not in allowed characters with percent
         //Encoded characters. .urlQueryAllowed is the character set.
-        guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+        guard let encodedSearchTerm = currentQuery.query!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
         }
         
@@ -89,7 +88,7 @@ public func routes(_ router: Router) throws {
             .flatMap { result in
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
-                return try req.view().render("results", ResultPage(searchTerm: searchTerm, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
+                return try req.view().render("results", ResultPage(query: currentQuery, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
         }
     }
 }
