@@ -38,12 +38,14 @@
 </nav>
 
 <body class="bg-light">
-<div class = "container mh-100 mw-100">
+<div class = "container-sm mh-100 mw-100">
     <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
 
         <div class="row align-items-end ml-3 mr-3 bg-light mt-5">
-            <div class = "ml-auto">
+            <div class = "col-sm" style = "text-align: right">
                 <img src="/images/HomeImage.png" width="100"/>
+            </div>
+            <div class = "col-sm-auto" style = "text-align: right">
                 <h4>Hearst Castle Papers</h4>
             </div>
         </div>
@@ -70,25 +72,35 @@
         <div class="row align-items-center ml-3 mr-3 bg-light mt-3">
             <!-- Carousel -->
             #if(numLetters> 1) {
-                <div id="pages" class="carousel mt-3" data-ride="carousel" style="height: 200px; mw-100; margin: 0 auto" data-interval="3000">
+                <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center">
                 <!-- Images -->
                     <div class="carousel-inner">
                         #for(child in letters) {
                             #if(isFirst){
-                                <div class="carousel-item active text-center">
-                                    <div class = "container-fluid">
-                                        <a href = "letter/#(child)">
-                                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
-                                        </a>
-                                        <p class = "font-italic">#(child.title)</p>
+                                <div class="carousel-item active">
+                                    <div class = "row align-items-center" style="height: 200px; text-align:center">
+                                        <div class = "col-sm ml-5">
+                                            <a href = "letter/#(child.PID)">
+                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
+                                            </a>
+                                        </div>
+                                        <div class = "col-sm mr-5">
+                                            <p class = " text-center font-italic">#(child.title)</p>
+                                        </div>
                                     </div>
                                 </div>
                             } else {
-                                <div class="carousel-item text-center">
-                                    <a href = "letter/#(child)">
-                                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid w-200"/>
-                                    </a>
-                                    <p class = "font-italic">#(child.title)</p>
+                                <div class="carousel-item">
+                                    <div class = "row align-items-center" style="height: 200px; text-align:center">
+                                        <div class = "col-sm ml-5">
+                                            <a href = "letter/#(child.PID)">
+                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
+                                            </a>
+                                        </div>
+                                        <div class = "col-sm mr-5">
+                                            <p class = "font-italic">#(child.title)</p>
+                                        </div>
+                                    </div>
                                 </div>
                             }
                         }
