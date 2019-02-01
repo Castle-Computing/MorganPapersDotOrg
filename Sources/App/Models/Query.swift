@@ -90,16 +90,20 @@ final class Query: Codable {
         
         if var query = query {
             query = query.trimmingCharacters(in: .whitespacesAndNewlines)
-            let wildCardQuery = query.replacingOccurrences(of: " ", with: "~ ") + "~"
-            let fuzzyQuery = query.replacingOccurrences(of: " ", with: "* ") + "*"
             
-            solrSearch.append(" AND (dc.title:\(wildCardQuery) OR dc.description:\(wildCardQuery) OR OCR_BOOK_t:\(wildCardQuery) OR dc.title:\(fuzzyQuery) OR dc.description:\(fuzzyQuery) OR OCR_BOOK_t:\(fuzzyQuery))")
+            if !query.isEmpty {
+                let wildCardQuery = query.replacingOccurrences(of: " ", with: "~ ") + "~"
+                let fuzzyQuery = query.replacingOccurrences(of: " ", with: "* ") + "*"
+                
+                solrSearch.append(" AND (dc.title:\(wildCardQuery) OR dc.description:\(wildCardQuery) OR OCR_BOOK_t:\(wildCardQuery) OR dc.title:\(fuzzyQuery) OR dc.description:\(fuzzyQuery) OR OCR_BOOK_t:\(fuzzyQuery))")
+            }
         }
         
         if let allExplicit = allExplicit {
             let terms = allExplicit.split(separator: " ")
             
             for term in terms {
+                guard !term.isEmpty else { continue }
                 solrSearch.append(" AND (OCR_BOOK_t:\"\(term)\")")
             }
         }
@@ -110,6 +114,7 @@ final class Query: Codable {
             var termsCombined = ""
             
             for term in terms {
+                guard !term.isEmpty else { continue }
                 if !termsCombined.isEmpty {
                     termsCombined.append(" OR ")
                 }
@@ -124,6 +129,7 @@ final class Query: Codable {
             let phrases = phraseExplicit.components(separatedBy: "\" \"")
             
             for phrase in phrases {
+                guard !phrase.isEmpty else { continue }
                 solrSearch.append(" AND (OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
             }
         }
@@ -132,30 +138,31 @@ final class Query: Codable {
             let terms = noneExplicit.split(separator: " ")
             
             for term in terms {
+                guard !term.isEmpty else { continue }
                 solrSearch.append(" AND -(OCR_BOOK_t:\"\(term)\")")
             }
         }
         
         if let author = author {
-            if excludeAuthor {
+            if excludeAuthor && !author.isEmpty {
                 solrSearch.append(" AND -(mods_name_personal_author_namePart_t:\(author))")
-            } else {
+            } else if !author.isEmpty {
                 solrSearch.append(" AND (mods_name_personal_author_namePart_t:\(author))")
             }
         }
         
         if let title = title {
-            if excludeTitle {
+            if excludeTitle && !title.isEmpty {
                 solrSearch.append(" AND -(mods_titleInfo_title_t:\(title))")
-            } else {
+            } else if !title.isEmpty {
                 solrSearch.append(" AND (mods_titleInfo_title_t:\(title))")
             }
         }
         
         if let location = location {
-            if excludeLocation {
+            if excludeLocation && !location.isEmpty {
                 solrSearch.append(" AND -((mods_subject_hierarchicalGeographic_city_t:\(location)) OR (mods_subject_hierarchicalGeographic_state_s:\(location)))")
-            } else {
+            } else if !location.isEmpty {
                 solrSearch.append(" AND ((mods_subject_hierarchicalGeographic_city_t:\(location)) OR (mods_subject_hierarchicalGeographic_state_s:\(location)))")
             }
         }
@@ -180,7 +187,7 @@ final class Query: Codable {
             solrSearch.append(" AND -(mods_genre_t:invoice)")
         }
         
-        if firstDate != Query.defaultFirstDate || secondDate != Query.defaultSecondDate {
+        if !firstDate.isEmpty && !secondDate.isEmpty && (firstDate != Query.defaultFirstDate || secondDate != Query.defaultSecondDate) {
             if excludeDates {
                 solrSearch.append(" AND -(mods_originInfo_dateCreated_dt:[\(firstDate)T00:00:00Z TO \(secondDate)T00:00:00Z])")
             } else {
