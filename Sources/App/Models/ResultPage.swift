@@ -122,13 +122,21 @@ final class docArray: Codable {
             if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
                 description = descriptionArray![0]
             } else if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                
+                if description?.count ?? 0 > 250 {
+                    description = description!.prefix(200) + "..."
+                }
             } else {
                 debugPrint("No valid description or OCR listed.")
             }
         } catch {
             if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                
+                if description?.count ?? 0 > 250 {
+                    description = description!.prefix(200) + "..."
+                }
             } else {
                 debugPrint("No description or OCR listed.")
             }
