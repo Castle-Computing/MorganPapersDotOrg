@@ -122,7 +122,7 @@ final class docArray: Codable {
             if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
                 description = descriptionArray![0]
             } else if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
                 
                 if description?.count ?? 0 > 250 {
                     description = description!.prefix(200) + "..."
@@ -132,7 +132,7 @@ final class docArray: Codable {
             }
         } catch {
             if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
                 
                 if description?.count ?? 0 > 250 {
                     description = description!.prefix(200) + "..."

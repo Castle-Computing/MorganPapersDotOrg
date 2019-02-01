@@ -62,7 +62,7 @@
                         </div>
                         <input value="#(query.author)" name="author" type="text" class="form-control" aria-label="author name">
                         <select name="exclude_author" class="custom-select"style="max-width: 200px">
-                            <option #if(query.excludeAuthor == false) { selected } value="">include</option>
+                            <option #if(query.excludeAuthor) {} else { selected } value="">include</option>
                             <option #if(query.excludeAuthor) { selected } value="true">exclude</option>
                         </select>
                     </div>
@@ -72,7 +72,7 @@
                         </div>
                         <input value="#(query.title)"  name="title" type="text" class="form-control" aria-label="document title">
                         <select name="exclude_title" class="custom-select"style="max-width: 200px">
-                            <option #if(query.excludeTitle == false) { selected } value="">include</option>
+                            <option #if(query.excludeTitle) {} else { selected } value="">include</option>
                             <option #if(query.excludeTitle) { selected } value="true">exclude</option>
                         </select>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                         <input value="#(query.location)" name="location" type="text" class="form-control" aria-label="document location">
                         <select name="exclude_location" class="custom-select" style="max-width: 200px">
-                            <option #if(query.excludeLocation == false) { selected } value="">include</option>
+                            <option #if(query.excludeLocation) {} else { selected } value="">include</option>
                             <option #if(query.excludeLocation) { selected } value="true">exclude</option>
                         </select>
                     </div>
@@ -92,23 +92,23 @@
                         </div>
                         <div class="input-group-append form-control">
                             <div class="form-check form-check-inline">
-                                <input name="exclude_letters" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true" #if(query.excludeLetters == false) { checked }>
+                                <input name="exclude_letters" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true" #if(query.excludeLetters) {} else { checked }>
                                 <label class="form-check-label" for="inlineCheckbox1">Letter</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="exclude_telegrams" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="true" #if(query.excludeTelegrams == false) { checked }>
+                                <input name="exclude_telegrams" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="true" #if(query.excludeTelegrams) {} else { checked }>
                                 <label class="form-check-label" for="inlineCheckbox2">Telegram</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="exclude_documents" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="true" #if(query.excludeDocuments == false) { checked }>
+                                <input name="exclude_documents" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="true" #if(query.excludeDocuments) {} else { checked }>
                                 <label class="form-check-label" for="inlineCheckbox3">Document</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="exclude_drawings" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="true" #if(query.excludeDrawings == false) { checked }>
+                                <input name="exclude_drawings" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="true" #if(query.excludeDrawings) {} else { checked }>
                                 <label class="form-check-label" for="inlineCheckbox4">Drawing</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="exclude_invoices" class="form-check-input" type="checkbox" id="inlineCheckbox5" value="true" #if(query.excludeInvoices == false) { checked }>
+                                <input name="exclude_invoices" class="form-check-input" type="checkbox" id="inlineCheckbox5" value="true" #if(query.excludeInvoices) {} else { checked }>
                                 <label class="form-check-label" for="inlineCheckbox5">Invoice</label>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             <div class="col-3 mx-0">
                                     <div class="input-group">
                                         <select name="exclude_dates" class="custom-select"style="margin: 0px;">
-                                            <option #if(query.excludeDates == false) { selected } value="">include dates</option>
+                                            <option #if(query.excludeDates) {} else { selected } value="">include dates</option>
                                             <option #if(query.excludeDates) { selected } value="true">exclude dates</option>
                                         </select>
                                     </div>
@@ -140,6 +140,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="input-group mx-lg my-2 float-right" style="width: 150px">
+                        <button class="btn btn-primary float-right" type="submit" id="search-button">Advanced Search</button>
                     </div>
                 </div>
             </div>
@@ -202,7 +205,7 @@
                 maxDate: '1945-12-31',
                 minDate: '1915-01-01',
                 useCurrent: false,
-                defaultDate: '#(query.firstDate)',
+                defaultDate: '#if(query.firstDate) {#(query.firstDate)} else {1915-12-01}',
                 showClear: true
             });
         });
@@ -212,7 +215,7 @@
                 maxDate: '1945-12-31',
                 minDate: '1915-01-01',
                 useCurrent: false,
-                defaultDate: '#(query.secondDate)',
+                defaultDate: '#if(query.secondDate) {#(query.secondDate)} else {1945-12-31}',
                 showClear: true
             });
         });

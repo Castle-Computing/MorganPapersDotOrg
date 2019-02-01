@@ -23,12 +23,14 @@ public func routes(_ router: Router) throws {
         }
         
         return flatMap(searchResultRequest, ocrDataRequest) { (result: SearchResult, ocrData: Data) in
-                guard let letter = result.response.docs.first else {
-                    throw Abort(.badRequest)
-                }
+            guard let letter = result.response.docs.first else {
+                throw Abort(.badRequest)
+            }
+        
+            var ocrText: String? = String(data: ocrData, encoding: .utf8)
+            if (ocrText?.isEmpty ?? false) || ocrText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { ocrText = nil }
             
-                let ocrText = String(data: ocrData, encoding: .utf8) ?? "invalid encoding"
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
+            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
         }
     }
 

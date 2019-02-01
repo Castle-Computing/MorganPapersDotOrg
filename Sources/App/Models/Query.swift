@@ -29,8 +29,11 @@ final class Query: Codable {
     var excludeDrawings = false
     var excludeInvoices = false
     
-    var firstDate = "1915-01-01"
-    var secondDate = "1945-12-31"
+    static let defaultFirstDate = "1915-01-01"
+    static let defaultSecondDate = "1945-12-31"
+    
+    var firstDate = Query.defaultFirstDate
+    var secondDate = Query.defaultSecondDate
     var excludeDates = false
     
     let currentSearchURL: String
@@ -122,6 +125,66 @@ final class Query: Codable {
             
             for phrase in phrases {
                 solrSearch.append(" AND (OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
+            }
+        }
+        
+        if let noneExplicit = noneExplicit {
+            let terms = noneExplicit.split(separator: " ")
+            
+            for term in terms {
+                solrSearch.append(" AND -(OCR_BOOK_t:\"\(term)\")")
+            }
+        }
+        
+        if let author = author {
+            if excludeAuthor {
+                solrSearch.append(" AND -(mods_name_personal_author_namePart_t:\(author))")
+            } else {
+                solrSearch.append(" AND (mods_name_personal_author_namePart_t:\(author))")
+            }
+        }
+        
+        if let title = title {
+            if excludeTitle {
+                solrSearch.append(" AND -(mods_titleInfo_title_t:\(title))")
+            } else {
+                solrSearch.append(" AND (mods_titleInfo_title_t:\(title))")
+            }
+        }
+        
+        if let location = location {
+            if excludeLocation {
+                solrSearch.append(" AND -((mods_subject_hierarchicalGeographic_city_t:\(location)) OR (mods_subject_hierarchicalGeographic_state_s:\(location)))")
+            } else {
+                solrSearch.append(" AND ((mods_subject_hierarchicalGeographic_city_t:\(location)) OR (mods_subject_hierarchicalGeographic_state_s:\(location)))")
+            }
+        }
+        
+        if excludeLetters {
+            solrSearch.append(" AND -(mods_genre_t:letter)")
+        }
+        
+        if excludeTelegrams {
+            solrSearch.append(" AND -(mods_genre_t:telegram)")
+        }
+        
+        if excludeDocuments {
+            solrSearch.append(" AND -(mods_genre_t:document)")
+        }
+        
+        if excludeDrawings {
+            solrSearch.append(" AND -(mods_genre_t:drawing)")
+        }
+        
+        if excludeInvoices {
+            solrSearch.append(" AND -(mods_genre_t:invoice)")
+        }
+        
+        if firstDate != Query.defaultFirstDate || secondDate != Query.defaultSecondDate {
+            if excludeDates {
+                solrSearch.append(" AND -(mods_originInfo_dateCreated_dt:[\(firstDate)T00:00:00Z TO \(secondDate)T00:00:00Z])")
+            } else {
+                solrSearch.append(" AND (mods_originInfo_dateCreated_dt:[\(firstDate)T00:00:00Z TO \(secondDate)T00:00:00Z])")
             }
         }
         
