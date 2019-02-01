@@ -75,10 +75,10 @@
 				<a href="#(query.currentSearchURL)" class="my-3 btn btn-sm btn-outline-info" role="button">1</a>
 				<a href="#(query.currentSearchURL)&page=#(page / 2)" class="my-3 btn btn-sm btn-outline-info" role="button">...</a>
 				<a href="#(query.currentSearchURL)&page=#(page)" class="my-3 btn btn-sm btn-outline-dark disabled" role="button">#(page)</a>
-				<a href="#(query.currentSearchURL)&page=#(page + 1)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 1)</a>
-				<a href="#(query.currentSearchURL)&page=#(page + 2)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 2)</a>
-				<a href="#(query.currentSearchURL)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 3)</a>
-				<a href="#(query.currentSearchURL)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 4)</a>
+				#if(page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 1)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 1)</a> }
+				#if(15 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 2)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 2)</a> }
+				#if(30 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 3)</a> }
+				#if(45 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 4)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 4)</a> }
 			}
 
 			#if(page * 15 < numberOfResults) {
