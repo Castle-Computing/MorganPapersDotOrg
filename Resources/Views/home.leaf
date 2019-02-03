@@ -52,7 +52,7 @@
 
         <div class="row align-items-center ml-3 mr-3 bg-light">
             <form class="input-group mb-4" action="/search" method="get">
-                <input type="search" name="query" class="form-control text-truncate" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
+                <input type="search" name="query" class="form-control" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
                 </div>
@@ -69,14 +69,13 @@
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
         </div>
 
-        <fieldset style="border: 1px black solid; background-color: rgba(0, 0, 255, 0.3)">
-        <legend style="text-align:center; width:180px; margin-left: 1em">On This Day...</legend>
-        <div class="row ml-3 mr-3 mt-3">
+
+        <div class="row rounded ml-3 mr-3 bg-light mt-3 text-white border border-primary bg-dark">
             <!-- Carousel -->
             #if(numLetters> 1) {
                 <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center; width:100%">
                 <!-- Images -->
-                    <div class="carousel-inner">
+                <div class="carousel-inner">
                         #for(child in letters) {
                             #if(isFirst){
                                 <div class="carousel-item active">
@@ -87,6 +86,7 @@
                                             </a>
                                         </div>
                                         <div class = "col-sm mr-5">
+                                            <p class = "text-center"><u>On #(today):</u></p>
                                             <p class = " text-center font-italic">#(child.title)</p>
                                         </div>
                                     </div>
@@ -100,6 +100,7 @@
                                             </a>
                                         </div>
                                         <div class = "col-sm mr-5">
+                                            <p class = "text-center"><u>On #(today):</u></p>
                                             <p class = "font-italic">#(child.title)</p>
                                         </div>
                                     </div>
@@ -127,7 +128,6 @@
                 }
             }
         </div>
-    </fieldset>
     </div>
 </div>
 </body>

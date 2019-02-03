@@ -21,6 +21,10 @@ public func routes(_ router: Router) throws {
         fileData.enumerateLines { line, _ in
             lines.append(line)
         }
+
+        //Current Date String for Title
+        dateFormatter.dateFormat = "MMMM d"
+        let todayStr = dateFormatter.string(from: now)
         
         
         //Modify leap year since no letter
@@ -43,7 +47,7 @@ public func routes(_ router: Router) throws {
                 print ("PID: ", item["PID"]!, "title: ", item["title"]!)
                 ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
             }
-            letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
+            letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count, today: todayStr)
             for item in letters.letters! {
                 print ("PID: ", item.PID, "title: ", item.title)
             }
@@ -52,7 +56,7 @@ public func routes(_ router: Router) throws {
         } catch {
             // Handle Error
         }
-        //Render home
+        //Render home, should never reach here
         return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
     }
     

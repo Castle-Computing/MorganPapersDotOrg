@@ -36,9 +36,11 @@ final class LODPage: Codable {
 final class LODPageTitle: Codable {
     let letters: [OIDTitle]?
     let numLetters: Int
-    init (lettersIn: [OIDTitle]?, numLetters: Int?) {
+    let today: String
+    init (lettersIn: [OIDTitle]?, numLetters: Int?, today: String?) {
         self.letters = lettersIn
         self.numLetters = numLetters ?? 0
+        self.today = today ?? "On This Day"
     }
 }
 
