@@ -69,7 +69,9 @@
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
         </div>
 
-        <div class="row ml-3 mr-3 mt-3 text-white border border-primary bg-dark">
+        <fieldset style="border: 1px black solid; background-color: rgba(0, 0, 255, 0.3)">
+        <legend style="text-align:center; width:180px; margin-left: 1em">On This Day...</legend>
+        <div class="row ml-3 mr-3 mt-3">
             <!-- Carousel -->
             #if(numLetters> 1) {
                 <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center; width:100%">
@@ -81,7 +83,7 @@
                                     <div class = "row align-items-center" style="height: 200px; text-align:center">
                                         <div class = "col-sm ml-5">
                                             <a href = "letter/#(child.PID)">
-                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
+                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style = "border-radius: 10px"/>
                                             </a>
                                         </div>
                                         <div class = "col-sm mr-5">
@@ -94,7 +96,7 @@
                                     <div class = "row align-items-center" style="height: 200px; text-align:center">
                                         <div class = "col-sm ml-5">
                                             <a href = "letter/#(child.PID)">
-                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid"/>
+                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style = "border-radius: 10px"/>
                                             </a>
                                         </div>
                                         <div class = "col-sm mr-5">
@@ -125,6 +127,7 @@
                 }
             }
         </div>
+    </fieldset>
     </div>
 </div>
 </body>
