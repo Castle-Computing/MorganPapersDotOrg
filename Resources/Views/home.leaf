@@ -41,18 +41,18 @@
 <div class = "container-sm mh-100 mw-100">
     <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
 
-        <div class="row align-items-end ml-3 mr-3 bg-light mt-5">
-            <div class = "col-sm" style = "text-align: right">
+        <div class="row align-items-end bg-light mt-5">
+            <div class = "col" style = "text-align: right">
                 <img src="/images/HomeImage.png" width="100"/>
             </div>
-            <div class = "col-sm-auto" style = "text-align: right">
-                <h4>Hearst Castle Papers</h4>
+            <div class = "col" style = "text-align: left">
+                <h4>Morgan Papers</h4>
             </div>
         </div>
 
         <div class="row align-items-center ml-3 mr-3 bg-light">
             <form class="input-group mb-4" action="/search" method="get">
-                <input type="search" name="query" class="form-control" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
+                <input type="search" name="query" class="form-control text-truncate" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
                 </div>
@@ -69,7 +69,7 @@
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
         </div>
 
-        <div class="row ml-3 mr-3 bg-light mt-3">
+        <div class="row ml-3 mr-3 mt-3 text-white border border-primary bg-dark">
             <!-- Carousel -->
             #if(numLetters> 1) {
                 <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center; width:100%">
