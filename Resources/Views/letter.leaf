@@ -84,12 +84,13 @@
                 </sr>
             </div>
         </div>	
-        
-        <div class="row mt-3 text-left">
-            <div class="col">
-                <p style="white-space: pre-line; padding: 7px; background-color: #f5ead1; border-radius: 5px;">#(ocrText)</p>
+        #if(ocrText) {
+            <div class="row mt-3 text-left">
+                <div class="col">
+                    <p style="white-space: pre-line; padding: 7px; background-color: #f5ead1; border-radius: 5px;">#(ocrText)</p>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <!--<div class = "col-lg-4 mt-5 ml-5">
         <h4 class = "text-center text-warning font-weight-bold">You Might Like...</h4>

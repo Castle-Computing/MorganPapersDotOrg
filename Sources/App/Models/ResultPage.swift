@@ -5,14 +5,14 @@
 //  Created by tigeriv on 10/25/18.
 //
 final class ResultPage: Codable {
-    let searchTerm: String
+    let query: Query
     let searchResults: [docArray]
     let numberOfResults: Int
     let start: Int
     let page: Int
     
-    init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
-        self.searchTerm = searchTerm
+    init(query: Query, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
+        self.query = query
         self.searchResults = searchResults
         self.numberOfResults = numResults
         self.start = start
@@ -122,7 +122,7 @@ final class docArray: Codable {
             if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
                 description = descriptionArray![0]
             } else if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
                 
                 if description?.count ?? 0 > 250 {
                     description = description!.prefix(200) + "..."
@@ -132,7 +132,7 @@ final class docArray: Codable {
             }
         } catch {
             if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'"))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
                 
                 if description?.count ?? 0 > 250 {
                     description = description!.prefix(200) + "..."

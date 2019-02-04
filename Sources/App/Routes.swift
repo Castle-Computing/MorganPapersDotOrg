@@ -23,12 +23,14 @@ public func routes(_ router: Router) throws {
         }
         
         return flatMap(searchResultRequest, ocrDataRequest) { (result: SearchResult, ocrData: Data) in
-                guard let letter = result.response.docs.first else {
-                    throw Abort(.badRequest)
-                }
+            guard let letter = result.response.docs.first else {
+                throw Abort(.badRequest)
+            }
+        
+            var ocrText: String? = String(data: ocrData, encoding: .utf8)
+            if (ocrText?.isEmpty ?? false) || ocrText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { ocrText = nil }
             
-                let ocrText = String(data: ocrData, encoding: .utf8) ?? "invalid encoding"
-                return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
+            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter))
         }
     }
 
@@ -50,9 +52,8 @@ public func routes(_ router: Router) throws {
         //Attempt to obtain search term, otherwise abort
         //Receive the search term from the query
         //Request host/search?query=
-        guard let searchTerm = req.query[String.self, at: "query"] else {
-            throw Abort(.badRequest)
-        }
+        
+        let currentQuery = Query.init(queryParameters: req.query, currentSearchURL: req.http.urlString)
         
         var page = req.query[Int.self, at: "page"] ?? 1
         if page < 1 {
@@ -61,17 +62,12 @@ public func routes(_ router: Router) throws {
         
         let start = (page - 1) * 15
         
-        //Replaces all characters of searchTerm not in allowed characters with percent
-        //Encoded characters. .urlQueryAllowed is the character set.
-        guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            throw Abort(.badRequest)
-        }
-        
         //Create URL for Islandora entries with encoded search title and description
         //Using SOLR search parameters
         //Returns maximum 10 documents (rows=10)
         //Excludes header
-        let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
+        //let searchURL = searchBookURL(encodedSearchTerm: encodedSearchTerm, start: start)
+        let searchURL = currentQuery.getSolrSearch(start: start)!
         
         //Create a client to send a request.get()
         let client = try req.client()
@@ -89,7 +85,7 @@ public func routes(_ router: Router) throws {
             .flatMap { result in
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
-                return try req.view().render("results", ResultPage(searchTerm: searchTerm, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
+                return try req.view().render("results", ResultPage(query: currentQuery, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: page))
         }
     }
 }
