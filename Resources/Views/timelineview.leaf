@@ -1,0 +1,24 @@
+#set("title") { "Your Timeline" }
+<html>
+<head>
+    <link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js">     </script>
+</head>
+<body>
+    <div id="Timeline"></div>
+    <script>
+    //May want to modify options
+        var options = {
+           width:'100%',
+           height:'1500',
+           timenav_position:'top',
+           language:'en',
+           start_at_end:false,
+           start_at_slide:0,
+        };
+
+        window.timeline = new TL.Timeline('Timeline',"/dynamicjson?rekl=#(rekl)&islandora=#(islandora)&cpsca=#(cpsca)",options);
+    </script>
+</div>
+</body>
+</html>

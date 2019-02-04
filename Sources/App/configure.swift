@@ -11,7 +11,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-    
+
     /// Use Leaf for rendering views
     config.prefer(LeafRenderer.self, for: ViewRenderer.self)
 
@@ -19,5 +19,6 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+    middlewares.use(SessionsMiddleware.self)
     services.register(middlewares)
 }
