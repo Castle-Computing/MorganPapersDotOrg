@@ -14,6 +14,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     
     /// Use Leaf for rendering views
     config.prefer(LeafRenderer.self, for: ViewRenderer.self)
+    
+    let serverConfigure = NIOServerConfig.default(hostname: "0.0.0.0", port: 9090)
+    services.register(serverConfigure)
 
     /// Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
