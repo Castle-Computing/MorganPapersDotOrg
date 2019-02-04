@@ -6,7 +6,7 @@
             <p class = "text-center font-weight-bold">Research sucks, but it doesn't have to. Here at Castle Computing, we're making research, specifically the construction of Hearst Castle, a fun, interactive experience. In this site, you will find a collection of letters and other forms of communication between revered architect Julia Morgan and media tycoon William Randolph Hearst from the construction of Hearst Castle.</p>
         </div>
         <div class = "col-md-4">
-            <img src="https://cdn.vox-cdn.com/thumbor/w7oXIduJWkMK5uA516v9uKKHnAQ=/0x0:640x480/1200x800/filters:focal(269x189:371x291)/cdn.vox-cdn.com/uploads/chorus_image/image/61328529/HearstCastle-712894.0.0.1450294390.0.jpeg" class="img-fluid"/>
+            <img src="/images/hearst.jpg" class="img-fluid"/>
         </div>
     </div>
 
