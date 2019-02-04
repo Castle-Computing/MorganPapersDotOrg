@@ -1,4 +1,4 @@
-#set("title") { #(numLetters) }
+#set("title") { Morgan Papers }
 
 <!DOCTYPE html>
 <html>
@@ -39,19 +39,16 @@
 
 <body class="bg-light">
 <div class = "container-sm mh-100 mw-100">
-    <div class="col-md-8 col-xl-5 col-lg-8 mx-auto text-center">
+    <div class="col-md-8 col-xl-6 col-lg-8 mx-auto text-center">
 
-        <div class="row align-items-end bg-light mt-5">
-            <div class = "col" style = "text-align: right">
-                <img src="/images/HomeImage.png" width="100"/>
-            </div>
-            <div class = "col" style = "text-align: left">
-                <h4>Morgan Papers</h4>
+        <div class="row align-items-end bg-light mt-5 mb-3 mx-1">
+            <div class = "col" style = "text-align: center">
+                <img src="/images/FullHomeImage.svg" width="450em"/>
             </div>
         </div>
 
         <div class="row align-items-center ml-3 mr-3 bg-light">
-            <form class="input-group mb-4" action="/search" method="get">
+            <form class="input-group mb-2" action="/search" method="get">
                 <input type="search" name="query" class="form-control text-truncate" placeholder="Search through Hearst Castle Construction Archives" aria-label="Search term" aria-describedby="search-term"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="search-button"><i class="fa fa-search"></i></button>
@@ -61,60 +58,47 @@
 
         <div class="row ml-3 mr-3 bg-light">
             <div class = "col text-right">
-                <h5 class="text-secondary"><a href="/explore">Help</a></h5>
+                <p class="text-secondary"><a href="/help" style="text-decoration: none; margin-right: 1em"><i class="fa fa-question-circle"></i> Read Help</a><a href="/explore" style="text-decoration: none"><i class="fab fa-readme"></i> Explore the Collection</a></p>
             </div>
         </div>
-
-        <div class="row ml-3 mr-3 bg-light mt-3">
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+    </div>
+    <div class="col-md-8 col-xl-7 col-lg-8 mx-auto text-center">
+        <div class="row mx-1 bg-light my-3">
+            <p>Explore the Julia Morgan collection! This website is an advanced search engine and interactive experience that can be utlized to explore the letters between Julia Morgan, William Hearst, and others as they discussed the construction of Hearst Castle. If you're not sure where to start, click <a href="/explore">here</a> to begin exploring.</p>
         </div>
-
-        <fieldset style="border: 1px black solid; background-color: rgba(0, 0, 255, 0.3)">
-        <legend style="text-align:center; width:180px; margin-left: 1em">On This Day...</legend>
+    </div>
+    <div class="col-md-8 col-xl-5 col-lg-8 mx-auto mt-5 text-center">
+        <fieldset style="border: 5px black solid; border-radius: 5px;">
+        <legend style="font-size: 20px; text-align:left; width:auto; margin-left: 1em; padding-left: 0.5em; padding-right: 0.5em">Letters from today...</legend>
         <div class="row ml-3 mr-3 mt-3">
             <!-- Carousel -->
             #if(numLetters> 1) {
-                <div id="pages" class="carousel slide" data-ride="carousel" style="height: 200px; text-align:center; width:100%">
+                <div id="pages" class="carousel slide" data-ride="carousel" style="height: 225px; text-align:center; width:100%">
                 <!-- Images -->
                     <div class="carousel-inner">
                         #for(child in letters) {
-                            #if(isFirst){
-                                <div class="carousel-item active">
-                                    <div class = "row align-items-center" style="height: 200px; text-align:center">
-                                        <div class = "col-sm ml-5">
-                                            <a href = "letter/#(child.PID)">
-                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style = "border-radius: 10px"/>
-                                            </a>
-                                        </div>
-                                        <div class = "col-sm mr-5">
-                                            <p class = " text-center font-italic">#(child.title)</p>
-                                        </div>
+                            <div class="carousel-item #if(isFirst) { active }">
+                                <div class = "row align-items-center" style="height: auto; text-align:center">
+                                    <div class = "col-sm ml-5">
+                                        <a href = "letter/#(child.PID)">
+                                            <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style="border-radius: 10px"/>
+                                        </a>
+                                    </div>
+                                    <div class = "col-sm mr-5">
+                                        <p class = "font-italic">#(child.title)</p>
                                     </div>
                                 </div>
-                            } else {
-                                <div class="carousel-item">
-                                    <div class = "row align-items-center" style="height: 200px; text-align:center">
-                                        <div class = "col-sm ml-5">
-                                            <a href = "letter/#(child.PID)">
-                                                <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style = "border-radius: 10px"/>
-                                            </a>
-                                        </div>
-                                        <div class = "col-sm mr-5">
-                                            <p class = "font-italic">#(child.title)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                            </div>
                         }
                     </div>
             <!-- L/R -->
                     <a class="carousel-control-prev" href="#pages" data-slide="prev">
-                        <span style="font-size: 1em; color: Black;">
+                        <span style="margin-right: 2em; font-size: 25px; color: Black;">
                             <i class="fas fa-chevron-circle-left"></i>
                         </span>
                     </a>
                     <a class="carousel-control-next" href="#pages" data-slide="next">
-                        <span style="font-size: 1em; color: Black;">
+                        <span style="margin-left: 2em; font-size: 25px; color: Black;">
                             <i class="fas fa-chevron-circle-right"></i>
                         </span>
                     </a>
