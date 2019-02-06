@@ -107,6 +107,8 @@ final class docArray: Codable {
         
         do {
             ocrText = try container.decode(String.self, forKey: .ocrText)
+        } catch {
+            debugPrint("No ocr included.")
         }
         
         if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {

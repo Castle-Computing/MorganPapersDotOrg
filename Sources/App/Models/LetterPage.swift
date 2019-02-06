@@ -13,14 +13,27 @@ final class LetterPage: Codable {
     let ocrText: String?
     let numPages: Int
     let metadata: docArray?
+    let relatedItems: [relatedItem]?
     
-    init (title: String?, children: [String]?, ocrText: String?, numPages: Int?, metadata: docArray?)
+    init (title: String?, children: [String]?, ocrText: String?, numPages: Int?, metadata: docArray?, relatedItems: [relatedItem]?)
     {
         self.letterTitle = title
         self.children = children
         self.ocrText = ocrText
         self.numPages = numPages ?? 0
         self.metadata = metadata
+        self.relatedItems = relatedItems
+    }
+}
+
+final class relatedItem: Codable {
+    let id: String
+    let title: String
+    let translatedID: String
+    init(id: String, title: String) {
+        self.id = id;
+        self.title = title;
+        self.translatedID = id.replacingOccurrences(of: ":", with: "-")
     }
 }
 

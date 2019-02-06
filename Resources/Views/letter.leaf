@@ -7,7 +7,7 @@
         <h4 style="margin-top: 10px; margin-bottom: 15px" class="text-center text-dark font-weight-bold">#(letterTitle)</h4>
         <div class="row">
         <div class="col">
-            #if(numPages> 1) {
+            #if(numPages > 1) {
                 <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
                     <ul class="carousel-indicators">
                         #for(child in children) {
@@ -53,9 +53,9 @@
                 </div>
             } else {
                 #for(child in children) {
-                            #if(isFirst) {
-                                <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid mx-auto d-block">
-                            }
+                    #if(isFirst) {
+                        <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid mx-auto d-block">
+                    }
                 }
             }
 
@@ -92,46 +92,21 @@
             </div>
         }
     </div>
-    <!--<div class = "col-lg-4 mt-5 ml-5">
-        <h4 class = "text-center text-warning font-weight-bold">You Might Like...</h4>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">1. Cupertino</p>
-                <p>Cupertino is a city in California's Silicon Valley.</p>
+    <div class = "col-lg-4 mt-5 ml-5">
+        <h4 class = "text-center">You Might Like...</h4>
+        #for(item in relatedItems) {
+            <div class = "row align-items-center mt-5">
+                <div class = "col">
+                    <p class = "font-weight-bold">#(item.title)</p>
+                </div>
+                <div class = "col">
+                    <a href="https://digital.lib.calpoly.edu/#(item.translatedID)">
+                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(item.id)/datastream/TN" class="img-fluid w-100"/>
+                    </a>    
+                </div>
             </div>
-            <div class = "col">
-                <img src="https://az592774.vo.msecnd.net/pgl-release/Images/ArticleImages/16/16005.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">2. Mountain View</p>
-                <p>Mountain View is a city located in Santa Clara County, California[9], United States, named for its views of the Santa Cruz Mountains.</p>
-            </div>
-            <div class = "col">
-                <img src="https://static1.squarespace.com/static/56d0d42df85082ea376b5eb3/58fd201cc534a56ca62e2ff9/58fd201cc534a56ca62e2ffc/1493071321693/Miramar+Capital+Projects_Village+Lakes+5+.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">3. San Jose</p>
-                <p>San Jose officially the City of San José, is an economic, cultural and political center of Silicon Valley, and the largest city in Northern California.</p>
-            </div>
-            <div class = "col">
-                <img src="https://www.langan.com/wp-content/uploads/2016/11/San-Jose.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">4. Palo Alto</p>
-                <p>Palo Alto is a charter city located in the northwest corner of Santa Clara County, California, United States, in the San Francisco Bay Area.</p>
-            </div>
-            <div class = "col">
-                <img src="https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_ca101_fiveamazingthings_palalto_alto1_videostill_1280x640.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-    </div>
-</div>-->
+        }
+</div>
 
 
 }
