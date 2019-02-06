@@ -16,142 +16,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     
 	<title>#get(title)</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <a class="navbar-brand" href="/">
         <img src="/images/search_vector_logo.svg" width="auto" height="50">
     </a>
-    <form name="searchForm" id="searchForm" class="mx-lg-2 my-auto d-inline w-50" action="/search" method="get">
-        <div class="input-group">
-            <input type="text" name="query" class="form-control" placeholder="Search..." value="#(query.query)" aria-label="Search" aria-describedby="search-button">
-            <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit" id="search-button">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu w-100 px-3 keep-open" aria-labelledby="dropdownMenuButton">
-                    <h4 class="mt-2">Find documents with...</h4>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">all of these words</span>
-                        </div>
-                        <input value="#(query.allExplicit)" name="all_explicit" type="text" class="form-control" aria-label="all of these words">
-                    </div>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">any of these words</span>
-                        </div>
-                        <input value="#(query.anyExplicit)" name="any_explicit" type="text" class="form-control" aria-label="any of these words">
-                    </div>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">this exact phrase</span>
-                        </div>
-                        <input value="#(query.phraseExplicit)" name="phrase_explicit" type="text" class="form-control" aria-label="this exact phrase" data-toggle="popover" data-trigger="hover" title="Tip" data-content='to search for multiple phrases, put exact words in quotes: "julia morgan" "william hearst"'>
-                    </div>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">none of these words</span>
-                        </div>
-                        <input value="#(query.noneExplicit)" name="none_explicit" type="text" class="form-control" aria-label="none of these words">
-                    </div>
-                    <h4 class="mt-4">Then narrow down your results by...</h4>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">author</span>
-                        </div>
-                        <input value="#(query.author)" name="author" type="text" class="form-control" aria-label="author name">
-                        <select name="exclude_author" class="custom-select"style="max-width: 200px">
-                            <option #if(query.excludeAuthor) {} else { selected } value="">include</option>
-                            <option #if(query.excludeAuthor) { selected } value="true">exclude</option>
-                        </select>
-                    </div>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">title</span>
-                        </div>
-                        <input value="#(query.title)"  name="title" type="text" class="form-control" aria-label="document title">
-                        <select name="exclude_title" class="custom-select"style="max-width: 200px">
-                            <option #if(query.excludeTitle) {} else { selected } value="">include</option>
-                            <option #if(query.excludeTitle) { selected } value="true">exclude</option>
-                        </select>
-                    </div>
-                    <div class="input-group mx-lg my-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">location</span>
-                        </div>
-                        <input value="#(query.location)" name="location" type="text" class="form-control" aria-label="document location">
-                        <select name="exclude_location" class="custom-select" style="max-width: 200px">
-                            <option #if(query.excludeLocation) {} else { selected } value="">include</option>
-                            <option #if(query.excludeLocation) { selected } value="true">exclude</option>
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="documentTypeInputGroup">document type</label>
-                        </div>
-                        <div class="input-group-append form-control">
-                            <div class="form-check form-check-inline">
-                                <input name="exclude_letters" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true" #if(query.excludeLetters) {} else { checked }>
-                                <label class="form-check-label" for="inlineCheckbox1">Letter</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="exclude_telegrams" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="true" #if(query.excludeTelegrams) {} else { checked }>
-                                <label class="form-check-label" for="inlineCheckbox2">Telegram</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="exclude_documents" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="true" #if(query.excludeDocuments) {} else { checked }>
-                                <label class="form-check-label" for="inlineCheckbox3">Document</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="exclude_drawings" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="true" #if(query.excludeDrawings) {} else { checked }>
-                                <label class="form-check-label" for="inlineCheckbox4">Drawing</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="exclude_invoices" class="form-check-input" type="checkbox" id="inlineCheckbox5" value="true" #if(query.excludeInvoices) {} else { checked }>
-                                <label class="form-check-label" for="inlineCheckbox5">Invoice</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mx-md my-2 p-0">
-                        <div class="row">
-                            <div class="col-3 mx-0">
-                                    <div class="input-group">
-                                        <select name="exclude_dates" class="custom-select"style="margin: 0px;">
-                                            <option #if(query.excludeDates) {} else { selected } value="">include dates</option>
-                                            <option #if(query.excludeDates) { selected } value="true">exclude dates</option>
-                                        </select>
-                                    </div>
-                            </div>
-                            <div class="col-4 mx-0">
-                                <div class="input-group mx-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">from</span>
-                                    </div>
-                                    <input name="first_date" type="text" class="form-control" id="datepicker">
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">to</span>
-                                    </div>
-                                    <input name="second_date" type="text" class="form-control" id="datepicker2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mx-lg my-2 float-right" style="width: 150px">
-                        <button class="btn btn-primary float-right" type="submit" id="search-button">Advanced Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    #embed("searchfield")
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
@@ -188,72 +62,9 @@
         #get(body)
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script></body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="/styles/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript">
-        // enables bootstrap popover functionality:
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-
-        $(function () {
-            $('#datepicker').datetimepicker({
-                format: 'YYYY-MM-DD',
-                maxDate: '1945-12-31',
-                minDate: '1915-01-01',
-                useCurrent: false,
-                defaultDate: '#if(query.firstDate) {#(query.firstDate)} else {1915-12-01}',
-                showClear: true
-            });
-        });
-        $(function () {
-            $('#datepicker2').datetimepicker({
-                format: 'YYYY-MM-DD',
-                maxDate: '1945-12-31',
-                minDate: '1915-01-01',
-                useCurrent: false,
-                defaultDate: '#if(query.secondDate) {#(query.secondDate)} else {1945-12-31}',
-                showClear: true
-            });
-        });
-
-        $(function() {
-            $('#searchForm').submit(function () {
-                var defaultDate1 = '1915-01-01';
-                var defaultDate2 = '1945-12-31';
-
-                if($(this)[0].elements['first_date'].value === defaultDate1 && $(this)[0].elements['second_date'].value == defaultDate2){
-                    $(this)[0].elements['first_date'].name = $(this)[0].elements['second_date'].name = '';
-                }
-                
-                $(this)
-                    .find('input[name]')
-                    .filter(function () {
-                        if(this.name.includes("exclude")) {
-                            this.checked = !this.checked;
-                        }
-
-                        return !this.value;
-                    })
-                    .prop('name', '');
-                
-                $(this)
-                    .find('select[name]')
-                    .filter(function () {
-                        return !this.value;
-                    })
-                    .prop('name', '');
-            });
-        });
-
-        // prevents advanced search window from closing if user clicks on it
-        $(function() {
-            $('.dropdown-menu.keep-open').on({
-                'click': (e) => { e.stopPropagation(); },
-            });
-        })
-    </script>
+    <script src="/scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="/scripts/searchfield.js"></script>
 </html>

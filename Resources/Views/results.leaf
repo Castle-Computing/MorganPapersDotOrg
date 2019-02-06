@@ -55,7 +55,6 @@
 			</div>
 		</div>
 	}
-
 	<div class="row">
 		<div class="col-lg-6" align="center">
 			#if(page > 1){
@@ -63,7 +62,7 @@
 					<i class="fas fa-chevron-left"></i>
 				</a>
 			}
-
+			#embed("searchfield")
 			#if(page < 6) {
 				<a href="#(query.currentSearchURL)" class="my-3 btn btn-sm #if(page == 1) { disabled btn-outline-dark } else { btn-outline-info }" role="button">1</a>
 				#if(15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=2" class="my-3 btn btn-sm #if(page == 2) { disabled btn-outline-dark } else { btn-outline-info }" role="button">2</a> }
@@ -88,7 +87,6 @@
 			}
 		</div>
 	</div>
-
 }
 
 #embed("base")
