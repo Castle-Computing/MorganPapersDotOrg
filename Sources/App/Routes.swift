@@ -36,7 +36,7 @@ public func routes(_ router: Router) throws {
         let fileURL2 = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
         let data = try Data(contentsOf: fileURL2, options: .mappedIfSafe)
         do {
-            let object: [String: AnyObject] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject as! [String : AnyObject]
+            let object: [String: AnyObject] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : AnyObject]
             let today = object[String(index)] as! [[String : AnyObject]]
             var ltArr: [OIDTitle] = []
             for item in today {
