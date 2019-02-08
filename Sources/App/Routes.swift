@@ -22,12 +22,16 @@ public func routes(_ router: Router) throws {
         
         let letterDatesURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
         let data = try Data.init(contentsOf: letterDatesURL)
-        let letterDatesObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
-        let today = letterDatesObject[dayIndex] as! [[String : AnyObject]]
+        let letterDatesObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : Any]
+        
         var ltArr: [OIDTitle] = []
         
-        for item in today {
-            ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
+        if let today = letterDatesObject?[dayIndex] as? [[String : AnyObject]] {
+            for item in today {
+                guard let title = item["title"] as? String else { continue }
+                guard let PID = item["PID"] as? String else { continue }
+                ltArr.append(OIDTitle(title: title, PID: PID))
+            }
         }
         
         letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
