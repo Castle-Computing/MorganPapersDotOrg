@@ -6,54 +6,33 @@ public func routes(_ router: Router) throws {
     router.get { req -> EventLoopFuture<View> in
         //Get current Date
         let now = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: now)
+        let day = calendar.component(.day, from: now)
+        
         let months = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M"
-        let month = dateFormatter.string(from: now)
-        dateFormatter.dateFormat = "d"
-        let day = dateFormatter.string(from: now)
-        var index = months[Int(month)! - 1] + Int(day)! - 1
-        
-        //Read from file
-        let fileURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.txt")
-        let fileData = try String.init(contentsOf: fileURL)
-        var lines: [String] = []
-        fileData.enumerateLines { line, _ in
-            lines.append(line)
-        }
-        
+        var dayIndex = String(months[month - 1] + day - 1)
         
         //Modify leap year since no letter
-        if (index == 59) {
-            index = 60
+        if (dayIndex == "59") {
+            dayIndex = "60"
         }
         
-        //Split line into array
-        let letterArr = lines[index].components(separatedBy: ", ")
         var letters: LODPageTitle
         
-        //Try JSON
-        let fileURL2 = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
-        let data = try Data(contentsOf: fileURL2, options: .mappedIfSafe)
-        do {
-            let object: [String: AnyObject] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : AnyObject]
-            let today = object[String(index)] as! [[String : AnyObject]]
-            var ltArr: [OIDTitle] = []
-            for item in today {
-                print ("PID: ", item["PID"]!, "title: ", item["title"]!)
-                ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
-            }
-            letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
-            for item in letters.letters! {
-                print ("PID: ", item.PID, "title: ", item.title)
-            }
-            print (letters.numLetters)
-            return try req.view().render("home", letters)
-        } catch {
-            // Handle Error
+        let letterDatesURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
+        let data = try Data.init(contentsOf: letterDatesURL)
+        let letterDatesObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
+        let today = letterDatesObject[dayIndex] as! [[String : AnyObject]]
+        var ltArr: [OIDTitle] = []
+        
+        for item in today {
+            ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
         }
-        //Render home
-        return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
+        
+        letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
+        
+        return try req.view().render("home", letters)
     }
     
     router.get("letter", String.parameter) { req -> Future<View> in
