@@ -4,6 +4,8 @@ import Vapor
 public func routes(_ router: Router) throws {
     //Home screen, accessible without any additional URL parameters
     router.get { req -> EventLoopFuture<View> in
+        let client = try req.client()
+        
         //Get current Date
         let now = Date()
         let calendar = Calendar.current
@@ -11,32 +13,36 @@ public func routes(_ router: Router) throws {
         let day = calendar.component(.day, from: now)
         
         let months = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-        var dayIndex = String(months[month - 1] + day - 1)
+        var dayIndex = months[month - 1] + day - 1
         
         //Modify leap year since no letter
-        if (dayIndex == "59") {
-            dayIndex = "60"
+        if (dayIndex == 59) {
+            dayIndex = 60
         }
         
-        var letters: LODPageTitle
-        
-        let letterDatesURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
-        let data = try Data.init(contentsOf: letterDatesURL)
-        let letterDatesObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : Any]
-        
-        var ltArr: [OIDTitle] = []
-        
-        if let today = letterDatesObject?[dayIndex] as? [[String : AnyObject]] {
-            for item in today {
-                guard let title = item["title"] as? String else { continue }
-                guard let PID = item["PID"] as? String else { continue }
-                ltArr.append(OIDTitle(title: title, PID: PID))
+        guard let currentQuery = Query.init(currentDayAsInt: dayIndex).getSolrSearch() else {
+            return try req.view().render("home")
+        }
+
+        return client.get(currentQuery  , headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            //flatMap unwraps the response and returns a SearchResult in the future
+            .flatMap { response -> Future<SearchResult> in
+                //Decode response into a SearchResult
+                try response.content.decode(SearchResult.self)
             }
+            //Take the SearchResult future (result), and try to render it
+            .flatMap { results in
+                //Render a view for the initial get request
+                //results.leaf, pass a ResultPage
+                var ltArr: [OIDTitle] = []
+                
+                for doc in results.response.docs {
+                    guard let title = doc.title else { continue }
+                    ltArr.append(OIDTitle(title: title, PID: doc.pid))
+                }
+                
+                return try req.view().render("home", LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count))
         }
-        
-        letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
-        
-        return try req.view().render("home", letters)
     }
     
     router.get("letter", String.parameter) { req -> Future<View> in

@@ -36,11 +36,17 @@ final class Query: Codable {
     var secondDate = Query.defaultSecondDate
     var excludeDates = false
     
-    let currentSearchURL: String
+    var letterOfTheDayValue: String?
+    
+    var currentSearchURL: String?
     
     private let baseURL = IslandoraService.baseURL + "solr/"
     private let urlSuffix = "?rows=15&omitHeader=true&wt=json&start="
     private let restrictToCollectionQuery = "(RELS_EXT_hasModel_uri_t:bookCModel AND ancestors_ms:\"rekl:morgan-ms010\")"
+    
+    init(currentDayAsInt: Int) {
+        letterOfTheDayValue = String(currentDayAsInt)
+    }
     
     init(queryParameters: QueryContainer, currentSearchURL: String) {
         let regex = try! NSRegularExpression(pattern: "&?page=\\d*")
@@ -85,7 +91,7 @@ final class Query: Codable {
         if let excludeDatesParam = queryParameters[Bool.self, at: "exclude_dates"] { excludeDates = excludeDatesParam }
     }
     
-    func getSolrSearch(start: Int) -> String? {
+    func getSolrSearch(start: Int = 0) -> String? {
         var solrSearch = baseURL + restrictToCollectionQuery
         
         if var query = query {
@@ -193,6 +199,10 @@ final class Query: Codable {
             } else {
                 solrSearch.append(" AND (mods_originInfo_dateCreated_dt:[\(firstDate)T00:00:00Z TO \(secondDate)T00:00:00Z])")
             }
+        }
+        
+        if let letterOfTheDayValue = letterOfTheDayValue {
+            solrSearch.append(" AND (LETTER_OF_THE_DAY_VALUE_t:\(letterOfTheDayValue))")
         }
         
         solrSearch.append(urlSuffix)        
