@@ -1,0 +1,11 @@
+#set("title") {Map}
+#set("body") {
+    <h2>THIS IS A MAP</h2>
+    #for(place in places) {
+        <div row>
+            <p>#(place.city), #(place.country) at (#(place.lat),#(place.long))</p>
+        </div>
+    }
+}
+
+#embed("base")
