@@ -107,4 +107,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 <script src="/scripts/bootstrap-datetimepicker.min.js"></script>
 <script src="/scripts/searchfield.js"></script>
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/bc8480de-2908-4da8-b318-5bfbf9f15cd0.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
 </html>
