@@ -7,7 +7,7 @@
         <h4 style="margin-top: 10px; margin-bottom: 15px" class="text-center text-dark font-weight-bold">#(letterTitle)</h4>
         <div class="row">
         <div class="col">
-            #if(numPages> 1) {
+            #if(numPages > 1) {
                 <div id="pages" class="carousel slide" data-ride="carousel" data-interval="false">
                     <ul class="carousel-indicators">
                         #for(child in children) {
@@ -53,9 +53,9 @@
                 </div>
             } else {
                 #for(child in children) {
-                            #if(isFirst) {
-                                <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid mx-auto d-block">
-                            }
+                    #if(isFirst) {
+                        <img referrerpolicy="no-referrer" src="https://digital.lib.calpoly.edu/islandora/object/#(child)/datastream/JPG/view" class="img-fluid mx-auto d-block">
+                    }
                 }
             }
 
@@ -80,17 +80,16 @@
                     #if(metadata.location) {
                         <i class="fas fa-map-marker-alt"></i>
                         #(metadata.location)
-                        &emsp;
                     }
                     <i class="fas fa-plus-circle"></i>
                     <iframe name="add" style="display:none;"></iframe>
-                    <form action="/set/#(pid)" method="get" target="add">
+                    <form action="/set/#(metadata.PID)" method="get" target="add">
                       <button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
                           <i class="fas fa-plus-circle"></i>
                       </button>
                     </form>
                     <iframe name="remove" style="display:none;"></iframe>
-                    <form action="/del/#(pid)" method="get" target="remove">
+                    <form action="/del/#(metadata.PID)" method="get" target="remove">
                       <button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
                           <i class="fas fa-minus-circle"></i>
                       </button>
@@ -98,53 +97,29 @@
                 </sr>
             </div>
         </div>
-
-        <div class="row mt-3 text-left">
-            <div class="col">
-                <p style="white-space: pre-line; padding: 7px; background-color: #f5ead1; border-radius: 5px;">#(ocrText)</p>
+        #if(ocrText) {
+            <div class="row mt-3 text-left">
+                <div class="col">
+                    <p style="white-space: pre-line; padding: 7px; background-color: #f5ead1; border-radius: 5px;">#(ocrText)</p>
+                </div>
             </div>
-        </div>
+        }
     </div>
-    <!--<div class = "col-lg-4 mt-5 ml-5">
-        <h4 class = "text-center text-warning font-weight-bold">You Might Like...</h4>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">1. Cupertino</p>
-                <p>Cupertino is a city in California's Silicon Valley.</p>
+    <div class = "col-lg-4 mt-5 ml-5">
+        <h4 class = "text-center">You Might Like...</h4>
+        #for(item in relatedItems) {
+            <div class = "row align-items-center mt-5">
+                <div class = "col">
+                    <p class = "font-weight-bold">#(item.title)</p>
+                </div>
+                <div class = "col">
+                    <a href="https://digital.lib.calpoly.edu/#(item.translatedID)">
+                        <img src="https://digital.lib.calpoly.edu/islandora/object/#(item.id)/datastream/TN" class="img-fluid w-100"/>
+                    </a>
+                </div>
             </div>
-            <div class = "col">
-                <img src="https://az592774.vo.msecnd.net/pgl-release/Images/ArticleImages/16/16005.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">2. Mountain View</p>
-                <p>Mountain View is a city located in Santa Clara County, California[9], United States, named for its views of the Santa Cruz Mountains.</p>
-            </div>
-            <div class = "col">
-                <img src="https://static1.squarespace.com/static/56d0d42df85082ea376b5eb3/58fd201cc534a56ca62e2ff9/58fd201cc534a56ca62e2ffc/1493071321693/Miramar+Capital+Projects_Village+Lakes+5+.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">3. San Jose</p>
-                <p>San Jose officially the City of San José, is an economic, cultural and political center of Silicon Valley, and the largest city in Northern California.</p>
-            </div>
-            <div class = "col">
-                <img src="https://www.langan.com/wp-content/uploads/2016/11/San-Jose.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-        <div class = "row align-items-center mt-5">
-            <div class = "col">
-                <p class = "font-weight-bold">4. Palo Alto</p>
-                <p>Palo Alto is a charter city located in the northwest corner of Santa Clara County, California, United States, in the San Francisco Bay Area.</p>
-            </div>
-            <div class = "col">
-                <img src="https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_ca101_fiveamazingthings_palalto_alto1_videostill_1280x640.jpg" class="img-fluid w-100"/>
-            </div>
-        </div>
-    </div>
-</div>-->
+        }
+</div>
 
 
 }

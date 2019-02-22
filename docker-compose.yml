@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  website:
+    image: ethankusters/morganpaperswebsite
+    ports:
+      - 80:80
+    environment:
+      EXAMPLE_PASSWORD: secretpw
+  nlp:
+    image: ethankusters/no-functions

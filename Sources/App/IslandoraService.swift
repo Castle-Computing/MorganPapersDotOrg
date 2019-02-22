@@ -7,6 +7,11 @@
 
 import Foundation
 
+class IslandoraService {
+    public static let baseURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/"
+}
+
+
 //URL associated with a PID, form rek:8156 etc.
 func getObjectURL(rekl: String) -> String {
     let objectURL = "https://digital.lib.calpoly.edu/islandora/rest/v1/object/" + rekl

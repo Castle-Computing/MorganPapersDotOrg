@@ -14,6 +14,32 @@
 		</div>
 	</div>
 
+  #if(numberOfResults > 0){
+    <div class="card">
+      <div class="card-header">
+        You have #(numberOfResults) items in your basket
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Add more items or access custom content</h5>
+        <p class="card-text">Your custom timeline and map are available below</p>
+        <a href="/timeline" class="btn btn-primary">View your timeline</a>
+        <a href="#" class="btn btn-primary">View your map</a>
+      </div>
+    </div>
+  } else {
+    <div class="card">
+      <div class="card-header">
+        Your basket is empty
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Adding letters to your basket enhances the Morgan Paper experience</h5>
+        <p class="card-text">Use our explore page or search feature to find letters to add</p>
+        <a href="/explore" class="btn btn-primary">Go explore</a>
+        <a href="/" class="btn btn-primary">Go search</a>
+        <a href="/help" class="btn btn-primary">Learn how to use Morgan Papers</a>
+      </div>
+    </div>
+  }
 	#for(result in searchResults) {
 		<div class="row">
 			<div class="col-lg-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
@@ -48,15 +74,12 @@
 								<i class="fas fa-map-marker-alt"></i>
 								#(result.location)
 							}
-
-							#if(result.PID) {
-								<iframe name="add" style="display:none;"></iframe>
-								<form action="/set/#(result.PID)" method="get" target="add">
+                <iframe name="remove" style="display:none;"></iframe>
+                <form action="/del/#(result.PID)" method="get" target="remove">
 									<button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
-											<i class="fas fa-plus-circle"></i>
+											<i class="fas fa-minus-circle"></i>
 									</button>
 								</form>
-							}
 
 						</sr>
 					</div>

@@ -5,14 +5,14 @@
 //  Created by tigeriv on 10/25/18.
 //
 final class ResultPage: Codable {
-    let searchTerm: String
+    let query: Query
     let searchResults: [docArray]
     let numberOfResults: Int
     let start: Int
     let page: Int
 
-    init(searchTerm: String, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
-        self.searchTerm = searchTerm
+    init(query: Query, searchResults: [docArray], numResults: Int, start: Int, page: Int) {
+        self.query = query
         self.searchResults = searchResults
         self.numberOfResults = numResults
         self.start = start
@@ -107,6 +107,8 @@ final class docArray: Codable {
 
         do {
             ocrText = try container.decode(String.self, forKey: .ocrText)
+        } catch {
+            debugPrint("No ocr included.")
         }
 
         if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {
@@ -122,13 +124,21 @@ final class docArray: Codable {
             if descriptionArray?.count ?? 0 > 0 && descriptionArray![0].count > 0 {
                 description = descriptionArray![0]
             } else if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
+
+                if description?.count ?? 0 > 250 {
+                    description = description!.prefix(200) + "..."
+                }
             } else {
                 debugPrint("No valid description or OCR listed.")
             }
         } catch {
             if let temp = ocrText {
-                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.prefix(200).replacingOccurrences(of: "\n", with: " "))
+                description = String(temp.split(separator: ":", maxSplits: 2, omittingEmptySubsequences: false).last!.replacingOccurrences(of: "\n", with: " ").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&quot;", with: "\"").replacingOccurrences(of: "�", with: "").replacingOccurrences(of: "&amp;", with: "&"))
+
+                if description?.count ?? 0 > 250 {
+                    description = description!.prefix(200) + "..."
+                }
             } else {
                 debugPrint("No description or OCR listed.")
             }
