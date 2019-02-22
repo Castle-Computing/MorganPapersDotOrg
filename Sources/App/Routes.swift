@@ -87,7 +87,7 @@ public func routes(_ router: Router) throws {
                     relatedItems.append(relatedItem.init(id: split.remove(at: 0), title: split.joined(separator: ",")))
                 }
             }
-            print(letter.pid)
+
             return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems))
         }
     }

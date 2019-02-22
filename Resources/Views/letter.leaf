@@ -115,7 +115,7 @@
                 <div class = "col">
                     <a href="https://digital.lib.calpoly.edu/#(item.translatedID)">
                         <img src="https://digital.lib.calpoly.edu/islandora/object/#(item.id)/datastream/TN" class="img-fluid w-100"/>
-                    </a>
+                    </a>    
                 </div>
             </div>
         }
