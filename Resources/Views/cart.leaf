@@ -15,28 +15,28 @@
 	</div>
 
   #if(numberOfResults > 0){
-    <div class="card">
+    <div class="card" style="width:60%">
       <div class="card-header">
         You have #(numberOfResults) items in your basket
       </div>
       <div class="card-body">
         <h5 class="card-title">Add more items or access custom content</h5>
         <p class="card-text">Your custom timeline and map are available below</p>
-        <a href="/timeline" class="btn btn-primary">View your timeline</a>
-        <a href="#" class="btn btn-primary">View your map</a>
+        <a href="/timeline" class="card-link">View your timeline</a>
+        <a href="#" class="card-link">View your map</a>
       </div>
     </div>
   } else {
-    <div class="card">
+    <div class="card" style="width:60%">
       <div class="card-header">
         Your basket is empty
       </div>
       <div class="card-body">
         <h5 class="card-title">Adding letters to your basket enhances the Morgan Paper experience</h5>
         <p class="card-text">Use our explore page or search feature to find letters to add</p>
-        <a href="/explore" class="btn btn-primary">Go explore</a>
-        <a href="/" class="btn btn-primary">Go search</a>
-        <a href="/help" class="btn btn-primary">Learn how to use Morgan Papers</a>
+        <a href="/explore" class="card-link">Go explore</a>
+        <a href="/" class="card-link">Go search</a>
+        <a href="/help" class="card-link">Learn how to use Morgan Papers</a>
       </div>
     </div>
   }
