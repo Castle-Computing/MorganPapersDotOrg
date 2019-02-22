@@ -70,12 +70,14 @@ final class Loc: Codable {
     let country: String
     let lat: Double
     let long: Double
-    init (city: String, state: String, country: String, lat: Double, long: Double) {
+    let timesOcc: Int
+    init (city: String, state: String, country: String, lat: Double, long: Double, timesOcc: Int) {
         self.city = city
         self.state = state
         self.country = country
         self.lat = lat
         self.long = long
+        self.timesOcc = timesOcc
     }
 }
 
