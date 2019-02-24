@@ -133,7 +133,7 @@ public func routes(_ router: Router) throws {
         //Sends an HTTP GET request to URL
         //The headers are required in the HTTP request, parameter User-Agent has value
         //MorganApp/0.1
-        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
+        return client.get(searchURL, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
             //flatMap unwraps the response and returns a SearchResult in the future
             .flatMap { response -> Future<SearchResult> in
                 //Decode response into a SearchResult
@@ -147,9 +147,6 @@ public func routes(_ router: Router) throws {
         }
     }
 
-    //Example url: http://localhost:8080/dynamicjson?rekl=28694,8172,13660&cpsca=132,64,84&islandora=1087,1093,1282,983
-//Should return as String like staticjson, but I couldn't figure it output
-//
     router.get("dynamicjson") { req -> Future<String> in
         let client = try req.client()
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
@@ -157,7 +154,7 @@ public func routes(_ router: Router) throws {
         guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
         }
-        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
+        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
             .flatMap { response -> Future<SearchResult> in
                 try response.content.decode(SearchResult.self)
             }
@@ -212,46 +209,26 @@ public func routes(_ router: Router) throws {
     //call dynamicjson from there
     router.get("timeline") { req -> Future<View> in
         let data = SavedID(reklQuery: try req.session()["rekl"] ?? "", islandoraQuery: try req.session()["islandora"] ?? "", cpscaQuery: try req.session()["cpsca"] ?? "")
-        return try req.view().render("timelineview", data)
+        return try req.view().render("timeline", data)
     }
 
-        // create a route at GET /sessions/set/:name
     router.get("set", String.parameter) { req -> String in
         // get router param
         let name = try req.parameters.next(String.self)
-        var current = "n/a"
-        var id = "0"
-        //Todo: Create a helper method to remove redundancy
-        if name.hasPrefix("rekl") { // true
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          current = try req.session()["rekl"] ?? "n/a"
-          if current != "n/a"{
-            try req.session()["rekl"] = current + "," + id
-          }
-          else{
-            try req.session()["rekl"] = id
-          }
+        
+        let nameComponents = name.components(separatedBy: ":")
+        guard nameComponents.count == 2 else { return "n/a" }
+        guard let id = nameComponents.last else { return "n/a" }
+        guard let prefix = nameComponents.first else { return "n/a" }
+        
+        let current = try req.session()[prefix] ?? "n/a"
+        
+        if current != "n/a" {
+            try req.session()[prefix] = current + "," + id
+        } else {
+            try req.session()[prefix] = id;
         }
-        else if name.hasPrefix("cpsca") {
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          current = try req.session()["cpsca"] ?? "n/a"
-          if current != "n/a"{
-            try req.session()["cpsca"] = current + "," + id
-          }
-          else{
-            try req.session()["cpsca"] = id
-          }
-        }
-        else if name.hasPrefix("islandora") {
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          current = try req.session()["islandora"] ?? "n/a"
-          if current != "n/a"{
-            try req.session()["islandora"] = current + "," + id
-          }
-          else{
-            try req.session()["islandora"] = id
-          }
-        }
+        
         // return the newly set name
         return current
     }
@@ -260,34 +237,19 @@ public func routes(_ router: Router) throws {
     router.get("del", String.parameter) { req -> String in
         // destroy the session
         let name = try req.parameters.next(String.self)
-        var current = "n/a"
-        var id = "0"
-        //Todo: Create a helper method to remove redundancy
-        if name.hasPrefix("rekl") { // true
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          print(id)
-          current = try req.session()["rekl"] ?? "n/a"
-          if current != "n/a"{
+        
+        let nameComponents = name.components(separatedBy: ":")
+        guard nameComponents.count == 2 else { return "n/a" }
+        guard let id = nameComponents.last else { return "n/a" }
+        guard let prefix = nameComponents.first else { return "n/a" }
+        
+        let current = try req.session()[prefix] ?? "n/a"
+        
+        if current != "n/a"{
             let parsed = current.replacingOccurrences(of: id, with: "")
-            try req.session()["rekl"] = parsed
-          }
+            try req.session()[prefix] = parsed
         }
-        else if name.hasPrefix("cpsca") {
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          current = try req.session()["cpsca"] ?? "n/a"
-          if current != "n/a"{
-            let parsed = current.replacingOccurrences(of: id, with: "")
-            try req.session()["cpsca"] = parsed
-          }
-        }
-        else if name.hasPrefix("islandora") {
-          id = name.components(separatedBy: ":")[1] ?? "0"
-          current = try req.session()["islandora"] ?? "n/a"
-          if current != "n/a"{
-            let parsed = current.replacingOccurrences(of: id, with: "")
-            try req.session()["islandora"] = parsed
-          }
-        }
+        
         return "done"
     }
 }
