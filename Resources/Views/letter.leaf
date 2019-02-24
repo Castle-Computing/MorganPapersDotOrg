@@ -61,9 +61,8 @@
 
             </div>
         </div>
-
         <div class="row mt-3">
-            <div class="col">
+            <div class="col-md-8 col-sm-12">
                 <sr>
                     #if(metadata.author) {
                         <i class="fas fa-user-circle"></i>
@@ -81,20 +80,15 @@
                         <i class="fas fa-map-marker-alt"></i>
                         #(metadata.location)
                     }
-                    <i class="fas fa-plus-circle"></i>
-                    <iframe name="add" style="display:none;"></iframe>
-                    <form action="/set/#(metadata.PID)" method="get" target="add">
-                      <button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
-                          <i class="fas fa-plus-circle"></i>
-                      </button>
-                    </form>
-                    <iframe name="remove" style="display:none;"></iframe>
-                    <form action="/del/#(metadata.PID)" method="get" target="remove">
-                      <button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
-                          <i class="fas fa-minus-circle"></i>
-                      </button>
-                    </form>
                 </sr>
+            </div>
+            <div class="col-4 pull-right d-md-block d-none">
+                <button pid="#(metadata.PID)" type="button" class="cartButton btn btn-outline-success">Add Letter to Cart</button>
+            </div>
+        </div>
+        <div class="row mt-3 d-sm-block d-md-none">
+            <div class="col">
+                <button pid="#(metadata.PID)" type="button" class="cartButton btn btn-outline-success">Add Letter to Cart</button>
             </div>
         </div>
         #if(ocrText) {
@@ -120,8 +114,6 @@
             </div>
         }
 </div>
-
-
 }
 
 #embed("base")

@@ -174,8 +174,12 @@ public func routes(_ router: Router) throws {
     }
 
     router.get("cart") { req -> Future<View> in
+        let cart = req.http.cookies["cart"] ?? "{}"
+        let cartValue = NSString(string: cart.string).removingPercentEncoding ?? "{}"
+        let cartData = try JSONSerialization.jsonObject(with: cartValue.data(using: .utf8)!) as? [String : String]
         let client = try req.client()
-        let data = SavedID(reklQuery: try req.session()["rekl"] ?? "", islandoraQuery: try req.session()["islandora"] ?? "", cpscaQuery: try req.session()["cpsca"] ?? "")
+    
+        let data = SavedID(reklQuery: cartData?["rekl"] ?? "", islandoraQuery: cartData?["islandora"] ?? "", cpscaQuery: cartData?["cpsca"] ?? "")
         let SavedLetters = IDArrays(SavedLetters: data)
         guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
@@ -185,7 +189,7 @@ public func routes(_ router: Router) throws {
         //Sends an HTTP GET request to URL
         //The headers are required in the HTTP request, parameter User-Agent has value
         //MorganApp/0.1
-        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1"), ("Authorization", "Basic Y2FzdGxlX2NvbXB1dGluZzo4PnoqPUw0QmU2TWlEP1FB")]))
+        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
             //flatMap unwraps the response and returns a SearchResult in the future
             .flatMap { response -> Future<SearchResult> in
                 //Decode response into a SearchResult
@@ -198,11 +202,12 @@ public func routes(_ router: Router) throws {
                 return try req.view().render("cart", ResultPage(query: currentQuery, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: 0))
         }
     }
+    
     //Either need to consolidate with dynamicjson or pass parameters to html and
     //call dynamicjson from there
     router.get("manualtimeline") { req -> Future<View> in
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
-        return try req.view().render("timelineview", data)
+        return try req.view().render("timeline", data)
     }
 
     //Either need to consolidate with dynamicjson or pass parameters to html and

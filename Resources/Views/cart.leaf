@@ -74,12 +74,10 @@
 								<i class="fas fa-map-marker-alt"></i>
 								#(result.location)
 							}
-                <iframe name="remove" style="display:none;"></iframe>
-                <form action="/del/#(result.PID)" method="get" target="remove">
-									<button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
-											<i class="fas fa-minus-circle"></i>
-									</button>
-								</form>
+
+							#if(result.PID) {
+								<button type="button" pid="#(result.PID)" class="cartButton cartPage btn btn-link pull-right">Add Letter to Cart</button>
+							}
 
 						</sr>
 					</div>
@@ -87,37 +85,6 @@
 			</div>
 		</div>
 	}
-	<div class="row">
-		<div class="col-lg-6" align="center">
-			#if(page > 1){
-				<a href="#(query.currentSearchURL)&page=#(page - 1)" class="my-3 btn btn-outline-dark btn-sm" tabindex="0" role="button">
-					<i class="fas fa-chevron-left"></i>
-				</a>
-			}
-			#if(page < 6) {
-				<a href="#(query.currentSearchURL)" class="my-3 btn btn-sm #if(page == 1) { disabled btn-outline-dark } else { btn-outline-info }" role="button">1</a>
-				#if(15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=2" class="my-3 btn btn-sm #if(page == 2) { disabled btn-outline-dark } else { btn-outline-info }" role="button">2</a> }
-				#if(2 * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=3" class="my-3 btn btn-sm #if(page == 3) { disabled btn-outline-dark } else { btn-outline-info }" role="button">3</a> }
-				#if(3 * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=4" class="my-3 btn btn-sm #if(page == 4) { disabled btn-outline-dark } else { btn-outline-info }" role="button">4</a> }
-				#if(4 * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=5" class="my-3 btn btn-sm #if(page == 5) { disabled btn-outline-dark } else { btn-outline-info }" role="button">5</a> }
-				#if(5 * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=6" class="my-3 btn btn-sm #if(page == 6) { disabled btn-outline-dark } else { btn-outline-info }" role="button">6</a> }
-			} else {
-				<a href="#(query.currentSearchURL)" class="my-3 btn btn-sm btn-outline-info" role="button">1</a>
-				<a href="#(query.currentSearchURL)&page=#(page / 2)" class="my-3 btn btn-sm btn-outline-info" role="button">...</a>
-				<a href="#(query.currentSearchURL)&page=#(page)" class="my-3 btn btn-sm btn-outline-dark disabled" role="button">#(page)</a>
-				#if(page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 1)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 1)</a> }
-				#if(15 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 2)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 2)</a> }
-				#if(30 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 3)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 3)</a> }
-				#if(45 + page * 15 < numberOfResults) { <a href="#(query.currentSearchURL)&page=#(page + 4)" class="my-3 btn btn-sm btn-outline-info" role="button">#(page + 4)</a> }
-			}
-
-			#if(page * 15 < numberOfResults) {
-				<a href="#(query.currentSearchURL)&page=#(page + 1)" class="my-3 btn btn-outline-dark btn-sm" role="button">
-					<i class="fas fa-chevron-right"></i>
-				</a>
-			}
-		</div>
-	</div>
 }
 
 #embed("base")

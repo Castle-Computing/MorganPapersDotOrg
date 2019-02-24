@@ -9,9 +9,6 @@
 				<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
 			}
 		</div>
-		<div class="col">
-
-		</div>
 	</div>
 
 	#for(result in searchResults) {
@@ -50,12 +47,7 @@
 							}
 
 							#if(result.PID) {
-								<iframe name="add" style="display:none;"></iframe>
-								<form action="/set/#(result.PID)" method="get" target="add">
-									<button class="btn"  style="background-color:Transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;" type="submit">
-											<i class="fas fa-plus-circle"></i>
-									</button>
-								</form>
+								<button type="button" pid="#(result.PID)" class="cartButton btn btn-link pull-right">Add Letter to Cart</button>
 							}
 
 						</sr>

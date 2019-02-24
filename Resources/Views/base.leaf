@@ -60,5 +60,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 <script src="/scripts/bootstrap-datetimepicker.min.js"></script>
 <script src="/scripts/searchfield.js"></script>
+<script src="/scripts/cookie.js"></script>
+<script src="/scripts/cart.js"></script>
 #get(scripts)
 </html>
