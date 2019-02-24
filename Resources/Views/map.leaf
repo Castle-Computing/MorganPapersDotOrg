@@ -9,7 +9,6 @@
         crossorigin=""></script>
     </head>
 
-
     <body>
         <div id="mapid" style = "height:500px;"></div>
         <script>
