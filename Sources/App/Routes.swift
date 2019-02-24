@@ -4,56 +4,45 @@ import Vapor
 public func routes(_ router: Router) throws {
     //Home screen, accessible without any additional URL parameters
     router.get { req -> EventLoopFuture<View> in
+        let client = try req.client()
+        
         //Get current Date
         let now = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: now)
+        let day = calendar.component(.day, from: now)
+        
         let months = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M"
-        let month = dateFormatter.string(from: now)
-        dateFormatter.dateFormat = "d"
-        let day = dateFormatter.string(from: now)
-        var index = months[Int(month)! - 1] + Int(day)! - 1
-        
-        //Read from file
-        let fileURL = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.txt")
-        let fileData = try String.init(contentsOf: fileURL)
-        var lines: [String] = []
-        fileData.enumerateLines { line, _ in
-            lines.append(line)
-        }
-        
+        var dayIndex = months[month - 1] + day - 1
         
         //Modify leap year since no letter
-        if (index == 59) {
-            index = 60
+        if (dayIndex == 59) {
+            dayIndex = 60
         }
         
-        //Split line into array
-        let letterArr = lines[index].components(separatedBy: ", ")
-        var letters: LODPageTitle
-        
-        //Try JSON
-        let fileURL2 = URL.init(fileURLWithPath: DirectoryConfig.detect().workDir + "/Resources/LetterDates.json")
-        let data = try Data(contentsOf: fileURL2, options: .mappedIfSafe)
-        do {
-            let object: [String: AnyObject] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : AnyObject]
-            let today = object[String(index)] as! [[String : AnyObject]]
-            var ltArr: [OIDTitle] = []
-            for item in today {
-                print ("PID: ", item["PID"]!, "title: ", item["title"]!)
-                ltArr.append(OIDTitle(title: item["title"] as! String, PID: item["PID"] as! String))
-            }
-            letters = LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count)
-            for item in letters.letters! {
-                print ("PID: ", item.PID, "title: ", item.title)
-            }
-            print (letters.numLetters)
-            return try req.view().render("home", letters)
-        } catch {
-            // Handle Error
+        guard let currentQuery = Query.init(currentDayAsInt: dayIndex).getSolrSearch() else {
+            return try req.view().render("home")
         }
-        //Render home
-        return try req.view().render("home", LODPage(lettersIn: letterArr, numLetters: letterArr.count))
+
+        return client.get(currentQuery  , headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            //flatMap unwraps the response and returns a SearchResult in the future
+            .flatMap { response -> Future<SearchResult> in
+                //Decode response into a SearchResult
+                try response.content.decode(SearchResult.self)
+            }
+            //Take the SearchResult future (result), and try to render it
+            .flatMap { results in
+                //Render a view for the initial get request
+                //results.leaf, pass a ResultPage
+                var ltArr: [OIDTitle] = []
+                
+                for doc in results.response.docs {
+                    guard let title = doc.title else { continue }
+                    ltArr.append(OIDTitle(title: title, PID: doc.pid))
+                }
+                
+                return try req.view().render("home", LODPageTitle(lettersIn: ltArr, numLetters: ltArr.count))
+        }
     }
     
     router.get("letter", String.parameter) { req -> Future<View> in
