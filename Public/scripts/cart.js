@@ -1,5 +1,5 @@
 $(function() { 
-    currentCart = Cookies.getJSON("cart");
+    var currentCart = Cookies.getJSON("cart");
     $('.cartButton').each(function() {
         var components = $(this).attr("pid").split(":", 2)
         if (components.length !== 2) { return }
@@ -7,13 +7,29 @@ $(function() {
         var value = components[1]
         if (currentCart && currentCart[prefix] && 
          (currentCart[prefix].endsWith(value) || currentCart[prefix].includes(value + ","))) {
-            if($(this).hasClass("btn-outline-success")) {
-                $(this).removeClass("btn-outline-success").addClass("btn-outline-danger")
-            }
+            $(this).removeClass("text-success").addClass("text-danger")
             $(this).html("Remove Letter from Cart")
         }
     })
     
+});
+
+$('.cartFeature').click(function(e) {
+    var currentCart = Cookies.getJSON("cart");
+    var queryString = "?"
+    for(key in currentCart) {
+        if(!currentCart[key].length) { continue }
+
+        if (queryString.length > 1) {
+            queryString += "&"
+        }
+
+        queryString += key + "=" + currentCart[key]
+    }
+
+    if(queryString.length === 1) { return }
+    var baseURL = $(this).attr("url")
+    window.location.href = baseURL + queryString
 });
 
 $('.cartButton').click(function(e) {
@@ -52,12 +68,12 @@ $('.cartButton').click(function(e) {
         if($(".cartButton[pid='" + pid + "']").hasClass("cartPage")){
             $(".cartButton[pid='" + pid + "']").parent().parent().parent().parent().remove()
         } else {
-            $(".cartButton.btn-outline-danger[pid='" + pid + "']").removeClass("btn-outline-danger").addClass("btn-outline-success")
+            $(".cartButton[pid='" + pid + "']").removeClass("text-danger").addClass("text-success")
             $(".cartButton[pid='" + pid + "']").html("Add Letter to Cart")
         }
         
     } else {
-        $(".cartButton.btn-outline-success[pid='" + pid + "']").removeClass("btn-outline-success").addClass("btn-outline-danger")
+        $(".cartButton[pid='" + pid + "']").removeClass("text-success").addClass("text-danger")
         $(".cartButton[pid='" + pid + "']").html("Remove Letter from Cart")
     }
 }); 

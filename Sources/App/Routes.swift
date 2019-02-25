@@ -180,6 +180,7 @@ public func routes(_ router: Router) throws {
         let client = try req.client()
     
         let data = SavedID(reklQuery: cartData?["rekl"] ?? "", islandoraQuery: cartData?["islandora"] ?? "", cpscaQuery: cartData?["cpsca"] ?? "")
+    
         let SavedLetters = IDArrays(SavedLetters: data)
         guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
@@ -205,56 +206,8 @@ public func routes(_ router: Router) throws {
     
     //Either need to consolidate with dynamicjson or pass parameters to html and
     //call dynamicjson from there
-    router.get("manualtimeline") { req -> Future<View> in
+    router.get("timeline") { req -> Future<View> in
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
         return try req.view().render("timeline", data)
-    }
-
-    //Either need to consolidate with dynamicjson or pass parameters to html and
-    //call dynamicjson from there
-    router.get("timeline") { req -> Future<View> in
-        let data = SavedID(reklQuery: try req.session()["rekl"] ?? "", islandoraQuery: try req.session()["islandora"] ?? "", cpscaQuery: try req.session()["cpsca"] ?? "")
-        return try req.view().render("timeline", data)
-    }
-
-    router.get("set", String.parameter) { req -> String in
-        // get router param
-        let name = try req.parameters.next(String.self)
-        
-        let nameComponents = name.components(separatedBy: ":")
-        guard nameComponents.count == 2 else { return "n/a" }
-        guard let id = nameComponents.last else { return "n/a" }
-        guard let prefix = nameComponents.first else { return "n/a" }
-        
-        let current = try req.session()[prefix] ?? "n/a"
-        
-        if current != "n/a" {
-            try req.session()[prefix] = current + "," + id
-        } else {
-            try req.session()[prefix] = id;
-        }
-        
-        // return the newly set name
-        return current
-    }
-
-    // create a route at GET /sessions/del
-    router.get("del", String.parameter) { req -> String in
-        // destroy the session
-        let name = try req.parameters.next(String.self)
-        
-        let nameComponents = name.components(separatedBy: ":")
-        guard nameComponents.count == 2 else { return "n/a" }
-        guard let id = nameComponents.last else { return "n/a" }
-        guard let prefix = nameComponents.first else { return "n/a" }
-        
-        let current = try req.session()[prefix] ?? "n/a"
-        
-        if current != "n/a"{
-            let parsed = current.replacingOccurrences(of: id, with: "")
-            try req.session()[prefix] = parsed
-        }
-        
-        return "done"
     }
 }

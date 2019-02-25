@@ -1,31 +1,16 @@
-#set("title") { #(searchTerm) at Julia Morgan Papers }
-
 #set("body") {
-	<div class="row>">
-		<div class="col">
-			#if(numberOfResults - start > 15) {
-				<p style="font-size: 13px; color: gray;">#(start + 1) through #(start + 15) of #(numberOfResults) Results</p>
-			} else {
-				<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
-			}
+	<div class="row my-2">
+		<div class="col-8">
+			<h1>Saved Letters</h1>
+			<p>Welcome to your cart! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
 		</div>
-		<div class="col">
-
-		</div>
-	</div>
-
+	</div>	
   #if(numberOfResults > 0){
-    <div class="card" style="width:60%">
-      <div class="card-header">
-        You have #(numberOfResults) items in your basket
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Add more items or access custom content</h5>
-        <p class="card-text">Your custom timeline and map are available below</p>
-        <a href="/timeline" class="card-link">View your timeline</a>
-        <a href="#" class="card-link">View your map</a>
-      </div>
-    </div>
+		<div class="row mb-4">
+				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
+				<a href="/test"><button type="button" class="mx-2 btn btn-outline-info">View Letters on Map</button></a>
+				<a href="/test"><button type="button" class="mx-2 btn btn-outline-dark">Generate Bibliography</button></a>
+		</div>
   } else {
     <div class="card" style="width:60%">
       <div class="card-header">
@@ -76,7 +61,7 @@
 							}
 
 							#if(result.PID) {
-								<button type="button" pid="#(result.PID)" class="cartButton cartPage btn btn-link pull-right">Add Letter to Cart</button>
+								<button type="button" pid="#(result.PID)" class="text-danger cartButton cartPage btn btn-link pull-right">Remove Letter from Cart</button>
 							}
 
 						</sr>

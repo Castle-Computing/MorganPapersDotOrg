@@ -1,4 +1,3 @@
-#set("title") { Timeline }
 #set("scripts") { 
     <script src="/scripts/timeline.js"></script> 
     <script>
