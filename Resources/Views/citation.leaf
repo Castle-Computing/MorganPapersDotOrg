@@ -1,0 +1,17 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class = "row">
+    <div class = "col">
+      <script>
+      let url = '/dynamicjson?rekl=#(rekl)&islandora=#(islandora)&cpsca=#(cpsca)';
+
+      fetch(url)
+      .then(res => res.json())
+      .then((out) => {
+        console.log('Checkout this JSON! ', out);
+      })
+      .catch(err => { throw err });
+      </script>
+    </div>
+</div>
+</html>

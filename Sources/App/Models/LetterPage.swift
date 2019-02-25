@@ -14,7 +14,7 @@ final class LetterPage: Codable {
     let numPages: Int
     let metadata: docArray?
     let relatedItems: [relatedItem]?
-    
+
     init (title: String?, children: [String]?, ocrText: String?, numPages: Int?, metadata: docArray?, relatedItems: [relatedItem]?)
     {
         self.letterTitle = title

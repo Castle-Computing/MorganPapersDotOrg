@@ -1,5 +1,3 @@
-#set("title") { #(searchTerm) at Julia Morgan Papers }
-
 #set("body") {
 	<div class="row>">
 		<div class="col">
@@ -9,11 +7,8 @@
 				<p style="font-size: 13px; color: gray;">#(start + 1) through #(numberOfResults) of #(numberOfResults) Results</p>
 			}
 		</div>
-		<div class="col">
-			
-		</div>
 	</div>
-	
+
 	#for(result in searchResults) {
 		<div class="row">
 			<div class="col-lg-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
@@ -28,7 +23,7 @@
 					</div>
 					<br>
 				}
-				
+
 				<div class="row">
 					<div class="col">
 						<sr>
@@ -37,7 +32,7 @@
 								#(result.author)
 								&emsp;
 							}
-							
+
 							#if(result.date) {
 								<i class="fas fa-calendar-alt"></i>
 								#(result.date)
@@ -48,7 +43,11 @@
 								<i class="fas fa-map-marker-alt"></i>
 								#(result.location)
 							}
-							
+
+							#if(result.PID) {
+								<button type="button" pid="#(result.PID)" class="text-success cartButton btn btn-link pull-right">Add Letter to Cart</button>
+							}
+
 						</sr>
 					</div>
 				</div>
