@@ -1,5 +1,40 @@
-#set("body") {
-<body>
+#set("scripts") {
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+  <script>
+      var mymap = L.map('mapid').setView([40, -40], 3);
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id\}/{z\}/{x\}/{y\}.png?access_token={accessToken\}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href = "https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve This Map</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets', accessToken: 'pk.eyJ1IjoidGlnZXJpdiIsImEiOiJjanNleGNoNmgwbWpiNDluc3RzdDc3cDFnIn0.CRYfBeKpeMp8DJLlErHeuw'
+      \}).addTo(mymap);
+      var greenIcon = L.icon({
+      iconUrl: '/images/Letter.png',
+      shadowUrl: '/images/leaf-shadow.png',
+
+      iconSize:     [38, 95], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      \});
+      #for(place in places) {
+          var marker = L.marker([#(place.lat), #(place.long)]).addTo(mymap).bindPopup('<b>#(place.city), #(place.country)<br /></b>#(place.timesOcc) Letter(s) <br /><a href = "/search?location=%22#(place.city)%22">Search for Letters From Here</a>');
+      }
+  </script>
+}
+
+#set("styles") {
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+}
+
+#set("bodyoutsidecontainer") {
+    <div id="mapid" style = "height: 60%"></div>
+}
+#set("centeredbody") {
     <div class="container h-100">
         <div class="row align-items-center h-100 mx-auto mt-3 d-flex align-items-stretch">
             <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
@@ -72,7 +107,5 @@
             </div>
         </div>
     </div>
-</body>
-</html>
 }
 #embed("base")
