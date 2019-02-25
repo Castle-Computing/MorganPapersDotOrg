@@ -1,6 +1,0 @@
-sonar-scanner \
-  -Dsonar.projectKey=Castle-Computing_MorganPapersWebsite \
-  -Dsonar.organization=castle-computing \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=https://sonarcloud.io \
-  -Dsonar.login=64cf7f250b4be37a0546d4f36c20b4e8e36591ff
