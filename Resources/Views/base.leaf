@@ -8,14 +8,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/app.css">
-    
+
+     <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="/styles/bootstrap-datetimepicker.min.css">
+
      <!-- Datepicker CSS -->
     <link rel="stylesheet" href="/styles/bootstrap-datetimepicker.min.css">
 
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    
-	<title>#get(title)</title>
+
+    #get(styles)
+
+	<title>Morgan Papers</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
@@ -37,43 +42,38 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">Cart</a>
+            </li>
         </ul>
     </div>
 </nav>
 <body>
-    <!--<div class="container-fluid">
-        <div class="row" style="background-color: lightgray; border-bottom: 1px solid gray">
-            <div class="col-1">
-                <a href="/">
-                    <img src="/images/search_vector_logo.svg" class="img-fluid">
-                </a>
-            </div>
-            <div class="col-5">
-                <form class="input-group mb-3" style="padding-top:20px" action="/search" method="get">
-                    <input type="search" name="query" class="form-control" placeholder="Search..." value="#(searchTerm)" aria-label="Search term" aria-describedby="search-term">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit" id="search-button">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>-->
+    #get(bodyoutsidecontainer)
     <div class="container mt-3 ml-lg-5 m-auto float-left">
         #get(body)
     </div>
+    <div class="container">
+        #get(centeredbody)
+    </div>
+    
+</body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script></body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="/scripts/bootstrap-datetimepicker.min.js"></script>
-    <script src="/scripts/searchfield.js"></script>
-    <script type="text/javascript">
-        window._mfq = window._mfq || [];
-        (function() {
-            var mf = document.createElement("script");
-            mf.type = "text/javascript"; mf.async = true;
-            mf.src = "//cdn.mouseflow.com/projects/bc8480de-2908-4da8-b318-5bfbf9f15cd0.js";
-            document.getElementsByTagName("head")[0].appendChild(mf);
-        })();
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script></body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+<script src="/scripts/bootstrap-datetimepicker.min.js"></script>
+<script src="/scripts/searchfield.js"></script>
+<script src="/scripts/cookie.js"></script>
+<script src="/scripts/cart.js"></script>
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/bc8480de-2908-4da8-b318-5bfbf9f15cd0.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
+#get(scripts)
 </html>
