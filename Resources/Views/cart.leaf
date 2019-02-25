@@ -8,8 +8,8 @@
   #if(numberOfResults > 0){
 		<div class="row mb-4">
 				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
-				<a href="/test"><button type="button" class="mx-2 btn btn-outline-info">View Letters on Map</button></a>
-				<a href="/test"><button type="button" class="mx-2 btn btn-outline-dark">Generate Bibliography</button></a>
+				<!--<button type="button" url="/map" class="mx-2 btn btn-outline-info cartFeature">View Letters on Map</button>
+				<button type="button" class="mx-2 btn btn-outline-dark">Generate Bibliography</button>-->
 		</div>
   } else {
     <div class="card" style="width:60%">
