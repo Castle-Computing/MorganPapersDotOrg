@@ -1,0 +1,75 @@
+#set("body") {
+	<div class="row my-2">
+		<div class="col-8">
+			<h1>Saved Letters</h1>
+			<p>Welcome to your cart! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
+		</div>
+	</div>	
+  #if(numberOfResults > 0){
+		<div class="row mb-4">
+				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
+				<a href="/test"><button type="button" class="mx-2 btn btn-outline-info">View Letters on Map</button></a>
+				<a href="/test"><button type="button" class="mx-2 btn btn-outline-dark">Generate Bibliography</button></a>
+		</div>
+  } else {
+    <div class="card" style="width:60%">
+      <div class="card-header">
+        Your basket is empty
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Adding letters to your basket enhances the Morgan Paper experience</h5>
+        <p class="card-text">Use our explore page or search feature to find letters to add</p>
+        <a href="/explore" class="card-link">Go explore</a>
+        <a href="/" class="card-link">Go search</a>
+        <a href="/help" class="card-link">Learn how to use Morgan Papers</a>
+      </div>
+    </div>
+  }
+	#for(result in searchResults) {
+		<div class="row">
+			<div class="col-lg-8 result" onclick="location.href='letter/#(result.PID)';" style="cursor:pointer; margin-bottom:15px; padding-left: 25px">
+				<div class="row">
+					<b><a href="letter/#(result.PID)">#(result.title).</a></b>
+				</div>
+				#if(result.description) {
+					<div class="row">
+						<div class="col">
+							<sr>#(result.description)</sr>
+						</div>
+					</div>
+					<br>
+				}
+
+				<div class="row">
+					<div class="col">
+						<sr>
+							#if(result.author) {
+								<i class="fas fa-user-circle"></i>
+								#(result.author)
+								&emsp;
+							}
+
+							#if(result.date) {
+								<i class="fas fa-calendar-alt"></i>
+								#(result.date)
+								&emsp;
+							}
+
+							#if(result.location) {
+								<i class="fas fa-map-marker-alt"></i>
+								#(result.location)
+							}
+
+							#if(result.PID) {
+								<button type="button" pid="#(result.PID)" class="text-danger cartButton cartPage btn btn-link pull-right">Remove Letter from Cart</button>
+							}
+
+						</sr>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+
+#embed("base")

@@ -1,4 +1,3 @@
-#set("title") { Help }
 #set("body") {
 <div class = "row mt-5 mb-5 align-items-center border-bottom">
     <div class = "col-md text-center">

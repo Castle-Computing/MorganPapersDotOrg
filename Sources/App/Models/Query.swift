@@ -106,20 +106,22 @@ final class Query: Codable {
         }
         
         if let allExplicit = allExplicit {
-            let terms = allExplicit.split(separator: " ")
+            let terms = allExplicit.components(separatedBy: " ")
             
-            for term in terms {
+            for var term in terms {
+                term = term.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !term.isEmpty else { continue }
                 solrSearch.append(" AND (OCR_BOOK_t:\"\(term)\")")
             }
         }
         
         if let anyExplicit = anyExplicit {
-            let terms = anyExplicit.split(separator: " ")
+            let terms = anyExplicit.components(separatedBy: " ")
             
             var termsCombined = ""
             
-            for term in terms {
+            for var term in terms {
+                term = term.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !term.isEmpty else { continue }
                 if !termsCombined.isEmpty {
                     termsCombined.append(" OR ")
@@ -128,28 +130,33 @@ final class Query: Codable {
                 termsCombined.append("(OCR_BOOK_t:\"\(term)\")")
             }
             
-            solrSearch.append("AND (\(termsCombined))")
+            if !termsCombined.isEmpty {
+                solrSearch.append("AND (\(termsCombined))")
+            }
         }
         
         if let phraseExplicit = phraseExplicit {
             let phrases = phraseExplicit.components(separatedBy: "\" \"")
             
-            for phrase in phrases {
+            for var phrase in phrases {
+                phrase = phrase.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !phrase.isEmpty else { continue }
                 solrSearch.append(" AND (OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
             }
         }
         
         if let noneExplicit = noneExplicit {
-            let terms = noneExplicit.split(separator: " ")
+            let terms = noneExplicit.components(separatedBy: " ")
             
-            for term in terms {
+            for var term in terms {
+                term = term.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !term.isEmpty else { continue }
                 solrSearch.append(" AND -(OCR_BOOK_t:\"\(term)\")")
             }
         }
         
-        if let author = author {
+        if var author = author {
+            author = author.trimmingCharacters(in: .whitespacesAndNewlines)
             if excludeAuthor && !author.isEmpty {
                 solrSearch.append(" AND -(mods_name_personal_author_namePart_t:\(author))")
             } else if !author.isEmpty {
@@ -157,7 +164,8 @@ final class Query: Codable {
             }
         }
         
-        if let title = title {
+        if var title = title {
+            title = title.trimmingCharacters(in: .whitespacesAndNewlines)
             if excludeTitle && !title.isEmpty {
                 solrSearch.append(" AND -(mods_titleInfo_title_t:\(title))")
             } else if !title.isEmpty {
