@@ -63,3 +63,29 @@ final class OIDTitle: Codable {
         self.PID = PID
     }
 }
+
+final class Loc: Codable {
+    let city: String
+    let state: String
+    let country: String
+    let lat: Double
+    let long: Double
+    let timesOcc: Int
+    init (city: String, state: String, country: String, lat: Double, long: Double, timesOcc: Int) {
+        self.city = city
+        self.state = state
+        self.country = country
+        self.lat = lat
+        self.long = long
+        self.timesOcc = timesOcc
+    }
+}
+
+final class MapPage: Codable {
+    let places: [Loc]
+    let numPlaces: Int
+    init (places: [Loc], numPlaces: Int) {
+        self.places = places
+        self.numPlaces = numPlaces
+    }
+}

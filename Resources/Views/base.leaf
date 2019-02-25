@@ -49,10 +49,14 @@
     </div>
 </nav>
 <body>
+    #get(bodyoutsidecontainer)
     <div class="container mt-3 ml-lg-5 m-auto float-left">
         #get(body)
     </div>
-    #get(bodyoutsidecontainer)
+    <div class="container">
+        #get(centeredbody)
+    </div>
+    
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
