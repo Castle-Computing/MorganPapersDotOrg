@@ -1,0 +1,7 @@
+#set("body"){
+    #for(result in results) {
+        <p>#(result.title)</p>
+    }
+}
+
+#embed("base")
