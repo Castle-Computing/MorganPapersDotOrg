@@ -205,7 +205,31 @@ public func routes(_ router: Router) throws {
             .flatMap { result in
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
-                return try req.view().render("bibliography", Results(results: result.response.docs))
+                
+                //docArr is docs ordered alphabetically
+                var docArr: [docArray] = []
+                
+                docArr = result.response.docs
+                
+                //Format Author
+                for (index, _) in docArr.enumerated() {
+                    if let author = docArr[index].author {
+                        var nameArr = author.components(separatedBy: " ")
+                        if (nameArr.count > 1) {
+                            var MLAName = nameArr[nameArr.count - 1] + ", "
+                            for i in 0 ... nameArr.count - 2 {
+                                MLAName += nameArr[i] + " "
+                            }
+                            MLAName = String(MLAName.dropLast())
+                            docArr[index].author = MLAName
+                        }
+                    }
+                }
+                
+                //Sort
+                docArr = docArr.sorted(by: {(($0.author ?? "ZZZZ") + ($0.title ?? "ZZZZ")) < (($1.author ?? "ZZZZ") + ($1.title ?? "ZZZZ"))})
+                
+                return try req.view().render("bibliography", Results(results: docArr))
         }
     }
 
