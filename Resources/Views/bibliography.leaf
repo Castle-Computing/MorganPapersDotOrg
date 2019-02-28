@@ -1,6 +1,6 @@
 #set("body"){
     #for(result in results) {
-        <p>#(result.title)</p>
+<p style = "margin-left: 2em; text-indent: -2em">#(result.author). "#(result.title)" <i>Morgan Papers</i>, http://morganpapers.org/letter/#(result.pid). Translated and archived by Robert E. Kennedy Library</p>
     }
 }
 
