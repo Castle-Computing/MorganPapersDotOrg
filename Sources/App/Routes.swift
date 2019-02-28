@@ -228,7 +228,7 @@ public func routes(_ router: Router) throws {
                 
                 //Sort
                 
-                docArr = docArr.sorted(by: {("\($0.author ?? "ZZZZ") \($0.title ?? "ZZZZ")" < "\($1.author ?? "ZZZZ") \($1.title ?? "ZZZZ")")})
+                docArr = docArr.sorted(by: {("\($0.author ?? $0.title ?? "ZZZZ")\($0.title ?? "ZZZZ")" < "\($1.author ?? $1.title ?? "ZZZZ")\($1.title ?? "ZZZZ")")})
                 
                 return try req.view().render("bibliography", Results(results: docArr))
         }
