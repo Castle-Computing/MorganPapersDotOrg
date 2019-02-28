@@ -4,6 +4,13 @@
 //
 //  Created by tigeriv on 10/25/18.
 //
+
+final class Results: Codable {
+    let results: [docArray]
+    init(results: [docArray]) {
+        self.results = results
+    }
+}
 final class ResultPage: Codable {
     let query: Query
     let searchResults: [docArray]

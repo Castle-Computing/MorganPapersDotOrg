@@ -185,6 +185,53 @@ public func routes(_ router: Router) throws {
                 return jsonString ?? "Error"
         }
     }
+    
+    router.get("bibliography") { req -> Future<View> in
+        let client = try req.client()
+        let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
+        let SavedLetters = IDArrays(SavedLetters: data, restrictLength: false)
+        
+        guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw Abort(.badRequest)
+        }
+        
+        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            //flatMap unwraps the response and returns a SearchResult in the future
+            .flatMap { response -> Future<SearchResult> in
+                //Decode response into a SearchResult
+                try response.content.decode(SearchResult.self)
+            }
+            //Take the SearchResult future (result), and try to render it
+            .flatMap { result in
+                //Render a view for the initial get request
+                //results.leaf, pass a ResultPage
+                
+                //docArr is docs ordered alphabetically
+                var docArr: [docArray] = []
+                
+                docArr = result.response.docs
+                
+                //Format Author
+                for (index, _) in docArr.enumerated() {
+                    if let author = docArr[index].author {
+                        var nameArr = author.components(separatedBy: " ")
+                        if (nameArr.count > 1) {
+                            var MLAName = nameArr[nameArr.count - 1] + ", "
+                            for i in 0 ... nameArr.count - 2 {
+                                MLAName += nameArr[i] + " "
+                            }
+                            MLAName = String(MLAName.dropLast())
+                            docArr[index].author = MLAName
+                        }
+                    }
+                }
+                
+                //Sort
+                docArr = docArr.sorted(by: {(($0.author ?? "ZZZZ") + ($0.title ?? "ZZZZ")) < (($1.author ?? "ZZZZ") + ($1.title ?? "ZZZZ"))})
+                
+                return try req.view().render("bibliography", Results(results: docArr))
+        }
+    }
 
     router.get("cart") { req -> Future<View> in
         let cart = req.http.cookies["cart"] ?? "{}"
@@ -217,7 +264,6 @@ public func routes(_ router: Router) throws {
         }
     }
     
-    //Either need to consolidate with dynamicjson or pass parameters to html and
     //call dynamicjson from there
     router.get("timeline") { req -> Future<View> in
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
