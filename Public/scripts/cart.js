@@ -8,7 +8,7 @@ $(function() {
         if (currentCart && currentCart[prefix] && 
          (currentCart[prefix].endsWith(value) || currentCart[prefix].includes(value + ","))) {
             $(this).removeClass("text-success").addClass("text-danger")
-            $(this).html("Remove Letter from Cart")
+            $(this).html("Remove Saved Letter")
         }
     })
     
@@ -69,11 +69,11 @@ $('.cartButton').click(function(e) {
             $(".cartButton[pid='" + pid + "']").parent().parent().parent().parent().remove()
         } else {
             $(".cartButton[pid='" + pid + "']").removeClass("text-danger").addClass("text-success")
-            $(".cartButton[pid='" + pid + "']").html("Add Letter to Cart")
+            $(".cartButton[pid='" + pid + "']").html("Save Letter")
         }
         
     } else {
         $(".cartButton[pid='" + pid + "']").removeClass("text-success").addClass("text-danger")
-        $(".cartButton[pid='" + pid + "']").html("Remove Letter from Cart")
+        $(".cartButton[pid='" + pid + "']").html("Remove Saved Letter")
     }
 }); 
