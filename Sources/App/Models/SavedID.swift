@@ -17,7 +17,7 @@ final class IDArrays: Codable {
     let islandoraArray: [String]
     let cpscaArray: [String]
     let url: String
-    init(SavedLetters: SavedID) {
+    init(SavedLetters: SavedID, restrictLength: Bool = true) {
         self.reklArray = SavedLetters.reklQuery.components(separatedBy: ",")
         self.islandoraArray = SavedLetters.islandoraQuery.components(separatedBy: ",")
         self.cpscaArray = SavedLetters.cpscaQuery.components(separatedBy: ",")
@@ -35,7 +35,13 @@ final class IDArrays: Codable {
             queryingURL.append(" OR ")
         }
         var truncated = queryingURL.prefix(queryingURL.count - 4)
-        truncated += "?rows=15&omitHeader=true&wt=json&start=0"
+        
+        if(restrictLength) {
+            truncated += "?rows=15&omitHeader=true&wt=json&start=0"
+        } else {
+            truncated += "?omitHeader=true&wt=json"
+        }
+        
         self.url = String(truncated)
     }
 }

@@ -9,9 +9,7 @@
 		<div class="row mb-4">
 				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
 				<button type="button" url="/storymap" class="mx-2 btn btn-outline-warning cartFeature">View Letters on a Map</button>
-
-				<!--<button type="button" url="/map" class="mx-2 btn btn-outline-info cartFeature">View Letters on Map</button>
-				<button type="button" class="mx-2 btn btn-outline-dark">Generate Bibliography</button>-->
+				<button type="button" url="/bibliography" class="cartFeature mx-2 btn btn-outline-dark">Generate Bibliography</button>
 		</div>
   } else {
     <div class="card" style="width:60%">
