@@ -2,7 +2,7 @@
 	<div class="row my-2">
 		<div class="col-8">
 			<h1>Saved Letters</h1>
-			<p>Welcome to your cart! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
+			<p>Welcome to your saved letters cart! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
 		</div>
 	</div>	
   #if(numberOfResults > 0){
