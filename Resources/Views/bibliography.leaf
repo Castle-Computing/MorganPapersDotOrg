@@ -3,7 +3,7 @@
 		<div class="col-9">
 			<h1>Bibliography</h1>
 			#for(result in results) {
-                <p style = "margin-left: 2em; text-indent: -2em; line-height: 2;">#(result.author). "#(result.title)." <i>Morgan Papers</i>, http://morganpapers.org/letter/#(result.PID). Translated and archived by Robert E. Kennedy Library.</p>
+                <p style = "margin-left: 2em; text-indent: -2em; line-height: 2;">#(result.author)#(result.title)<i>Morgan Papers</i>, http://morganpapers.org/letter/#(result.PID). Translated and archived by Robert E. Kennedy Library.</p>
             }		
         </div>
 	</div>	 
