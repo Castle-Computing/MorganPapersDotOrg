@@ -6,10 +6,18 @@
     </div>
 </div>
 
-<div class = "row mt-5 align-items-center border-bottom">
-    <div class = "col-md text-center mb-5">
+<div class = "row mt-5 align-items-center">
+    <div class = "col-md text-center mb-2">
         <h1 class = "text-center font-weight-bold">Explorer Page</h1>
-        <p class = "text-left">Stuck at the home page? Don't know what to search for? This page is for you. The explorer page is designed for new users, and is discoverable by clicking the explore option in the navigation menu. It provides some hand-selected suggested searches, which will help provide insight into Hearst Castle. Simply navigate to the page, choose an interesting image or title, and click the Explore button below it, such as "Explore Casa Grande Letters".</p>
+        <p class = "text-left">Stuck at the home page? Don't know what to search for? This page is for you. The explorer page is designed for new users, and is discoverable by clicking the explore option in the navigation menu. The first thing you will notice is a map, as pictured to the right. Each marker on the map represents a location that a letter was sent from. Zoom in and out freely, and scroll across the map to find interesting locations. When you click on a marker, it will display the location name, the number of letters, and a link to the result page for all letters from that location.</p>
+    </div>
+    <div class = "col-md text-center mb-2">
+        <img src="/images/Map.png" class="img-fluid w-100">
+    </div>
+</div>
+<div class = "row mt-2 align-items-center border-bottom">
+    <div class = "col-md text-center mb-5">
+        <p class = "text-left">This page also provides some hand-selected suggested searches, which will help provide insight into Hearst Castle. Simply scroll down past the map, choose an interesting image or title, and click the Explore button below it, such as "Explore Casa Grande Letters."</p>
     </div>
     <div class = "col-md text-center mb-5">
         <img src="/images/ExplorerPage.png" class="img-fluid w-100">
