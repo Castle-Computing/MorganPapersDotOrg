@@ -82,12 +82,12 @@
                 </sr>
             </div>
             <div class="col-4 pull-right d-md-block d-none align">
-                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Add Letter to Cart</button>
+                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Save Letter</button>
             </div>
         </div>
         <div class="row mt-3 d-sm-block d-md-none align-items-center">
             <div class="col">
-                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Add Letter to Cart</button>
+                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Save Letter</button>
             </div>
         </div>
         #if(ocrText) {
@@ -99,8 +99,11 @@
         }
     </div>
     <div class = "col-lg-4 mt-5 ml-5">
-        <h4 class = "text-center">You Might Like...</h4>
+        
         #for(item in relatedItems) {
+            #if(isFirst) {
+                <h4 class = "text-center">You Might Like...</h4>
+            }
             <div class = "row align-items-center mt-5">
                 <div class = "col">
                     <p class = "font-weight-bold">#(item.title)</p>
