@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.knightlab.com/libs/storymapjs/latest/css/storymap.css">
 }
 #set("scripts") {
-<script type="text/javascript" src="https://cdn.knightlab.com/libs/storymapjs/latest/js/storymap-min.js"></script>
+<script type="text/javascript" src="/scripts/storymap-min.js"></script>
 
 <script>
 // storymap_data can be an URL or a Javascript object

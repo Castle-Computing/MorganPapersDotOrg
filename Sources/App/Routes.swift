@@ -230,6 +230,18 @@ public func routes(_ router: Router) throws {
 
                 docArr = docArr.sorted(by: {("\($0.author ?? $0.title ?? "ZZZZ")\($0.title ?? "ZZZZ")" < "\($1.author ?? $1.title ?? "ZZZZ")\($1.title ?? "ZZZZ")")})
 
+                //Edit data fields to include formatting
+                for (index, _) in docArr.enumerated() {
+                    //Check author
+                    if let author = docArr[index].author {
+                        docArr[index].author = author + ". "
+                    }
+                    //Check title
+                    if let title = docArr[index].title {
+                        docArr[index].title = "\"" + title + ".\" "
+                    }
+                }
+
                 return try req.view().render("bibliography", Results(results: docArr))
         }
     }
