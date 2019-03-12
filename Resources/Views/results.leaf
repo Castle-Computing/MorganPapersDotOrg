@@ -45,7 +45,7 @@
 							}
 
 							#if(result.PID) {
-								<button type="button" pid="#(result.PID)" class="text-success cartButton btn btn-link pull-right">Add Letter to Cart</button>
+								<button type="button" pid="#(result.PID)" class="text-success cartButton btn btn-link pull-right d-md-inline d-none">Save Letter</button>
 							}
 
 						</sr>

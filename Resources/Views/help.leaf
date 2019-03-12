@@ -6,10 +6,18 @@
     </div>
 </div>
 
-<div class = "row mt-5 align-items-center border-bottom">
-    <div class = "col-md text-center mb-5">
+<div class = "row mt-5 align-items-center">
+    <div class = "col-md text-center mb-2">
         <h1 class = "text-center font-weight-bold">Explorer Page</h1>
-        <p class = "text-center">Stuck at the home page? Don't know what to search for? This page is for you. The explorer page is designed for new users, and is discoverable by clicking the explore option in the navigation menu. It provides some hand-selected suggested searches, which will help provide insight into Hearst Castle. Simply navigate to the page, choose an interesting image or title, and click the Explore button below it, such as "Explore Casa Grande Letters".</p>
+        <p class = "text-left">Stuck at the home page? Don't know what to search for? This page is for you. The explorer page is designed for new users, and is discoverable by clicking the explore option in the navigation menu. The first thing you will notice is a map, as pictured to the right. Each marker on the map represents a location that a letter was sent from. Zoom in and out freely, and scroll across the map to find interesting locations. When you click on a marker, it will display the location name, the number of letters, and a link to the result page for all letters from that location.</p>
+    </div>
+    <div class = "col-md text-center mb-2">
+        <img src="/images/Map.png" class="img-fluid w-100">
+    </div>
+</div>
+<div class = "row mt-2 align-items-center border-bottom">
+    <div class = "col-md text-center mb-5">
+        <p class = "text-left">This page also provides some hand-selected suggested searches, which will help provide insight into Hearst Castle. Simply scroll down past the map, choose an interesting image or title, and click the Explore button below it, such as "Explore Casa Grande Letters."</p>
     </div>
     <div class = "col-md text-center mb-5">
         <img src="/images/ExplorerPage.png" class="img-fluid w-100">
@@ -19,7 +27,7 @@
 <div class = "row mt-5 align-items-center border-bottom">
     <div class = "col-md text-center mb-5">
         <h1 class = "text-center font-weight-bold">Results</h1>
-        <p class = "text-center">This page appears after you make a search. It will display all closely matching results, in order of relevance. In the case of large numbers of results, scroll to the bottom and click the next buttons or a number to access more pages of results.</p>
+        <p class = "text-left">This page appears after you make a search. It will display all closely matching results, in order of relevance. In the case of large numbers of results, scroll to the bottom and click the next buttons or a number to access more pages of results.</p>
     </div>
     <div class = "col-md text-center mb-5">
         <img src="/images/Pagenation.png" class="img-fluid w-100">
@@ -29,7 +37,7 @@
 <div class = "row mt-5 align-items-center border-bottom">
     <div class = "col-md text-center mb-5">
         <h1 class = "text-center font-weight-bold">Advanced Search</h1>
-        <p class = "text-center">Open the advanced search drop-down menu from the search bar by clicking the arrow next to the search icon. To search for results with specific words, phrases, or exclude words in the results, type space-separated queries into the corresponding fields. Quotes are only used to enter multiple phrases into the "this exact phrase" field. Results can be further narrowed down by author, title, location, document type, and date. The default for these fields is to search for matching results. However, the drop-down menu to the right allows the option to exclude entries instead. For example, as shown to the right, I could search for telegrams mentioning "Neptune Pool" which don't mention Architecture in the title. Try playing around with the advanced search tool to get the hang of it. If you're confused, try reading the hint in the entry field.</p>
+        <p class = "text-left">Open the advanced search drop-down menu from the search bar by clicking the arrow next to the search icon. To search for results with specific words, phrases, or exclude words in the results, type space-separated queries into the corresponding fields. Quotes are only used to enter multiple phrases into the "this exact phrase" field. Results can be further narrowed down by author, title, location, document type, and date. The default for these fields is to search for matching results. However, the drop-down menu to the right allows the option to exclude entries instead. For example, as shown to the right, I could search for telegrams mentioning "Neptune Pool" which don't mention Architecture in the title. Try playing around with the advanced search tool to get the hang of it. If you're confused, try reading the hint in the entry field.</p>
     </div>
     <div class = "col-md text-center mb-5">
         <img src="/images/AdvancedSearch.png" class="img-fluid" style = "max-height:500px; width:auto">
@@ -39,7 +47,7 @@
 <div class = "row mt-5 align-items-center">
     <div class = "col-md text-center mb-5">
         <h1 class = "text-center font-weight-bold">Timeline</h1>
-        <p class = "text-center">Timelines can be useful for visualizing order of events. Our timelines are self-curated, so you can make your own by viewing a letter, then clicking the "Add to Timeline" option from the letter viewing page. The timeline can be accessed from the navigation bar, and will display all of your letters in a chronological manner. The timeline displays the currently selected letter, and other letters can be accessed by clicking on the next and previous arrow buttons. Clicking on the image or title links to the letter view page.</p>
+        <p class = "text-left">Timelines can be useful for visualizing order of events. Our timelines are self-curated, so you can make your own by viewing a letter, then clicking the "Add to Timeline" option from the letter viewing page. The timeline can be accessed from the navigation bar, and will display all of your letters in a chronological manner. The timeline displays the currently selected letter, and other letters can be accessed by clicking on the next and previous arrow buttons. Clicking on the image or title links to the letter view page.</p>
     </div>
     <div class = "col-md text-center mb-5">
         <img src="/images/Timeline.png" class="img-fluid w-100">

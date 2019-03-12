@@ -64,8 +64,10 @@ public func routes(_ router: Router) throws {
             .flatMap { secondResponse -> Future<Data> in
                 return secondResponse.http.body.consumeData(on: req)
         }
+        
 
         return flatMap(searchResultRequest, ocrDataRequest, relatedItemsRequest) { (result: SearchResult, ocrData: Data, relatedItems: Data) in
+            
             guard let letter = result.response.docs.first else {
                 throw Abort(.badRequest)
             }
@@ -75,7 +77,6 @@ public func routes(_ router: Router) throws {
 
             var relatedItemsText: String? = String(data: relatedItems, encoding: .utf8)
             if (relatedItemsText?.isEmpty ?? false) || relatedItemsText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { relatedItemsText = nil }
-
 
             var relatedItems = [relatedItem]()
 
@@ -88,7 +89,7 @@ public func routes(_ router: Router) throws {
                 }
             }
 
-            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems))
+            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems, nextItem: letter.nextLetter, prevItem: letter.prevLetter))
         }
     }
 
@@ -185,6 +186,66 @@ public func routes(_ router: Router) throws {
                 return jsonString ?? "Error"
         }
     }
+    
+    router.get("bibliography") { req -> Future<View> in
+        let client = try req.client()
+        let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
+        let SavedLetters = IDArrays(SavedLetters: data, restrictLength: false)
+        
+        guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw Abort(.badRequest)
+        }
+        
+        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            //flatMap unwraps the response and returns a SearchResult in the future
+            .flatMap { response -> Future<SearchResult> in
+                //Decode response into a SearchResult
+                try response.content.decode(SearchResult.self)
+            }
+            //Take the SearchResult future (result), and try to render it
+            .flatMap { result in
+                //Render a view for the initial get request
+                //results.leaf, pass a ResultPage
+                
+                //docArr is docs ordered alphabetically
+                var docArr: [docArray] = []
+                
+                docArr = result.response.docs
+                
+                //Format Author
+                for (index, _) in docArr.enumerated() {
+                    if let author = docArr[index].author {
+                        var nameArr = author.components(separatedBy: " ")
+                        if (nameArr.count > 1) {
+                            var MLAName = nameArr[nameArr.count - 1] + ", "
+                            for i in 0 ... nameArr.count - 2 {
+                                MLAName += nameArr[i] + " "
+                            }
+                            MLAName = String(MLAName.dropLast())
+                            docArr[index].author = MLAName
+                        }
+                    }
+                }
+                
+                //Sort
+                
+                docArr = docArr.sorted(by: {("\($0.author ?? $0.title ?? "ZZZZ")\($0.title ?? "ZZZZ")" < "\($1.author ?? $1.title ?? "ZZZZ")\($1.title ?? "ZZZZ")")})
+                
+                //Edit data fields to include formatting
+                for (index, _) in docArr.enumerated() {
+                    //Check author
+                    if let author = docArr[index].author {
+                        docArr[index].author = author + ". "
+                    }
+                    //Check title
+                    if let title = docArr[index].title {
+                        docArr[index].title = "\"" + title + ".\" "
+                    }
+                }
+                
+                return try req.view().render("bibliography", Results(results: docArr))
+        }
+    }
 
     router.get("cart") { req -> Future<View> in
         let cart = req.http.cookies["cart"] ?? "{}"
@@ -217,7 +278,6 @@ public func routes(_ router: Router) throws {
         }
     }
     
-    //Either need to consolidate with dynamicjson or pass parameters to html and
     //call dynamicjson from there
     router.get("timeline") { req -> Future<View> in
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
