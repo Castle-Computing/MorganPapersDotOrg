@@ -7,9 +7,9 @@
 	</div>
   #if(numberOfResults > 0){
 		<div class="row mb-4">
-				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
-				<button type="button" url="/storymap" class="mx-2 btn btn-outline-warning cartFeature">View Letters on a Map</button>
-				<button type="button" url="/bibliography" class="cartFeature mx-2 btn btn-outline-dark">Generate Bibliography</button>
+				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on a Timeline</button>
+				<button type="button" url="/storymap" class="mx-2 btn btn-outline-info cartFeature">View Letters on a Map</button>
+				<button type="button" url="/bibliography" class="cartFeature mx-2 btn btn-outline-dark">Generate a Bibliography</button>
 		</div>
   } else {
     <div class="card" style="width:60%">
