@@ -4,7 +4,7 @@
         <button class="btn btn-outline-primary" type="submit" id="search-button">
             <i class="fas fa-search"></i>
         </button>
-        <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split d-md-block d-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu-right dropdown-menu w-100 px-3 keep-open" aria-labelledby="dropdownMenuButton">
             <h4 class="mt-2">Find documents with...</h4>
             <div class="input-group mx-lg my-2">

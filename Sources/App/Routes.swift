@@ -64,8 +64,10 @@ public func routes(_ router: Router) throws {
             .flatMap { secondResponse -> Future<Data> in
                 return secondResponse.http.body.consumeData(on: req)
         }
+        
 
         return flatMap(searchResultRequest, ocrDataRequest, relatedItemsRequest) { (result: SearchResult, ocrData: Data, relatedItems: Data) in
+            
             guard let letter = result.response.docs.first else {
                 throw Abort(.badRequest)
             }
@@ -75,7 +77,6 @@ public func routes(_ router: Router) throws {
 
             var relatedItemsText: String? = String(data: relatedItems, encoding: .utf8)
             if (relatedItemsText?.isEmpty ?? false) || relatedItemsText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { relatedItemsText = nil }
-
 
             var relatedItems = [relatedItem]()
 
@@ -88,7 +89,7 @@ public func routes(_ router: Router) throws {
                 }
             }
 
-            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems))
+            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems, nextItem: letter.nextLetter, prevItem: letter.prevLetter))
         }
     }
 
