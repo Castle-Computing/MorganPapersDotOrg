@@ -14,8 +14,8 @@ final class LetterPage: Codable {
     let numPages: Int
     let metadata: docArray?
     let relatedItems: [relatedItem]?
-    let nextItem: String?
-    let prevItem: String?
+    var nextItem: String?
+    var prevItem: String?
 
     init (title: String?, children: [String]?, ocrText: String?, numPages: Int?, metadata: docArray?, relatedItems: [relatedItem]?, nextItem: String?, prevItem: String?)
     {
@@ -25,8 +25,10 @@ final class LetterPage: Codable {
         self.numPages = numPages ?? 0
         self.metadata = metadata
         self.relatedItems = relatedItems
-        self.nextItem = nextItem
-        self.prevItem = prevItem
+        if nextItem?.count ?? 0 > 0 && prevItem?.count ?? 0 > 0 {
+            self.nextItem = nextItem
+            self.prevItem = prevItem
+        }
     }
 }
 

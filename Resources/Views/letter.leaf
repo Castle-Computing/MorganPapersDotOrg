@@ -2,7 +2,6 @@
 <meta name="referrer" content="never">
 <div class = "row">
     <div class = "col">
-
         <h4 style="margin-top: 10px; margin-bottom: 15px" class="text-center text-dark font-weight-bold">#(letterTitle)</h4>
         <div class="row">
         <div class="col">
@@ -85,10 +84,17 @@
                 <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Save Letter</button>
             </div>
         </div>
-        <div class="row mt-3 d-sm-block d-md-none align-items-center">
-            <div class="col">
-                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Save Letter</button>
-            </div>
+        <div class="row">
+            #if(prevItem) {
+                <div class = "col float-left">
+                    <a href = "/letter/#(prevItem)" class="btn btn-secondary float-left" role="button"><i class="fas fa-chevron-left"></i> Previous</a>
+                </div>
+            }
+            #if(nextItem) {
+                <div class = "col float-right">
+                    <a href = "/letter/#(nextItem)" class="btn btn-secondary float-right" role="button">Next <i class="fas fa-chevron-right"></i></a>
+                </div>
+            }
         </div>
         #if(ocrText) {
             <div class="row mt-3 text-left">
@@ -115,25 +121,6 @@
                 </div>
             </div>
         }
-        <div class = "row justify-content-center mt-5">
-            <h4>Chronological Letters</h4>
-        </div>
-        <div class = "row align-items-center mt-2 mb-5">
-            #if(prevItem) {
-                <div class = "col text-center">
-                    <a href = "/letter/#(prevItem)" class="btn btn-secondary" role = "button">
-                            Previous
-                    </a>
-                </div>
-            }
-            #if(nextItem) {
-                <div class = "col text-center">
-                    <a href = "/letter/#(nextItem)" class="btn btn-secondary" role = "button">
-                        Next
-                    </a>
-                </div>
-            }
-        </div>
     </div>
 </div>
 }

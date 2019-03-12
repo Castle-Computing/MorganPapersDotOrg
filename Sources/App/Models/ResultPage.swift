@@ -58,6 +58,11 @@ final class docArray: Codable {
     var children: [String]?
 
     var pid: String
+    
+    var prevLetter: String?
+    var nextLetter: String?
+    
+    var relatedObjects: String?
 
     enum CodingKeys: String, CodingKey {
         case titleArray = "dc.title"
@@ -74,15 +79,22 @@ final class docArray: Codable {
         case statePlaceholder = "mods_subject_hierarchicalGeographic_state_s"
         case location = "location"
         case children = "BOOK_CHILDREN_t"
+        case prevLetter = "PREVIOUS_MORGAN_LETTER_t"
+        case nextLetter = "NEXT_MORGAN_LETTER_t"
+        case relatedObjects = "RELATED_OBJECTS_t"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        titleArray = try container.decode([String].self, forKey: .titleArray)
-        title = titleArray![0]
-
         pid = try container.decode(String.self, forKey: .pid)
+        
+        do {
+            titleArray = try container.decode([String].self, forKey: .titleArray)
+            title = titleArray![0]
+        } catch {
+            debugPrint("No title listed.")
+        }
+
 
         do {
             authorPlaceholder = try container.decode(String.self, forKey: .authorPlaceholder)
@@ -104,6 +116,23 @@ final class docArray: Codable {
         } catch {
             debugPrint("No children listed.")
         }
+        
+        do {
+            let prevLetterString = try container.decode(String.self, forKey: .prevLetter)
+            prevLetter = prevLetterString
+            
+            let nextLetterString = try container.decode(String.self, forKey: .nextLetter)
+            nextLetter = nextLetterString
+        } catch {
+            debugPrint("No prev/next listed.")
+        }
+        
+        do {
+            let relatedObjectsString = try container.decode(String.self, forKey: .relatedObjects)
+            relatedObjects = relatedObjectsString
+        } catch {
+            debugPrint("No related objects listed.")
+        }
 
         do {
             cityPlaceholder = try container.decode(String.self, forKey: .cityPlaceholder)
@@ -117,6 +146,7 @@ final class docArray: Codable {
         } catch {
             debugPrint("No ocr included.")
         }
+        
 
         if cityPlaceholder?.count ?? 0 > 0 && statePlaceholder?.count ?? 0 > 0 {
             location = cityPlaceholder! + ", " + statePlaceholder!

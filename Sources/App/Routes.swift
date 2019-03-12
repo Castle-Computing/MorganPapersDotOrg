@@ -65,17 +65,8 @@ public func routes(_ router: Router) throws {
                 return secondResponse.http.body.consumeData(on: req)
         }
         
-        let prevItemRequest = client.get("https://digital.lib.calpoly.edu/islandora/object/" + letterPID + "/datastream/PREVIOUS_MORGAN_LETTER", headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
-            .flatMap { secondResponse -> Future<Data> in
-                return secondResponse.http.body.consumeData(on: req)
-        }
-        
-        let nextItemRequest = client.get("https://digital.lib.calpoly.edu/islandora/object/" + letterPID + "/datastream/NEXT_MORGAN_LETTER", headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
-            .flatMap { secondResponse -> Future<Data> in
-                return secondResponse.http.body.consumeData(on: req)
-        }
 
-        return flatMap(searchResultRequest, ocrDataRequest, relatedItemsRequest, nextItemRequest, prevItemRequest) { (result: SearchResult, ocrData: Data, relatedItems: Data, next: Data, prev: Data) in
+        return flatMap(searchResultRequest, ocrDataRequest, relatedItemsRequest) { (result: SearchResult, ocrData: Data, relatedItems: Data) in
             
             guard let letter = result.response.docs.first else {
                 throw Abort(.badRequest)
@@ -86,15 +77,6 @@ public func routes(_ router: Router) throws {
 
             var relatedItemsText: String? = String(data: relatedItems, encoding: .utf8)
             if (relatedItemsText?.isEmpty ?? false) || relatedItemsText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { relatedItemsText = nil }
-            
-            var nextItem: String? = String(data: next, encoding: .utf8)
-            if (nextItem?.isEmpty ?? false) || nextItem?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { nextItem = nil }
-            print(nextItem)
-            
-            var prevItem: String? = String(data: prev, encoding: .utf8)
-            if (prevItem?.isEmpty ?? false) || prevItem?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false { prevItem = nil }
-            print(prevItem)
-
 
             var relatedItems = [relatedItem]()
 
@@ -107,7 +89,7 @@ public func routes(_ router: Router) throws {
                 }
             }
 
-            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems, nextItem: nextItem, prevItem: prevItem))
+            return try req.view().render("letter", LetterPage(title: letter.title, children: letter.children, ocrText: ocrText, numPages: letter.children?.count, metadata: letter, relatedItems: relatedItems, nextItem: letter.nextLetter, prevItem: letter.prevLetter))
         }
     }
 
