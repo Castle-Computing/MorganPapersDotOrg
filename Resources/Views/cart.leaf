@@ -2,14 +2,14 @@
 	<div class="row my-2">
 		<div class="col-8">
 			<h1>Saved Letters</h1>
-			<p>Welcome to your saved letters cart! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
+			<p>Welcome to your saved letters basket! By saving letters, you can keep track of the content your interested in and view them on a timeline or map. You can also generate a bibliography.</p>
 		</div>
-	</div>	
+	</div>
   #if(numberOfResults > 0){
 		<div class="row mb-4">
-				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on Timeline</button>
-				<!--<button type="button" url="/map" class="mx-2 btn btn-outline-info cartFeature">View Letters on Map</button>-->
-				<button type="button" url="/bibliography" class="cartFeature mx-2 btn btn-outline-dark">Generate Bibliography</button>
+				<button type="button" url="/timeline" class="mx-2 btn btn-outline-warning cartFeature">View Letters on a Timeline</button>
+				<button type="button" url="/storymap" class="mx-2 btn btn-outline-info cartFeature">View Letters on a Map</button>
+				<button type="button" url="/bibliography" class="cartFeature mx-2 btn btn-outline-dark">Generate a Bibliography</button>
 		</div>
   } else {
     <div class="card" style="width:60%">

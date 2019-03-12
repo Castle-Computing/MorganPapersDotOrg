@@ -96,7 +96,7 @@ public func routes(_ router: Router) throws {
     router.get("help") { req -> Future<View> in
         return try req.view().render("help")
     }
-    
+
     router.get("about") { req -> Future<View> in
         return try req.view().render("about")
     }
@@ -110,7 +110,7 @@ public func routes(_ router: Router) throws {
         let data_longitude = [-121.8746789, -122.4192363, -121.1907533, -73.9871558, 2.3514992, -122.2728639, -3.4857779, -73.9495823, -120.6596156, -118.2427669, -121.6550372, -81.6934446, -108.7439489, -97.3455918, -74.4809492, -122.135266343, 12.3345898, -73.9871558, -87.6244212, 12.4853384, -89.4884384, -71.0582912, -106.6509851, -121.0807468, -103.5438321, -121.4943996, -118.1444779, -120.1832533, -77.0365625, -78.8783922, -77.0365625, -81.655651, -119.7026673, -118.158049315, -82.3589631, 9.1904984, -3.7035825, -110.6973572, -0.1276474, -97.3447244, -118.4965129, -77.0365625, -117.898451, -77.0967445, 8.7473608, 0.5292758, -100.0170787, 16.3725042, -114.1941804, -122.2713563, -121.8946388, -88.0430541, -111.9738429, -121.8374777, -73.45562, -119.708861261]
         let data_latitude = [37.6624312, 37.7792808, 35.6438587, 40.7308619, 48.8566101, 37.8708393, 51.4083212, 40.6501038, 35.2827525, 34.0536834, 36.6744117, 41.5051613, 35.5283573, 38.0722333, 40.7970384, 41.2497685, 45.4371908, 40.7308619, 41.8755616, 41.894802, 40.9161637, 42.3602534, 35.0841034, 35.5641381, 37.9850091, 38.5815719, 34.1476452, 39.327962, 38.8950092, 42.8867166, 38.8950092, 30.3321838, 34.4221319, 33.78538945, 23.135305, 45.4667971, 40.4167047, 35.0241874, 51.5073219, 38.0469166, 34.0250724, 38.8950092, 34.0143928, 38.7345867, 50.3681107, 51.3804845, 37.7527982, 48.2083537, 41.2614717, 37.8044557, 36.600256, 30.6943566, 41.2230048, 39.7284945, 44.69282, 36.7295295]
         let data_timesocc = [1, 315, 281, 170, 8, 2, 2, 47, 14, 328, 2, 5, 2, 3, 6, 7, 1, 1, 5, 3, 1, 7, 4, 2, 1, 2, 2, 1, 3, 1, 2, 1, 4, 1, 1, 1, 2, 1, 1, 1, 3, 2, 170, 2, 3, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1]
-        
+
         var locArr: [Loc] = []
         for (index, _) in data_city.enumerated() {
             locArr.append(Loc(city: data_city[index], state: data_state[index], country: data_country[index], lat: data_latitude[index], long: data_longitude[index], timesOcc: data_timesocc[index]))
@@ -186,16 +186,16 @@ public func routes(_ router: Router) throws {
                 return jsonString ?? "Error"
         }
     }
-    
+
     router.get("bibliography") { req -> Future<View> in
         let client = try req.client()
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
         let SavedLetters = IDArrays(SavedLetters: data, restrictLength: false)
-        
+
         guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
         }
-        
+
         return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
             //flatMap unwraps the response and returns a SearchResult in the future
             .flatMap { response -> Future<SearchResult> in
@@ -206,12 +206,12 @@ public func routes(_ router: Router) throws {
             .flatMap { result in
                 //Render a view for the initial get request
                 //results.leaf, pass a ResultPage
-                
+
                 //docArr is docs ordered alphabetically
                 var docArr: [docArray] = []
-                
+
                 docArr = result.response.docs
-                
+
                 //Format Author
                 for (index, _) in docArr.enumerated() {
                     if let author = docArr[index].author {
@@ -226,11 +226,11 @@ public func routes(_ router: Router) throws {
                         }
                     }
                 }
-                
+
                 //Sort
-                
+
                 docArr = docArr.sorted(by: {("\($0.author ?? $0.title ?? "ZZZZ")\($0.title ?? "ZZZZ")" < "\($1.author ?? $1.title ?? "ZZZZ")\($1.title ?? "ZZZZ")")})
-                
+
                 //Edit data fields to include formatting
                 for (index, _) in docArr.enumerated() {
                     //Check author
@@ -242,19 +242,50 @@ public func routes(_ router: Router) throws {
                         docArr[index].title = "\"" + title + ".\" "
                     }
                 }
-                
+
                 return try req.view().render("bibliography", Results(results: docArr))
         }
     }
 
-    router.get("cart") { req -> Future<View> in
+    router.get("dynamicmapjson") { req -> Future<String> in
+        let client = try req.client()
+        let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
+        let SavedLetters = IDArrays(SavedLetters: data)
+        guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw Abort(.badRequest)
+        }
+        return client.get(encodedSearchTerm, headers: HTTPHeaders.init([("User-Agent", "MorganApp/0.1")]))
+            .flatMap { response -> Future<SearchResult> in
+                try response.content.decode(SearchResult.self)
+            }
+            .map { result in
+                var builder: [MapJSONBuilder] = []
+                var eventarray: [[String : Any]] = []
+                //Go through each entry and add it to json output
+                for entry in result.response.docs{
+                    let test = MapJSONBuilder(entry: entry)
+                    builder.append(test)
+                }
+                builder = builder.sorted(by: { ($0.datearray[0],$0.datearray[1],$0.datearray[2]) < ($1.datearray[0],$1.datearray[1],$1.datearray[2]) })
+                for events in builder{
+                  eventarray.append(events.events)
+                }
+                let storymap : [String: Any] = ["slides": eventarray]
+                let mapobject : [String : Any] = ["storymap" : storymap]
+                let data = try JSONSerialization.data(withJSONObject: mapobject, options: .prettyPrinted)
+                let jsonString = String(data: data, encoding: String.Encoding.ascii)
+                return jsonString ?? "Error"
+        }
+    }
+
+    router.get("saved") { req -> Future<View> in
         let cart = req.http.cookies["cart"] ?? "{}"
         let cartValue = NSString(string: cart.string).removingPercentEncoding ?? "{}"
         let cartData = try JSONSerialization.jsonObject(with: cartValue.data(using: .utf8)!) as? [String : String]
         let client = try req.client()
-    
+
         let data = SavedID(reklQuery: cartData?["rekl"] ?? "", islandoraQuery: cartData?["islandora"] ?? "", cpscaQuery: cartData?["cpsca"] ?? "")
-    
+
         let SavedLetters = IDArrays(SavedLetters: data)
         guard let encodedSearchTerm = SavedLetters.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw Abort(.badRequest)
@@ -277,10 +308,15 @@ public func routes(_ router: Router) throws {
                 return try req.view().render("cart", ResultPage(query: currentQuery, searchResults: result.response.docs, numResults: result.response.numFound, start: result.response.start, page: 0))
         }
     }
-    
+
     //call dynamicjson from there
     router.get("timeline") { req -> Future<View> in
         let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
         return try req.view().render("timeline", data)
+    }
+
+    router.get("storymap") { req -> Future<View> in
+        let data = SavedID(reklQuery: req.query[String.self, at: "rekl"] ?? "", islandoraQuery: req.query[String.self, at: "islandora"] ?? "", cpscaQuery: req.query[String.self, at: "cpsca"] ?? "")
+        return try req.view().render("storymap", data)
     }
 }

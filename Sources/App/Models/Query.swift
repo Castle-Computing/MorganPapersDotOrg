@@ -137,11 +137,17 @@ final class Query: Codable {
         
         if let phraseExplicit = phraseExplicit {
             let phrases = phraseExplicit.components(separatedBy: "\" \"")
+            var phraseSearch = ""
             
             for var phrase in phrases {
                 phrase = phrase.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !phrase.isEmpty else { continue }
-                solrSearch.append(" AND (OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
+                if !phraseSearch.isEmpty { phraseSearch.append(" OR ")}
+                phraseSearch.append("(OCR_BOOK_t:\"\(phrase.replacingOccurrences(of: "\"", with: ""))\")")
+            }
+            
+            if !phraseSearch.isEmpty {
+                solrSearch.append(" AND (\(phraseSearch))")
             }
         }
         
