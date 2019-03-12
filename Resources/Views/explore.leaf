@@ -36,14 +36,14 @@
 }
 #set("centeredbody") {
     <div class="container h-100">
-        <div class="row align-items-center h-100 mx-auto mt-3 d-flex align-items-stretch">
+        <div class="row align-items-center my-3 h-100 mx-auto mt-3 d-flex align-items-stretch">
             <div class="col-xs-4 mt-3 mx-auto d-flex align-items-stretch">
               <div class="card" style="width: 22.2rem;">
                 <img class="card-img-top" src="/images/casagrande.jpg" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Casa Grande</h5>
                   <p class="card-text">Hearst Castle’s main building, where Hearst entertained guests. Prior to 1929, for nearly 10 years, Morgan and Hearst simply referred to it as the “big house” or the “main building”.</p>
-                  <a href="/search?query=%22Casa+Grande%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa Grande correspondence</a>
+                  <a href="/search?phrase_explicit=%22casa+grande%22+%22big+house%22+%22main+building%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa Grande Correspondence</a>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Casa del Sol (House C)</h5>
                   <p class="card-text">Facing due west towards the Pacific Ocean sunset, Casa del Sol (“House of the Sun”), was one of 3 residential buildings that forms a semi-circle around Casa Grande.</p>
-                  <a href="/search?query=%22House+C%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Sol correspondence</a>
+                  <a href="/search?query=%22House+C%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Sol Correspondence</a>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Casa del Monte (House B)</h5>
                   <p class="card-text">Comprised of 10 rooms, Casa del Monte (“House of the Mountain”) commands a view of the Santa Lucia mountain range.</p>
-                  <a href="/search?query=%22House+B%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Monte correspondence</a>
+                  <a href="/search?query=%22House+B%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Monte Correspondence</a>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Casa del Mar (House A)</h5>
                   <p class="card-text">During construction, Hearst identified Casa del Mar as his residence on the hilltop. This “House of the Sea” boasts a splendid view of the Pacific Ocean coastline.</p>
-                  <a href="/search?query=%22House+A%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Mar correspondence</a>
+                  <a href="/search?query=%22House+A%22" class="btn btn-sm btn-block btn-primary mt-auto">Browse Casa del Mar Correspondence</a>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@
                   <h5 class="card-title">Julia Morgan</h5>
                   <p class="card-text">Soon after becoming the first woman licensed as an architect, Julia Morgan opened her San Francisco office in 1904 and launched a prolific career in architecture. She first worked for Hearst in 1910, and began designing Hearst Castle in 1919. </p>
                   <div class="mt-auto">
-                  <a href="/search?author=julia+morgan" class="btn btn-sm btn-block btn-primary mt-auto">Browse correspondence written by Julia Morgan</a>
+                  <a href="/search?author=julia+morgan" class="btn btn-sm btn-block btn-primary mt-auto">Browse Correspondence by Julia Morgan</a>
                   </div>
 
                 </div>
@@ -100,7 +100,7 @@
                   <h5 class="card-title">William Randolph Hearst</h5>
                   <p class="card-text">News media tycoon, and heir to the sprawling coastal property near San Simeon, California, William Randolph Hearst commissioned what he called “La Cuesta Encantada” (now known as Hearst Castle) in 1919, and remained closely involved in its design and construction until construction ceased in 1947.</p>
                   <div class="mt-auto">
-                  <a href="/search?author=william+hearst" class="btn btn-sm btn-block btn-primary mt-auto">Browse correspondence written by W. R. Hearst</a>
+                  <a href="/search?author=william+hearst" class="btn btn-sm btn-block btn-primary mt-auto">Browse Correspondence by W. R. Hearst</a>
                 </div>
                 </div>
               </div>
@@ -110,9 +110,9 @@
                 <img class="card-img-top" src="/images/timeline.png" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Custom Timelines</h5>
-                  <p class="card-text">When you add correspondence to your saved letters, you can generate a custom timeline to visualize the order of correspondence. Click below for an example.</p>
+                  <p class="card-text">When you add correspondence to your <a href="/saved">saved letters</a>, you can generate a custom timeline to visualize the order of correspondence.</p>
                   <div class="mt-auto">
-                  <a href="/timeline?rekl=15989,84123,10380,84127,15160,9047,82005,82121,87702,10659,87492,86035,84159,83942,12592,87705,15995,9025,9113,10653,8323,14799,8220,9819,12302" class="btn btn-sm btn-block btn-primary mt-auto">View a timeline of Hearst's animal requests</a>
+                  <a href="/timeline?rekl=15989,84123,10380,84127,15160,9047,82005,82121,87702,10659,87492,86035,84159,83942,12592,87705,15995,9025,9113,10653,8323,14799,8220,9819,12302" class="btn btn-sm btn-block btn-primary mt-auto">Explore the Animals of San Simeon</a>
                 </div>
                 </div>
               </div>
@@ -122,9 +122,9 @@
                 <img class="card-img-top" src="/images/storymap.png" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Custom Maps</h5>
-                  <p class="card-text">When you add correspondence to your saved letters, you can generate a chronologically ordered map that shows the correspondence location. Click below for an example.</p>
+                  <p class="card-text">When you add correspondence to your <a href="/saved">saved letters</a>, you can generate a custom map that organizes the correspondance geographically.</p>
                   <div class="mt-auto">
-                  <a href="/storymap?rekl=84061,88294,88284,84024,84014,84055,81609,81600,81612,81597,84002,83994,90479" class="btn btn-sm btn-block btn-primary mt-auto">View a map of Hearst's travels in Europe</a>
+                  <a href="/storymap?rekl=84061,88294,88284,84024,84014,84055,81609,81600,81612,81597,84002,83994,90479" class="btn btn-sm btn-block btn-primary mt-auto">View a Map of Hearst's Travels in Europe</a>
                 </div>
                 </div>
               </div>
@@ -134,9 +134,9 @@
                 <img class="card-img-top" src="/images/bibliography.png" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Custom Bibliographies</h5>
-                  <p class="card-text">When you add correspondence to your saved letters, you can generate a formatted bibliography to cite all of the sources properly. Click below for an example.</p>
+                  <p class="card-text">When you add correspondence to your <a href="/saved">saved letters</a>, you can generate an MLA formatted bibliography to easily cite all of your sources.</p>
                   <div class="mt-auto">
-                  <a href="/bibliography?rekl=13630,12554,2593,84506,2646,12637,28468,28465,15980,84318,81892,13989,2587&islandora=1241" class="btn btn-sm btn-block btn-primary mt-auto">View a bibliography of San Luis Obispo letters</a>
+                  <a href="/bibliography?rekl=13630,12554,2593,84506,2646,12637,28468,28465,15980,84318,81892,13989,2587&islandora=1241" class="btn btn-sm btn-block btn-primary mt-auto">Cite the Letters from San Luis Obispo</a>
                 </div>
                 </div>
               </div>

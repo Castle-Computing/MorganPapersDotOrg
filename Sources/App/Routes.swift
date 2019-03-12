@@ -278,7 +278,7 @@ public func routes(_ router: Router) throws {
         }
     }
 
-    router.get("cart") { req -> Future<View> in
+    router.get("saved") { req -> Future<View> in
         let cart = req.http.cookies["cart"] ?? "{}"
         let cartValue = NSString(string: cart.string).removingPercentEncoding ?? "{}"
         let cartData = try JSONSerialization.jsonObject(with: cartValue.data(using: .utf8)!) as? [String : String]
