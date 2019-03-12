@@ -80,19 +80,19 @@
                     }
                 </sr>
             </div>
-            <div class="col-4 pull-right d-md-block d-none align">
-                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link">Save Letter</button>
+            <div class="col-4 float-right d-md-block d-none align">
+                <button pid="#(metadata.PID)" type="button" class="text-success cartButton btn btn-link float-right">Save Letter</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             #if(prevItem) {
                 <div class = "col float-left">
-                    <a href = "/letter/#(prevItem)" class="btn btn-secondary float-left" role="button"><i class="fas fa-chevron-left"></i> Previous</a>
+                    <a href = "/letter/#(prevItem)" class="btn btn-secondary float-left btn-sm" role="button"><i class="fas fa-chevron-left"></i> Previous Letter</a>
                 </div>
             }
             #if(nextItem) {
                 <div class = "col float-right">
-                    <a href = "/letter/#(nextItem)" class="btn btn-secondary float-right" role="button">Next <i class="fas fa-chevron-right"></i></a>
+                    <a href = "/letter/#(nextItem)" class="btn btn-secondary float-right btn-sm" role="button">Next Letter <i class="fas fa-chevron-right"></i></a>
                 </div>
             }
         </div>
@@ -127,7 +127,9 @@
 }
 
 #set("footer") {
-    <span class="text-muted">Is there something wrong with this page? Please <a href="mailto:archives@calpoly.edu?subject=Morgan%20Papers%20Website%3A%20Letter%20#(metadata.PID)&amp;body=Hi%20Cal%20Poly%20Archives%2C%0AI%20noticed%20something%20wrong%20with%20the%20letter%20entitled%20%22#(letterTitle)%22%20with%20the%20this%20id%20value%20%22#(metadata.PID)%22%20on%20https://morganpapers.org.">send us an email.</a></span>
+    <div class="my-3 text-center">
+        <span class="text-muted">Notice something wrong with this page? Please <a href="mailto:archives@calpoly.edu?subject=Morgan%20Papers%20Website%3A%20Letter%20#(metadata.PID)&amp;body=Hi%20Cal%20Poly%20Archives%2C%0AI%20noticed%20something%20wrong%20with%20the%20letter%20entitled%20%22#(letterTitle)%22%20with%20the%20this%20id%20value%20%22#(metadata.PID)%22%20on%20https://morganpapers.org.">send us an email.</a></span>
+    </div>
 }
 
 #embed("base")
