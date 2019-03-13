@@ -23,30 +23,33 @@
 	<title>Morgan Papers</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <a class="navbar-brand" href="/">
-        <img src="/images/search_vector_logo.svg" width="auto" height="50">
+<nav class="navbar navbar-light bg-light sticky-top flex-wrap2 flex-md-nowrap p-0">
+    <a class="navbar-brand col-auto mr-0" href="/">
+        <img class="d-md-inline d-none" src="/images/search_vector_logo.svg" width="auto" height="50">
+        <img class="d-md-none" src="/images/FullHomeImage.svg" width="auto" height="50">
     </a>
-    #embed("searchfield")
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler d-md-none mt-1 mr-2" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="/explore">Explore</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/help">Help</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/saved">Saved</a>
-            </li>
-        </ul>
-    </div>
+    #embed("searchfield")
+    <ul class="navbar-nav navbar-expand-md pl-2 pr-3">
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav mr-auto text-nowrap">
+                <li class="nav-item">
+                    <a class="nav-link" href="/explore">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/help">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item d-md-inline d-none">
+                    <a class="nav-link" href="/saved">Saved</a>
+                </li>
+            </ul>
+        </div>
+    </ul>
 </nav>
 <body>
     #get(bodyoutsidecontainer)

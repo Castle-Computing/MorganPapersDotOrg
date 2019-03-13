@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-md-inline d-none">
                 <a class="nav-link" href="/saved">Saved</a>
             </li>
         </ul>
@@ -43,13 +43,17 @@
         <div class="row justify-content-center no-gutters my-0 py-0">
             <div class="col">
                 <div class="row justify-content-center mt-1 mb-4 py-0">
-                    <img src="/images/FullHomeImage.svg" height="80em" style="margin: 0px; padding: 0px"/>
+                    <div class="col-md-6 col-xl-5">
+                        <img src="/images/FullHomeImage.svg" class="img-fluid"/>
+                    </div>
                 </div>
                 <div class="row justify-content-center py-0">
                     #embed("searchfield")
                 </div>
-                <div class="row justify-content-center w-100">
-                    <p class="text-secondary" style="width: 70%; text-align: right"><a href="/help" style="text-decoration: none; margin-right: 1em"><i class="fa fa-question-circle"></i> Read Help</a><a href="/explore" style="text-decoration: none"><i class="fab fa-readme"></i> Explore the Collection</a></p>
+                <div class="row float-right">
+                    <div class="col-lg-8 float-right">
+                        <p class="text-secondary float-right" style="width: 19em"><a href="/help" style="text-decoration: none; margin-right: 1em"><i class="fa fa-question-circle"></i> Read Help</a><a href="/explore" style="text-decoration: none"><i class="fab fa-readme"></i> Explore the Collection</a></p>
+                    </div>
                 </div>
                 <div class="mt-5 row justify-content-center text-center">
                     <div class="col-lg-8">
@@ -61,7 +65,7 @@
                         <fieldset style="border: 5px black solid; border-radius: 5px;">
                             <legend style="font-size: 20px; text-align:left; width:auto; margin-left: 1em; padding-left: 0.5em; padding-right: 0.5em">Letters Written On This Day</legend>
                             <div class="row ml-3 mr-3 mt-3">
-                                #if(numLetters> 1) {
+                                #if(numLetters > 1) {
                                     <div id="pages" class="carousel slide" data-ride="carousel" style="height: 225px; text-align:center; width:100%">
                                         <div class="carousel-inner">
                                             #for(child in letters) {
