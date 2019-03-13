@@ -70,13 +70,13 @@
                                         <div class="carousel-inner">
                                             #for(child in letters) {
                                                 <div class="carousel-item #if(isFirst) { active }">
-                                                    <div class = "row align-items-center" style="height: auto; text-align:center">
-                                                        <div class = "col-sm ml-5">
+                                                    <div class = "row align-items-center" style="text-align:center">
+                                                        <div class = "col-sm ml-md-5">
                                                             <a href = "letter/#(child.PID)">
                                                                 <img src="https://digital.lib.calpoly.edu/islandora/object/#(child.PID)/datastream/TN" class="img-fluid" style="border-radius: 10px"/>
                                                             </a>
                                                         </div>
-                                                        <div class = "col-sm mr-5">
+                                                        <div class = "col-sm mr-5 d-md-inline d-none">
                                                             <p class = "font-italic">#(child.title)</p>
                                                         </div>
                                                     </div>
