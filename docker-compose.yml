@@ -1,10 +1,10 @@
-version: "3.3"
+version: "3.4"
 services:
   website:
-    image: ethankusters/morganpaperswebsite
+    image: morganpapers/morganpapersdotorg
     ports:
       - 80:80
-    environment:
-      EXAMPLE_PASSWORD: secretpw
   nlp:
-    image: ethankusters/no-functions
+    image: morganpapers/automatedcontentcreation
+    environment:
+      ISLANDORA_PASSWORD: secretpw
