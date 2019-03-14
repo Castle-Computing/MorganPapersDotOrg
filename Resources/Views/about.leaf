@@ -22,7 +22,7 @@
     <div class = "row mt-5">
         <div class = "col">
             <h1 class = "text-center text-warning font-weight-bold font-italic">Who are we?</h1>
-            <p class = "text-center font-weight-bold mt-2">We are computer engineering and software engineering students at Cal Poly, making this website for our capstone project under guidance from <a href = "https://scholar.google.com/citations?user=JTvmrykAAAAJ&hl=en"> Professor Foadd Khosmood</a>. A capstone project is a group project which computer engineering students complete for a client during their third year, prior to senior project. Our client for this project is <a href = "https://lib.calpoly.edu/people/zvowell/">Zach Vowell</a>, digital archivist at the Kennedy Library.</p>
+            <p class = "text-center font-weight-bold mt-2">We are computer engineering and software engineering students at Cal Poly, making this website for our capstone project under guidance from <a href = "https://scholar.google.com/citations?user=JTvmrykAAAAJ&hl=en"> Professor Foaad Khosmood</a>. A capstone project is a group project which computer engineering students complete for a client during their third year, prior to senior project. Our client for this project is <a href = "https://lib.calpoly.edu/people/zvowell/">Zach Vowell</a>, digital archivist at the Kennedy Library.</p>
         </div>
     </div>
     <div class = "row mt-3">
