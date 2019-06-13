@@ -12,7 +12,7 @@
     <div class = "row mt-5 mb-5 align-items-center">
         <div class = "col-sm-8" ml-5 mr-5>
             <h1 class = "text-center text-warning font-weight-bold font-italic">Who's Julia Morgan?</h1>
-            <p class = "text-center font-weight-bold">Glad you asked! Julia Morgan was the first licensed female architect in California, and built many amazing projects including Hearst Castle. To learn more about Julia Morgan or the collection, visit Kennedy Library's <a href="http://lib.calpoly.edu/search-and-find/collections-and-archives/architectural/julia-morgan/">Julia Morgan Biography</a>.</p>
+            <p class = "text-center font-weight-bold">Glad you asked. Julia Morgan was the first licensed female architect in California, and built many amazing projects including Hearst Castle. To learn more about Julia Morgan or the collection, visit Kennedy Library's <a href="http://lib.calpoly.edu/search-and-find/collections-and-archives/architectural/julia-morgan/">Julia Morgan Biography</a>.</p>
         </div>
         <div class = "col-sm-4">
             <img src="http://www.californiamuseum.org/sites/main/files/imagecache/lightbox/main-images/julia-morgan.png" class="img-fluid"/>
