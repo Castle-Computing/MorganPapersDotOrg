@@ -11,7 +11,7 @@ RUN swift build -c release && mv `swift build -c release --show-bin-path` /build
 # Production image
 FROM ubuntu:16.04
 RUN apt-get -qq update && apt-get install -y \
-  libicu55 libxml2 libbsd0 libcurl3 libatomic1 \
+  libicu55 libxml2 libbsd0 libcurl3 libatomic1 libcurl4-openssl-dev \
   tzdata \
   && rm -r /var/lib/apt/lists/*
 WORKDIR /app
