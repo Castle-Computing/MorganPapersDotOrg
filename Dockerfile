@@ -1,7 +1,8 @@
 # Build image
-FROM swift:4.1 as builder
+FROM swift:4.2 as builder
 RUN apt-get -qq update && apt-get -q -y install \
   tzdata \
+  libcurl4-openssl-dev \
   && rm -r /var/lib/apt/lists/*
 WORKDIR /app
 COPY . .
@@ -11,8 +12,9 @@ RUN swift build -c release && mv `swift build -c release --show-bin-path` /build
 # Production image
 FROM ubuntu:16.04
 RUN apt-get -qq update && apt-get install -y \
-  libicu55 libxml2 libbsd0 libcurl3 libatomic1 libcurl4-openssl-dev \
+  libicu55 libxml2 libbsd0 libcurl3 libatomic1 \
   tzdata \
+  libcurl4-openssl-dev \
   && rm -r /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=builder /build/bin/Run .
